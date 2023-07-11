@@ -8,7 +8,7 @@
     <link rel="icon" href="#" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
 
-    
+ 
     {{-- Estilos de tailwind --}}
     @vite('resources/css/app.css')
 
@@ -23,7 +23,10 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 
-
+    <link href="{{ asset('css/perfect-scrollbar.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/argon-dashboard-tailwind.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/argon-dashboard-tailwind.min.css') }}" rel="stylesheet" />
+    
     @vite('resources/css/nucleo-icons.css')
     @vite('resources/css/nucleo-svg.css')
     @vite('resources/css/argon-dashboard-tailwind.css')
@@ -31,10 +34,13 @@
     <!-- Popper -->
     <script src="https://unpkg.com/@popperjs/core@2"></script>
 
-    @vite('resources/js/plugins/chartjs.min.js')
-    @vite('resources/js/plugins/perfect-scrollbar.min.js')
-    @vite('resources/js/argon-dashboard-tailwind.js')
-    @vite('resources/js/argon-dashboard-tailwind.min.js')
+
+    <script src="{{ asset('js/plugins/chartjs.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/perfect-scrollbar.min.js') }}"></script>
+    <script src="{{ asset('js/argon-dashboard-tailwind.js') }}"></script>
+    <script src="{{ asset('js/argon-dashboard-tailwind.min.js') }}"></script>
+
+
 
     <title>FitSport</title>
 </head>
@@ -44,7 +50,7 @@
     {{-- @yield('contenido_top') --}}
  
     <!-- sidenav  -->
-    <aside class="fixed inset-y-0 flex-wrap items-center justify-between block w-full p-0 my-4 overflow-y-auto antialiased transition-transform duration-200 -translate-x-full bg-black border-0 shadow-xl dark:shadow-none dark:bg-slate-850 max-w-64 ease-nav-brand z-990 xl:ml-6 rounded-2xl xl:left-0 xl:translate-x-0" aria-expanded="false" style="background-color: rgba(53, 58, 80, 0.67);">
+    <aside class="fixed inset-y-0 flex-wrap items-center justify-between block w-full p-0 my-4  antialiased transition-transform duration-200 -translate-x-full bg-black border-0 shadow-xl dark:shadow-none dark:bg-slate-850 max-w-64 ease-nav-brand z-990 xl:ml-6 rounded-2xl xl:left-0 xl:translate-x-0" aria-expanded="false" style="background-color: rgba(53, 58, 80, 0.67);">
       <div class="h-19 text-center">
         <a class="block px-8 py-6 m-0 text-sm whitespace-nowrap dark:text-white text-slate-700" href="#">
           <img src="{{asset ('img/logo.svg')}}" class="inline h-full max-w-full transition-all duration-200 dark:hidden ease-nav-brand max-h-8" alt="main_logo" />
@@ -53,7 +59,7 @@
 
       <hr class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent" />
 
-      <div class="items-center block w-auto max-h-screen overflow-auto h-sidenav grow basis-full">
+      <div class="items-center block w-auto grow basis-full">
         <ul class="flex flex-col pl-0 mb-0">
 
           <li class="mt-0.5 w-full">

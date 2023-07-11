@@ -1,0 +1,400 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+@font-face {
+  font-family: 'lovelo';
+  src: url('../fonts/Lovelo.otf') format('truetype');
+  /* Añade aquí más formatos de fuente si los tienes disponibles */
+}
+
+@font-face {
+  font-family: 'Clear Sans Thin';
+  src: url('../fonts/ClearSans-Thin.ttf') format('truetype');
+  /* Añade aquí más formatos de fuente si los tienes disponibles */
+}
+
+/* para nav de pagina principal*/
+nav {
+  position: fixed;
+  width: 100%;
+  height: 13%;
+  left: 0;
+  top: 0;
+  background: #030303;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 2%;
+  margin-bottom: 1px;
+  z-index: 1;
+}
+.content {
+	margin-top: 5.8%;
+	z-index: -1;
+}
+
+.div-nav-a {
+  display: flex;
+  height: 100%;
+  width: 45%;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.nav-a {
+  font-family: 'Lato', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 31.3px;
+  line-height: 38px;
+  text-decoration: none;
+  color: #FFFFFF;
+  padding-left: 5%;
+  padding-right: 5%;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.topnav {
+  overflow: hidden;
+  height: 100%;
+}
+
+.topnav a {
+  float: left;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  height: 100%;
+}
+
+.topnav a:hover {
+  background-color: #D5EB44;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+/* para demas contenido de pagina principal*/
+.fa {
+	color: #CDFF04;
+	font-size: 40px;
+}
+
+.decoration{
+
+	position: absolute;
+	width: 11%;
+	height: 80%;
+	z-index: -1;
+	background: #D5EB44;
+
+}
+.img1{
+	/* FitSport Wireframes 1 */
+	margin-top: 10%;
+	margin-left: 11%;
+	z-index: 0;
+	width: 90%
+}
+.frase1{
+	position: absolute;
+	width: 45%;
+	height: 50%;
+	margin-left: 1%;
+
+	font-family: 'Clear Sans Thin';
+	font-style: normal;
+	font-weight: 250;
+	font-size: 32px;
+	line-height: 43px;
+	display: flex;
+	align-items: center;
+	text-align: justify;
+
+	color: #040607;
+
+
+}
+.unirse{
+	position: absolute;
+	width: 45%;
+	margin-right: 5%;
+	height: 50%;
+	margin-top: 10%;
+	
+	font-style: normal;
+	font-weight: 250;
+	font-size: 32px;
+	line-height: 43px;
+	display: flex;
+	align-items: center;
+	justify-content: right;
+	
+	color: white;
+}
+.unirse a{
+	background: #FFDE59;
+	padding-left: 40px;
+	padding-right: 40px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-decoration: none;
+	color: white;
+	border-radius: 13px;
+	font-family: 'lovelo';
+	font-weight: 900;
+	font-size: 41px;
+}
+.unirse a:hover {
+	background: #E8CA50;
+	padding-left: 40px;
+	padding-right: 40px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-decoration: none;
+	border-radius: 13px;
+	font-family: 'lovelo';
+	font-weight: 900;
+	font-size: 41px;
+	color: white;
+}
+
+/* para pantallas pequeñas*/
+
+@media (max-width: 768px) {
+  nav {
+    padding: 0;
+  }
+
+  .div-nav-a {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-a {
+    font-size: 17px;
+    padding: 0.08em;
+    margin-right: 1.5em;
+    transition: background-color 0.3s;
+  }
+
+  .nav-a:hover {
+    background-color: #CDFF04;
+    text-decoration: none;
+    color: #FFFFFF;
+  }
+  .img1{
+	width: 80%;
+	margin-top: 5%;
+	margin-left: 3%
+	z-index: 0;
+  }
+  .frase1{
+  	margin-left: 8%;
+  	width: 85%;
+  	font-family: 'Clear Sans Thin';
+  	font-style: normal;
+  	font-weight: 250;
+  	font-size: 25px;
+  	line-height: 43px;
+  	display: flex;
+  	align-items: center;
+  	text-align: justify;
+  
+  	color: #040607;
+  
+  
+  }
+
+  .decoration{
+
+	position: absolute;
+	width: 6%;
+	height: 110%;
+	z-index: -1;
+	background: #D5EB44;
+
+   }
+   .unirse{
+  position: absolute;
+  width: 100%;
+  margin-right: 5%;
+  height: 100%;
+  margin-top: 20%;
+  
+  font-style: normal;
+  font-weight: 250;
+  font-size: 32px;
+  line-height: 43px;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  
+  color: white;
+}
+
+
+}
+/* para registrarse*/
+.containerl {
+  display: flex;
+  width: 100%;
+}
+
+.image2 {
+  flex: 4;
+  background: url('../img/img2.png') center/cover;
+
+}
+
+.image5 {
+  flex: 4;
+  background: url('../img/img5.png') center/cover;
+
+}
+
+.black-box {
+  flex: 6;
+  background: #000000;
+}
+.img3{
+	position: absolute;
+	z-index: 1;
+	width: 28%;
+	margin-top: 1.5%;
+
+	transform: translateX(-20%);
+}
+
+.input-sign input{
+	background: #FFFFFF;
+	border-radius: 17px;
+	height: 40px;
+}
+.label {
+	font-family: 'Raleway';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 20px;
+	line-height: 23px;
+	text-align: center;
+	margin-bottom: 1%;
+	margin-left: 7%;
+	color: #FFFFFF;
+
+}
+.image-input-container {
+  display: inline-block;
+  position: relative;
+  margin-left: 38%;
+}
+
+.image-input-container label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  cursor: pointer;
+  background: #FFFFFF;
+}
+
+.image-input-container label i {
+  font-size: 50px;
+
+}
+
+.image-input-container label .selected-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+}
+
+.image-input-container input[type="file"] {
+  display: none;
+}
+
+	
+
+.button-sub{
+	background: #7B96D4;
+	border-radius: 20px;
+	border: none;
+
+
+	padding-left: 50px;
+	padding-right: 50px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	color: white;
+	font-family: 'lovelo';
+	font-weight: 900;
+	font-size: 25px;
+
+}
+.button-sub:hover {
+	border-radius: 20px;
+	border: none;
+
+
+	padding-left: 50px;
+	padding-right: 50px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	color: white;
+	font-family: 'lovelo';
+	font-weight: 900;
+	font-size: 25px;
+	background:#6981B8;
+
+}
+
+
+.img32 {
+  position: absolute;
+  z-index: 0;
+  width: 23%;
+  bottom: 0;
+  right: 0;
+  margin-bottom: 1.5%;
+  margin-right: 0;
+  transform: translate(0%, 370%);
+}
+
+.img33 {
+  position: absolute;
+  z-index: 0;
+  width: 23%;
+  bottom: 0;
+  right: 0;
+  margin-bottom: 1.5%;
+  margin-right: 0;
+  transform: translate(0%, 45%);
+}
+
+.label-check {
+	margin-left: 10px !important;
+	color: #FFFFFF !important;
+	font-family: 'Raleway';
+}
+.p-reg {
+	margin-left: 10px !important;
+	color: #FFFFFF !important;
+	font-family: 'Raleway';
+	font-size: 20px;
+}
+

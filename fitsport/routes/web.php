@@ -16,3 +16,9 @@ use App\Http\Controllers\HomeController;
 
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
+
+
+Route::get('/login', [HomeController::class, 'login'])->name('login');
+
+
+Route::get('/register', [HomeController::class, 'register'])->name('register');

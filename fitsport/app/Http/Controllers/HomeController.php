@@ -10,10 +10,9 @@ class HomeController extends Controller
         return view('dashboard');
     }
 
-    public function login(){
-        return view('auth.login');
+    public function index(){
+        return view('principal');
     }
-    public function register(){
-        return view('auth.register');
-    }
+
+   
 }

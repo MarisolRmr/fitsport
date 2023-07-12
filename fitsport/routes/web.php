@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\RegisterController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,10 +17,19 @@ use App\Http\Controllers\HomeController;
 */
 
 
-Route::get('/', [HomeController::class, 'home'])->name('home');
+Route::get('/', [HomeController::class, 'index']);
 
+Route::get('/dashboard', [HomeController::class, 'home'])->name('home');
 
-Route::get('/login', [HomeController::class, 'login'])->name('login');
+Route::get('/login',[LoginController::class,'index'])->name('login');
+//Ruta de validacion del login
+Route::post('/login',[LoginController::class,'store']);
+//Ruta de validacion del logout
+Route::post('/logout',[LogoutController::class,'store'])->name('logout');
 
+//ruta para vista de registro de usuarios
+Route::get('/signup', [RegisterController::class,'index'])->name('register');
 
-Route::get('/register', [HomeController::class, 'register'])->name('register');
+//ruta para enviar datos al servidor
+Route::post('/signup', [RegisterController::class,'store']);
+

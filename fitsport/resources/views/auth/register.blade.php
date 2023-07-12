@@ -13,7 +13,11 @@
 
 	<!-- Importar Bootstrap CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-
+	<style>
+		.border-red-500{
+			border: 2px solid red;
+		}
+	</style>
 </head>
 <body>
 	<div class="containerl">
@@ -28,59 +32,105 @@
 					<!-- logotipo -->
 					<img src="{{asset('img/logo.png')}}" style="margin-bottom: 7%; margin-top: 2%">
 
-					<form action="" enctype="multipart/form-data" method="post">
-					   <!-- Sección de entrada de datos personales -->
+					<form action="{{route('register')}}" enctype="multipart/form-data" method="post" novalidate>
+						@csrf
+						<!-- Sección de entrada de datos personales -->
 					   <div class="mb-5 row input-sign" style="padding-left: 2%; padding-right: 2% margin-bottom:10%;">
 					    <div class="col-sm-6">
 					      <label for="nombre" style="color: white font" class="form-label label">Nombre</label>
-					      <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese aquí su nombre">
-					    </div>
+					      <input type="text" class="form-control @error ('nombre') border-red-500 @enderror"  value="{{old('nombre')}}" id="nombre" name="nombre" placeholder="Ingrese aquí su nombre">
+					      @error ('nombre')
+							<p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2">
+								{{$message}}
+							</p>
+						  @enderror
+						</div>
 					    <div class="col-sm-6">
 					      <label for="apellido" style="color: white font" class="form-label label">Apellido</label>
-					      <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Ingrese aquí su apellido">
-					    </div>
+					      <input type="text" class="form-control  @error ('apellido') border-red-500 @enderror" value="{{old('apellido')}}"  id="apellido" name="apellido" placeholder="Ingrese aquí su apellido">
+					      @error ('apellido')
+							<p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2">
+								{{$message}}
+							</p>
+						  @enderror
+						</div>
 					  </div>
 
 					  <div class="mb-5 row input-sign" style="padding-left: 2%; padding-right: 2% margin-bottom:10%;">
 					    <div class="col-sm-6">
 					      <label for="correo" style="color: white font" class="form-label label">Correo electrónico</label>
-					      <input type="email" class="form-control" id="correo" name="correo" placeholder="Ingrese aquí su correo">
-					    </div>
+					      <input type="email" class="form-control  @error ('correo') border-red-500 @enderror" value="{{old('correo')}}" id="correo" name="correo" placeholder="Ingrese aquí su correo">
+					      @error ('correo')
+							<p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2">
+								{{$message}}
+							</p>
+						  @enderror
+						</div>
 					    <div class="col-sm-6">
 					      <label for="telefono" style="color: white font" class="form-label label">Teléfono</label>
-					      <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingrese aquí su telefono">
-					    </div>
+					      <input type="text" class="form-control @error ('telefono') border-red-500 @enderror" value="{{old('telefono')}}" id="telefono" name="telefono" placeholder="Ingrese aquí su telefono">
+					      @error ('telefono')
+							<p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2">
+								{{$message}}
+							</p>
+						  @enderror
+						</div>
 					  </div>
 
 					  <div class="mb-5 row input-sign" style="padding-left: 2%; padding-right: 2% margin-bottom:10%;">
 					    <div class="col-sm-6">
 					      <label for="fecha_nac" style="color: white font" class="form-label label">Fecha de nacimiento</label>
-					      <input type="date" class="form-control" id="fecha_nac" name="fecha_nac" placeholder="Ingrese aquí su fecha de nacimiento">
-					    </div>
+					      <input type="date" class="form-control  @error ('fecha_nac') border-red-500 @enderror" value="{{old('fecha_nac')}}" id="fecha_nac" name="fecha_nac" placeholder="Ingrese aquí su fecha de nacimiento">
+					      @error ('fecha_nac')
+							<p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2">
+								{{$message}}
+							</p>
+						  @enderror
+						</div>
 					    <div class="col-sm-6">
-					      <label for="username" style="color: white font" class="form-label label">Nombre de usuario</label>
-					      <input type="text" class="form-control" id="username" name="username" placeholder="Ingrese aquí su nombre de usuario">
-					    </div>
+					      <label for="usuario" style="color: white font" class="form-label label">Nombre de usuario</label>
+					      <input type="text" class="form-control @error ('usuario') border-red-500 @enderror"  value="{{old('usuario')}}"  id="usuario" name="usuario" placeholder="Ingrese aquí su nombre de usuario">
+					      @error ('usuario')
+							<p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2">
+								{{$message}}
+							</p>
+						  @enderror
+						</div>
 					  </div>
 
 					  <div class="mb-5 row input-sign" style="padding-left: 2%; padding-right: 2% margin-bottom:10%;">
 					    <div class="col-sm-6">
 					      <label for="password" style="color: white font" class="form-label label">Contraseña</label>
-					      <input type="password" class="form-control" id="password" name="password" placeholder="Ingrese aquí su contraseña">
-					    </div>
+					      <input type="password" class="form-control @error ('password') border-red-500 @enderror" id="password" name="password" value="{{old('password')}}"  placeholder="Ingrese aquí su contraseña">
+					      @error ('password')
+							<p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2">
+								{{$message}}
+							</p>
+						  @enderror
+						</div>
 					    <div class="col-sm-6">
 					      <label for="password_confirmation" style="color: white font" class="form-label label">Confirme la contraseña</label>
-					      <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Ingrese aquí su contraseña de nuevo">
-					    </div>
+					      <input type="password" class="form-control @error ('password_confirmation') border-red-500 @enderror" id="password_confirmation" value="{{old('password_confirmation')}}" name="password_confirmation" placeholder="Ingrese aquí su contraseña de nuevo">
+					      @error ('password_confirmation')
+							<p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2">
+								{{$message}}
+							</p>
+						  @enderror
+						</div>
 					  </div>
 
 					  <!-- Sección para cargar una imagen -->
 					   <div class="image-input-container mb-5">
-					    <label for="image-input">
+					    <label for="fotografia">
 					      <i class="fas fa-camera" style="color: lightgray"></i>
 					      <span class="selected-image"></span>
-					      <input type="file" id="image-input" name="imagen" accept="image/*" onchange="handleImageUpload(event)" />
-					    </label>
+					      <input type="file" class=" @error ('fotografia') border-red-500 @enderror" id="fotografia" name="fotografia" value="{{old('fotografia')}}" accept="image/*" onchange="handleImageUpload(event)" />
+					      @error ('fotografia')
+							<p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2">
+								{{$message}}
+							</p>
+						  @enderror
+						</label>
 					  </div>
 
 					  <!-- Botón de registro -->

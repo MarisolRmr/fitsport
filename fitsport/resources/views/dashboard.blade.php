@@ -130,7 +130,7 @@
             <script>
               document.write(new Date().getFullYear() + ",");
             </script>
-            made with <i class="fa fa-heart"></i> by Lorena Marisol Romero Hernández
+            made with <i class="fa fa-heart"></i> by WITech
           </div>
         </div>
       </div>

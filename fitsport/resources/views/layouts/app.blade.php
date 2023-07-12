@@ -175,9 +175,13 @@
               </li>
 
               <li class="flex items-center">
-                <a href="#" class="block px-0 py-2 text-sm font-semibold text-white transition-all ease-nav-brand">
-                  <span class="hidden sm:inline"> Cerrar Sesión </span> 
-                </a>
+                <form method="post" action="{{route('logout')}}">
+                  @csrf
+                  <button type="submit" class="block px-0 py-2 text-sm font-semibold text-white transition-all ease-nav-brand">
+                    <span class="hidden sm:inline"> Cerrar Sesión </span> 
+                  </button>
+                </form>
+                
               </li>
 
 

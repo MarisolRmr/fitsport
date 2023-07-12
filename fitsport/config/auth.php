@@ -63,6 +63,7 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+            'table' => 'users',
         ],
 
         // 'users' => [
@@ -91,12 +92,12 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
-            'table' => 'password_reset_tokens',
-            'expire' => 60,
-            'throttle' => 60,
-        ],
+     'users' => [
+         'provider' => 'users',
+         'table' => 'password_reset_tokens',
+         'expire' => 60,
+         'throttle' => 60,
+     ],
     ],
 
     /*

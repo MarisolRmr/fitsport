@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" href="#" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
 
  
     {{-- Estilos de tailwind --}}
@@ -40,9 +40,41 @@
     <script src="{{ asset('js/argon-dashboard-tailwind.js') }}"></script>
     <script src="{{ asset('js/argon-dashboard-tailwind.min.js') }}"></script>
 
-
-
+  
     <title>FitSport</title>
+    <style>
+      .offcanvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 280px;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+        background-color: rgba(53, 58, 80, 0.67);
+        z-index: 990;
+      }
+
+      .offcanvas.active {
+        transform: translateX(0);
+      }
+      .close-offcanvas-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 8px;
+        background: transparent;
+        border: none;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+      }
+      #sidenav li:hover{
+        background-color: rgba(77, 82, 106, 0.8);
+      }
+
+      
+    </style>
 </head>
 
 <body class="m-0 font-sans text-base antialiased font-normal dark:bg-slate-900 leading-default bg-gray-50 text-slate-500">
@@ -50,22 +82,20 @@
     {{-- @yield('contenido_top') --}}
  
     <!-- sidenav  -->
-    <aside class="fixed inset-y-0 flex-wrap items-center justify-between block w-full p-0 my-4  antialiased transition-transform duration-200 -translate-x-full bg-black border-0 shadow-xl dark:shadow-none dark:bg-slate-850 max-w-64 ease-nav-brand z-990 xl:ml-6 rounded-2xl xl:left-0 xl:translate-x-0" aria-expanded="false" style="background-color: rgba(53, 58, 80, 0.67);">
-      <div class="h-19 text-center">
-        <a class="block px-8 py-6 m-0 text-sm whitespace-nowrap dark:text-white text-slate-700" href="#">
-          <img src="{{asset ('img/logo.svg')}}" class="inline h-full max-w-full transition-all duration-200 dark:hidden ease-nav-brand max-h-8" alt="main_logo" />
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample">
+    <aside class="fixed inset-y-0 flex-wrap items-center justify-between block w-full p-0 my-4  ">
+      <div class="h-19 text-center mb-4">
+        <a class="block px-8 py-6 m-0  whitespace-nowrap dark:text-white text-slate-700" href="#">
+          <img src="{{asset ('img/logo.svg')}}" class="inline h-full max-w-full" alt="main_logo" />
         </a>
       </div>
-
       <hr class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent" />
-
       <div class="items-center block w-auto grow basis-full">
-        <ul class="flex flex-col pl-0 mb-0">
-
+        <ul class="flex flex-col pl-0 mb-0" id="sidenav">
           <li class="mt-0.5 w-full">
-            <a class="py-2.7 text-white dark:opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg px-4 font-semibold text-slate-700 transition-colors" href="#">
-              <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                <i class="relative top-0 text-sm leading-normal text-blue-500 ni ni-tv-2"></i>
+            <a style="font-size:18px" class="py-2.7 text-white dark:opacity-80 ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg px-4 font-semibold text-slate-700 transition-colors" href="#">
+              <div class="mr-2 flex h-12 w-12 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
+                <i class="relative top-0 leading-normal text-blue-500 ni ni-tv-2"></i>
               </div>
               <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Dashboard</span>
             </a>
@@ -76,45 +106,45 @@
           </li> --}}
 
           <li class="mt-0.5 w-full">
-            <a class="text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="#">
-              <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                <i class="relative top-0 text-sm leading-normal text-orange-500 ni ni-calendar-grid-58"></i>
+            <a style="font-size:18px" class="text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="#">
+              <div class="mr-2 flex h-12 w-12 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
+                <i class="relative top-0  leading-normal text-orange-500 ni ni-calendar-grid-58"></i>
               </div>
               <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Gyms and Boxes</span>
             </a>
           </li>
 
           <li class="mt-0.5 w-full">
-            <a class="text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="#">
-              <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center fill-current stroke-0 text-center xl:p-2.5">
-                <i class="relative top-0 text-sm leading-normal text-emerald-500 ni ni-credit-card"></i>
+            <a style="font-size:18px" class="text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="#">
+              <div class="mr-2 flex h-12 w-12 items-center justify-center rounded-lg bg-center fill-current stroke-0 text-center xl:p-2.5">
+                <i class="relative top-0  leading-normal text-emerald-500 ni ni-credit-card"></i>
               </div>
               <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Nutriólogos</span>
             </a>
           </li>
 
           <li class="mt-0.5 w-full">
-            <a class="text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="#">
-              <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                <i class="relative top-0 text-sm leading-normal text-cyan-500 ni ni-app"></i>
+            <a style="font-size:18px" class="text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="#">
+              <div class="mr-2 flex h-12 w-12 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
+                <i class="relative top-0  leading-normal text-cyan-500 ni ni-app"></i>
               </div>
               <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Entrenadores</span>
             </a>
           </li>
 
           <li class="mt-0.5 w-full">
-            <a class="text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="#">
-              <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                <i class="relative top-0 text-sm leading-normal text-red-600 ni ni-world-2"></i>
+            <a style="font-size:18px" class="text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="#">
+              <div class="mr-2 flex h-12 w-12 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
+                <i class="relative top-0  leading-normal text-red-600 ni ni-world-2"></i>
               </div>
               <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Atletas</span>
             </a>
           </li>
 
-          <li class="mt-0.5 w-full">
-            <a class="text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="#">
-              <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                <i class="relative top-0 text-sm leading-normal text-slate-700 ni ni-single-02"></i>
+          <li class="mt-0.5 w-full hover:bg-white">
+            <a style="font-size:18px" class="  text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors " href="#">
+              <div class="mr-2 flex h-12 w-12 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
+                <i class="relative top-0  leading-normal text-slate-700 ni ni-single-02"></i>
               </div>
               <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Ejercítate</span>
             </a>
@@ -124,6 +154,7 @@
       </div>
 
     </aside>
+    </div>
 
 
     <!-- end sidenav -->
@@ -139,10 +170,17 @@
     </div>
     
   
-    <main class="relative h-full max-h-screen transition-all duration-200 ease-in-out xl:ml-68 rounded-xl">
+    <main id="main" class=" relative h-full max-h-screen rounded-xl transition-all duration-200 ease-in-out rounded-xl flex-grow">
+
 
         <!-- Navbar -->
+        
       <nav class="relative flex flex-wrap items-center justify-between px-0 py-3 mx-6 transition-all ease-in shadow-none duration-250 rounded-2xl lg:flex-nowrap lg:justify-start" navbar-main navbar-scroll="false">
+        <div class="flex items-center">
+            <a class="block px-2 py-3 text-4xl font-bold text-white transition-all ease-nav-brand" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+              <i style="height: 25px; width: 25px;" class="fas fa-bars sm:mr-1"></i>
+            </a>
+        </div>
         <div class="flex items-center justify-between w-full px-4 py-1 mx-auto flex-wrap-inherit">
           <nav>
             <!-- breadcrumb -->
@@ -165,8 +203,9 @@
                 
               </div>
             </div>
+            
             <ul class="flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full">
-
+              
               <li class="flex items-center">
                 <a href="#" class="block px-0 py-2 text-sm font-semibold text-white transition-all ease-nav-brand">
                   <i class="fa fa-user sm:mr-1"></i>
@@ -193,16 +232,6 @@
                 </a>
               </li> --}}
 
-             
-              <li class="flex items-center pl-4 xl:hidden">
-                <a href="javascript:;" class="block p-0 text-sm text-white transition-all ease-nav-brand" sidenav-trigger>
-                  <div class="w-4.5 overflow-hidden">
-                    <i class="ease mb-0.75 relative block h-0.5 rounded-sm bg-white transition-all"></i>
-                    <i class="ease mb-0.75 relative block h-0.5 rounded-sm bg-white transition-all"></i>
-                    <i class="ease relative block h-0.5 rounded-sm bg-white transition-all"></i>
-                  </div>
-                </a>
-              </li>
             </ul>
           </div>
         </div>
@@ -214,8 +243,30 @@
 
     </main>
 
-   
+    
+     <!-- Importar el archivo JavaScript de Bootstrap -->
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+     <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var offcanvas = document.getElementById('offcanvasExample');
+        var main = document.getElementById('main');
+
+        var offcanvasToggle = document.querySelector('[data-bs-toggle="offcanvas"]');
+
+        offcanvasToggle.addEventListener('click', function() {
+          offcanvas.classList.toggle('active');
+          main.classList.toggle('xl:ml-68');
+          main.classList.toggle('w-32');
+        });
+      });
+    </script>
+
+
+
+
+     </script>
   </body>
 
 </html>

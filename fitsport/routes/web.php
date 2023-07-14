@@ -33,3 +33,6 @@ Route::get('/signup', [RegisterController::class,'index'])->name('register');
 //ruta para enviar datos al servidor
 Route::post('/signup', [RegisterController::class,'store']);
 
+Route::get('/noticias', function () {
+    return view('admin.noticias');
+});

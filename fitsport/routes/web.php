@@ -39,3 +39,6 @@ Route::get('/noticias', [NoticiasController::class,'index'])->name('noticias.ind
 
 //ruta para agregar nueva noticia
 Route::get('/noticias/Nueva', [NoticiasController::class,'create'])->name('noticias.create');
+
+// guardar categorias
+Route::post('/noticias', [NoticiasController::class, 'store'])->name('noticias.store');

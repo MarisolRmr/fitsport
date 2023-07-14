@@ -126,11 +126,20 @@
 
   <div class=" rounded-xl  text-white w-4/5 mb-8" style="background-color:rgba(53, 58, 80, 0.67); padding: 40px">
     <div class=" rounded-xl p-4 text-white overflow-x-auto" style="background: #64677893;">
+    @if(session('agregada'))
+        <div class="bg-green-200 p-2 rounded-lg mb-6 text-black text-center ">
+            {{ session('agregada') }}
+        </div>
+    @endif
+    @if(session('success'))
+        <div class="bg-green-200 p-2 rounded-lg mb-6 text-black text-center ">
+            {{ session('success') }}
+        </div>
+    @endif
     <table id="example" class="mt-2 table hover hover:border-collapse">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Imagen</th>
                 <th>Nombre</th>
                 <th>Fecha</th>
                 <th>Descripción</th>
@@ -139,132 +148,17 @@
             </tr>
         </thead>
         <tbody>
+        @foreach($noticias as $noticia)
             <tr>
-                <td>Jane</td>
-                <td>Smith</td>
-                <td>30</td>
-                <td>25</td>
-                <td></td>
+                <td>{{ $noticia->id }}</td>
+                <td>{{ $noticia->nombre }}</td>
+                <td>{{ $noticia->fecha }}</td>
+                <td>{{ $noticia->descripcion }}</td>
                 <td class="actions-cell"><a href="#" class="edit-button">Editar</a></td>
                 <td class="actions-cell"><a href="#" class="edit-button">Eliminar</a></td>
             </tr>
-            <tr>
-                <td>Jane</td>
-                <td>Smith</td>
-                <td>30</td>
-                <td>25</td>
-                <td></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Editar</a></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Eliminar</a></td>
-            </tr>
-            <tr>
-                <td>Jane</td>
-                <td>Smith</td>
-                <td>30</td>
-                <td>25</td>
-                <td></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Editar</a></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Eliminar</a></td>
-            </tr>
-            <tr>
-                <td>Jane</td>
-                <td>Smith</td>
-                <td>30</td>
-                <td>25</td>
-                <td></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Editar</a></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Eliminar</a></td>
-            </tr>
-            <tr>
-                <td>Jane</td>
-                <td>Smith</td>
-                <td>30</td>
-                <td>25</td>
-                <td></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Editar</a></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Eliminar</a></td>
-            </tr>
-            <tr>
-                <td>Jane</td>
-                <td>Smith</td>
-                <td>30</td>
-                <td>25</td>
-                <td></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Editar</a></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Eliminar</a></td>
-            </tr>
-            <tr>
-                <td>Jane</td>
-                <td>Smith</td>
-                <td>30</td>
-                <td>25</td>
-                <td></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Editar</a></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Eliminar</a></td>
-            </tr>
-            <tr>
-                <td>Jane</td>
-                <td>Smith</td>
-                <td>30</td>
-                <td>25</td>
-                <td></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Editar</a></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Eliminar</a></td>
-            </tr>
-            <tr>
-                <td>Jane</td>
-                <td>Smith</td>
-                <td>30</td>
-                <td>25</td>
-                <td></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Editar</a></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Eliminar</a></td>
-            </tr>
-            <tr>
-                <td>Jane</td>
-                <td>Smith</td>
-                <td>30</td>
-                <td>25</td>
-                <td></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Editar</a></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Eliminar</a></td>
-            </tr>
-            <tr>
-                <td>Jane</td>
-                <td>Smith</td>
-                <td>30</td>
-                <td>25</td>
-                <td></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Editar</a></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Eliminar</a></td>
-            </tr>
-            <tr>
-                <td>Jane</td>
-                <td>Smith</td>
-                <td>30</td>
-                <td>25</td>
-                <td></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Editar</a></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Eliminar</a></td>
-            </tr>
-            <tr>
-                <td>Jane</td>
-                <td>Smith</td>
-                <td>30</td>
-                <td>25</td>
-                <td></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Editar</a></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Eliminar</a></td>
-            </tr>
-            <tr>
-                <td>Jane</td>
-                <td>Smith</td>
-                <td>30</td>
-                <td>25</td>
-                <td></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Editar</a></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Eliminar</a></td>
-            </tr>
+        @endforeach
+            
         </tbody>
     </table>
     </div>

@@ -153,6 +153,14 @@
               <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Ejercítate</span>
             </a>
           </li>
+          <li class="mt-0.5 w-full hover:bg-white">
+            <a href="{{route('noticias.index')}}" style="font-size:18px" class="  text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors " href="#">
+              <div class="mr-2 flex h-12 w-12 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
+                <i class="relative top-0  leading-normal text-slate-700 ni ni-single-02"></i>
+              </div>
+              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Noticias</span>
+            </a>
+          </li>
 
         </ul>
       </div>

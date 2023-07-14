@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\NoticiasController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,6 +34,8 @@ Route::get('/signup', [RegisterController::class,'index'])->name('register');
 //ruta para enviar datos al servidor
 Route::post('/signup', [RegisterController::class,'store']);
 
-Route::get('/noticias', function () {
-    return view('admin.noticias');
-});
+
+Route::get('/noticias', [NoticiasController::class,'index'])->name('noticias.index');
+
+//ruta para agregar nueva noticia
+Route::get('/noticias/Nueva', [NoticiasController::class,'create'])->name('noticias.create');

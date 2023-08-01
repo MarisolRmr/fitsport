@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 use Illuminate\Http\Request;
 use App\Models\Noticia;
 
@@ -29,28 +30,34 @@ class NoticiasController extends Controller
         'fecha' => 'required',
         'descripcion' => 'required',
         'texto' => 'required',
+        'imagen' => 'required'
    ]);
 
-    // Obtener el archivo de imagen subido
-    //$imagen = $request->file('imagen');
+ 
+   $nombreImagenUnico='';
+    if ($request->hasFile('imagen')) {
+        $imagen = $request->file('imagen');
+        $nombreImagenUnico = Str::uuid() . "." . $imagen->getClientOriginalExtension();
+        $imagenServidor = Image::make($imagen);
+        $imagenServidor->fit(800, 200); // Redimensionar la imagen
+        $imagenPath = public_path('noticias_img') . '/' . $nombreImagenUnico;
+        $imagenServidor->save($imagenPath); // Guardar la imagen redimensionada en la carpeta "public/uploads"
+    }
 
-    // Generar un ID único para el nombre del archivo
-    //$imagenNombre = uniqid() . '.' . $imagen->getClientOriginalExtension();
 
-    // Guardar la imagen en la carpeta "uploads" con el nombre único
-    //$imagen->move('uploads', $imagenNombre);
-
-    // Crear el registro en la base de datos y almacenar el ID único de la imagen
+    
     Noticia::create([
         'nombre' => $request->nombre,
         'fecha' => $request->fecha,
         'descripcion' => $request->descripcion,
         'texto' => $request->texto,
+        'imagen' =>$nombreImagenUnico,
     ]);
 
     // Redireccionar a la vista de listado de noticias
     return redirect()->route('noticias.index')->with('agregada', 'Noticia agregada correctamente');
 }
+
 
 
 }

@@ -97,7 +97,7 @@
       <div class="items-center block w-auto grow basis-full">
         <ul class="flex flex-col pl-0 mb-0" id="sidenav">
           <li class="mt-0.5 w-full">
-            <a style="font-size:18px" class="py-2.7 text-white dark:opacity-80 ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg px-4 font-semibold text-slate-700 transition-colors" href="#">
+            <a href="{{route('home')}}" style="font-size:18px" class="py-2.7 text-white dark:opacity-80 ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg px-4 font-semibold text-slate-700 transition-colors">
               <div class="mr-2 flex h-12 w-12 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                 <i class="relative top-0 leading-normal text-blue-500 ni ni-tv-2"></i>
               </div>
@@ -110,7 +110,7 @@
           </li> --}}
 
           <li class="mt-0.5 w-full">
-            <a href="{{route('gymBoxes.index')}}"style="font-size:18px" class="text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="#">
+            <a href="{{route('gymBoxes.index')}}" style="font-size:18px" class="text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors">
               <div class="mr-2 flex h-12 w-12 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                 <i class="relative top-0  leading-normal text-orange-500 ni ni-calendar-grid-58"></i>
               </div>
@@ -128,7 +128,7 @@
           </li>
 
           <li class="mt-0.5 w-full">
-            <a href="{{route('entrenador.index')}}" style="font-size:18px" class="text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="#">
+            <a href="{{route('entrenador.index')}}" style="font-size:18px" class="text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors">
               <div class="mr-2 flex h-12 w-12 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                 <i class="relative top-0  leading-normal text-cyan-500 ni ni-app"></i>
               </div>
@@ -146,7 +146,7 @@
           </li>-->
 
           <li class="mt-0.5 w-full hover:bg-white">
-            <a href="{{route('ejercicio.index')}}" style="font-size:18px" class="  text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors " href="#">
+            <a href="{{route('ejercicio.index')}}" style="font-size:18px" class="  text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors " >
               <div class="mr-2 flex h-12 w-12 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                 <i class="relative top-0  leading-normal text-slate-700 ni ni-single-02"></i>
               </div>
@@ -154,7 +154,7 @@
             </a>
           </li>
           <li class="mt-0.5 w-full hover:bg-white">
-            <a href="{{route('noticias.index')}}" style="font-size:18px" class="  text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors " href="#">
+            <a href="{{route('noticias.index')}}" style="font-size:18px" class="  text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors " >
               <div class="mr-2 flex h-12 w-12 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                 <i class="relative top-0  leading-normal text-red-600 ni ni-single-02"></i>
               </div>

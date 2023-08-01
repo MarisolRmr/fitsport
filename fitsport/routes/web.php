@@ -21,15 +21,10 @@ use App\Http\Controllers\EntrenadorAdController;
 |
 */
 
-
-Route::get('/', [HomeController::class, 'index']);
-
-Route::get('/dashboard', [HomeController::class, 'home'])->name('home');
+Route::get('/', [HomeController::class, 'home'])->name('home');
 
 Route::get('/login',[LoginController::class,'index'])->name('login');
-//Ruta de validacion del login
 Route::post('/login',[LoginController::class,'store']);
-//Ruta de validacion del logout
 Route::post('/logout',[LogoutController::class,'store'])->name('logout');
 
 //ruta para vista de registro de usuarios
@@ -37,7 +32,6 @@ Route::get('/signup', [RegisterController::class,'index'])->name('register');
 
 //ruta para enviar datos al servidor
 Route::post('/signup', [RegisterController::class,'store']);
-
 
 Route::get('/noticias', [NoticiasController::class,'index'])->name('noticias.index');
 
@@ -58,7 +52,6 @@ Route::get('/entrenador', [EntrenadorAdController::class,'index'])->name('entren
 Route::get('/entrenador/create', [EntrenadorAdController::class,'create'])->name('entrenador.create');
 //Ruta para guardar los datos del entrenado
 Route::get('/entrenador/create', [EntrenadorAdController::class,'create'])->name('entrenador.create');
-
 
 //Ruta para la vista de listado entrenador
 Route::get('/ejercicio', [EjerciciosController::class,'index'])->name('ejercicio.index');

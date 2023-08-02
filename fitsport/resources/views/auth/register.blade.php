@@ -144,7 +144,7 @@
 					<!-- Enlace para iniciar sesión -->
 					<div class="justify-content-center align-items-center d-flex" style="margin-bottom: 5rem">
 				  	  <p class="p-reg">
-				  	  	Ya tienes una cuenta? <a href="login.php" style="color: #7B96D4">Inicia Sesión</a>
+				  	  	Ya tienes una cuenta? <a href="{{route('login')}}" style="color: #7B96D4">Inicia Sesión</a>
 				  	  </p>
 			      	</div>
 

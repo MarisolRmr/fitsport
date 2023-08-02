@@ -200,7 +200,6 @@
               <li class="text-sm leading-normal">
 
                 <a class="text-white opacity-50" href="#"> FitSport</a>
-
                 
               </li>
               <li class="text-sm pl-2 capitalize leading-normal text-white before:float-left before:pr-2 before:text-white before:content-['/']" aria-current="page">@yield('titulo')</li>

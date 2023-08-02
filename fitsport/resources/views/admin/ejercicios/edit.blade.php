@@ -51,6 +51,38 @@
     .image-input-container input[type="file"] {
         display: none;
     }
+    /* Estilo para el icono de lápiz */
+    .edit-icon {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 24px;
+    }
+
+    /* Estilo para el fondo gris o borroso en hover */
+    .selected-image:hover::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Puedes ajustar la opacidad según tus preferencias */
+        border-radius: 50%;
+    }
+    
+
+    /* Muestra el icono de lápiz solo en hover y si hay una imagen seleccionada */
+    .selected-image:hover .edit-icon {
+        display: flex;
+    }
+
 </style>
 @endsection
 
@@ -84,17 +116,21 @@
                     <div class="w-1/2 ml-2">
                         <div class="image-input-container">
                             <label for="imagen">
-                            <i class="fas fa-camera" style="color: lightgray"></i>
-                            <span class="selected-image"></span>
-                            <input type="file" class="@error('imagen') border-red-500 @enderror" id="imagen" name="imagen" accept="image/*" onchange="handleImageUpload(event)" />
-                            @error('imagen')
-                                <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2">
-                                {{$message}}
-                                </p>
-                            @enderror
+                                <i class="fas fa-camera" style="color: lightgray"></i>
+                                <span class="selected-image" style="background-image: url('{{ asset('ImgEjercicios/' . $ejercicio->imagen) }}');">
+                                    <span class="edit-icon">
+                                        <i class="fas fa-pencil-alt" ></i>
+                                    </span>
+                                </span>
+                                <input type="file" class="@error('imagen') border-red-500 @enderror" id="imagen" name="imagen" accept="image/*" onchange="handleImageUpload(event)" />
+                                @error('imagen')
+                                    <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2">
+                                        {{$message}}
+                                    </p>
+                                @enderror
                             </label>
                         </div>
-                    </div> 
+                    </div>  
                 </div>
                 <div class=" mb-4">
                     <label for="descripcion" class="block text-white font-semibold">Descripción</label>
@@ -124,40 +160,26 @@
         </div>
     </div>
 @endsection
-
 @section('js')
-    <script>
-        function handleImageUpload(event) {
-            const input = event.target;
-            const imageContainer = input.parentElement;
-            const selectedImage = imageContainer.querySelector('.selected-image');
+<script>
+    function handleImageUpload(event) {
+        const input = event.target;
+        const imageContainer = input.parentElement;
+        const selectedImage = imageContainer.querySelector('.selected-image');
 
-            const file = input.files[0];
-            const reader = new FileReader();
+        const file = input.files[0];
+        const reader = new FileReader();
 
-            reader.onload = function (e) {
-                selectedImage.style.backgroundImage = `url('${e.target.result}')`; // Add the URL here
-            };
+        reader.onload = function (e) {
+            selectedImage.style.backgroundImage = `url('${e.target.result}')`; // Add the URL here
+            if (e.target.result) {
+                editIcon.style.display = 'flex'; // Mostrar el ícono de lápiz si hay imagen
+            } else {
+                editIcon.style.display = 'none'; // Ocultar el ícono de lápiz si no hay imagen
+            }
+        };
 
-            reader.readAsDataURL(file);
-        }
-    </script>
-
-    {{-- <script>
-        
-        function handleImageUpload(event) {
-            const input = event.target;
-            const imageContainer = input.parentElement;
-            const selectedImage = imageContainer.querySelector('.selected-image');
-
-            const file = input.files[0];
-            const reader = new FileReader();
-
-            reader.onload = function (e) {
-            selectedImage.style.backgroundImage = `url(${e.target.result})`;
-            };
-
-            reader.readAsDataURL(file);
-        }
-    </script> --}}
+        reader.readAsDataURL(file);
+    }
+</script>
 @endsection

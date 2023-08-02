@@ -73,7 +73,7 @@
                 <div class="flex">
                     <div class="w-full mr-2">
                         <label for="nombre" class="text-lg font-bold">Nombre:</label>
-                        <input type="text" id="nombre" name="nombre" value="{{old('nombre')}}" class=" text-black w-full mt-1 p-2 rounded" placeholder="Ingresa tu nombre">
+                        <input type="text" id="nombre" name="nombre" value="{{old('nombre')}}" class=" text-black w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-500" placeholder="Ingrese el nombre del ejercicio">
                         @error('nombre')
                             <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                                 {{$message}}
@@ -83,7 +83,7 @@
                     <div class="w-1/2 ml-2">
                         <div class="image-input-container">
                             <label for="imagen">
-                            <i class="fas fa-camera" style="color: lightgray"></i>
+                            <i class="fas fa-camera" style="color: lightgray; font-size: 40px;"></i>
                             <span class="selected-image"></span>
                             <input type="file" class="@error('imagen') border-red-500 @enderror" id="imagen" name="imagen" value="{{old('imagen')}}" accept="image/*" onchange="handleImageUpload(event)" />
                             @error('imagen')
@@ -97,7 +97,7 @@
                 </div>
                 <div class=" mb-4">
                     <label for="descripcion" class="block text-white font-semibold">Descripción</label>
-                    <textarea style="color:black" name="descripcion" id="descripcion" value="{{old('descripcion')}}" class="w-full text-black p-2 border border-white rounded-lg focus:outline-none focus:border-blue-500" placeholder="Ingresa una descripción"></textarea>
+                    <textarea style="color:black" name="descripcion" id="descripcion" value="{{old('descripcion')}}" class="w-full text-black p-2 border border-white rounded-lg focus:outline-none focus:border-blue-500" placeholder="Ingrese una breve descripción"></textarea>
                     @error('descripcion')
                         <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                             {{$message}}
@@ -106,7 +106,7 @@
                 </div>
                 <div class=" mb-4">
                     <label for="explicacion" class="block text-white font-semibold">Explicación</label>
-                    <textarea style="color:black" name="explicacion" id="explicacion" value="{{old('explicacion')}}"class="w-full p-2 text-black border border-white rounded-lg focus:outline-none focus:border-blue-500" placeholder="Ingresa una descripción"></textarea>
+                    <textarea style="color:black" name="explicacion" id="explicacion" value="{{old('explicacion')}}"class="w-full p-2 text-black border border-white rounded-lg focus:outline-none focus:border-blue-500" placeholder="Ingrese la explicación del ejercicio"></textarea>
                     @error('explicacion')
                         <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                             {{$message}}

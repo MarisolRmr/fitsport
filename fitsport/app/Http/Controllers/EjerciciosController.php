@@ -47,7 +47,7 @@ class EjerciciosController extends Controller
             'imagen' =>$nombreImagenUnico,
         ]);
         //Se retorna a la vista de clientes
-        return redirect()->route('ejercicio.index');
+        return redirect()->route('ejercicio.index')->with('agregada', 'Ejercicio agregado correctamente');
     }
 
     //Ruta para retornar la vista de editar ejercicio
@@ -94,8 +94,21 @@ class EjerciciosController extends Controller
     //Funcion para eliminar el ejercicio
     public function delete($id_ejercicio)
     {
-        //Se busca el ejercicio en el modelo y se elimina
-        Ejercicio::find($id_ejercicio)->delete();
-        return redirect()->route('ejercicio.index');
+        // Buscar el ejercicio por su ID
+        $ejercicio = Ejercicio::find($id_ejercicio);
+
+        // Verificar si existe la imagen asociada al ejercicio y borrarla si es el caso
+        if ($ejercicio->imagen) {
+            $imagenPath = public_path('ImgEjercicios') . '/' . $ejercicio->imagen;
+            if (file_exists($imagenPath)) {
+                unlink($imagenPath); // Eliminar la imagen del servidor
+            }
+        }
+
+        // Eliminar el ejercicio de la base de datos
+        $ejercicio->delete();
+
+        return redirect()->route('ejercicio.index')->with('success', 'Ejercicio eliminado correctamente');
     }
+
 }

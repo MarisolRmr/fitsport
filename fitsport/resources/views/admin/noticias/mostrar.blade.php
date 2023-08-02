@@ -127,7 +127,6 @@
         </svg>
     </a>
   </div>
-
   <div class=" rounded-xl  text-white w-4/5 mb-8" style="background-color:rgba(53, 58, 80, 0.67); padding: 40px">
     <div class=" rounded-xl p-4 text-white overflow-x-auto" style="background: #64677893;">
     @if(session('agregada'))

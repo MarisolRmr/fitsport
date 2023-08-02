@@ -26,7 +26,7 @@
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="{{ asset('css/perfect-scrollbar.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/argon-dashboard-tailwind.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/argon-dashboard-tailwind.min.css') }}" rel="stylesheet" />
@@ -47,6 +47,10 @@
     @yield('css')
     <title>FitSport</title>
     <style>
+      .swal2-icon{
+        border-color: #849be3cc !important;
+        color: #849be3cc !important;
+      }
       .offcanvas {
         position: fixed;
         top: 0;
@@ -76,12 +80,23 @@
       #sidenav li:hover{
         background-color: rgba(77, 82, 106, 0.8);
       }
+      /* Color de fondo de la barra de desplazamiento */
+      ::-webkit-scrollbar {
+        background-color: rgba(53, 58, 80, 0.4); 
+      }
+
+      /* Estilo de la barra de desplazamiento */
+      ::-webkit-scrollbar-thumb {
+        background-color: #64677893;
+        border-radius: 10px;
+      }
+
 
       
     </style>
 </head>
 
-<body class="m-0 font-sans text-base antialiased font-normal dark:bg-slate-900 leading-default bg-gray-50 text-slate-500">
+<body id="body" class="m-0 font-sans text-base antialiased font-normal dark:bg-slate-900 leading-default bg-gray-50 text-slate-500">
   
     {{-- @yield('contenido_top') --}}
  
@@ -200,7 +215,6 @@
               <li class="text-sm leading-normal">
 
                 <a class="text-white opacity-50" href="#"> FitSport</a>
-
                 
               </li>
               <li class="text-sm pl-2 capitalize leading-normal text-white before:float-left before:pr-2 before:text-white before:content-['/']" aria-current="page">@yield('titulo')</li>
@@ -265,6 +279,7 @@
       document.addEventListener('DOMContentLoaded', function() {
         var offcanvas = document.getElementById('offcanvasExample');
         var main = document.getElementById('main');
+        var body = document.getElementById('body');
 
         var offcanvasToggle = document.querySelector('[data-bs-toggle="offcanvas"]');
 
@@ -272,6 +287,7 @@
           offcanvas.classList.toggle('active');
           main.classList.toggle('xl:ml-68');
           main.classList.toggle('w-32');
+          body.style.overflow = 'auto';
         });
       });
       

@@ -39,9 +39,15 @@ Route::get('/noticias', [NoticiasController::class,'index'])->name('noticias.ind
 
 //ruta para agregar nueva noticia
 Route::get('/noticias/Nueva', [NoticiasController::class,'create'])->name('noticias.create');
-
-// guardar categorias
+// guardar noticica
 Route::post('/noticias', [NoticiasController::class, 'store'])->name('noticias.store');
+//Ruta para mandar a la vista de editar ejercicio
+Route::get('/noticias/edit/{id}', [NoticiasController::class, 'edit'])->name('noticia.editar');
+//Ruta para modificar la noticia en la base de datos
+Route::post('/updateNoticia/{id}', [NoticiasController::class, 'update'])->name('noticia.update');
+//Ruta para eliminar la noticia de la base de datos
+Route::get('/noticia/delete/{id}', [NoticiasController::class, 'delete'])->name('noticia.eliminar');
+
 
 //Rutas Gyms
 Route::get('/GymAndBoxes',[GimnasiosController::class,'index'])->name('gymBoxes.index');
@@ -55,9 +61,18 @@ Route::get('/entrenador/create', [EntrenadorAdController::class,'create'])->name
 //Ruta para guardar los datos del entrenado
 Route::get('/entrenador/create', [EntrenadorAdController::class,'create'])->name('entrenador.create');
 
+////////////////////////////////////////////////////////////////////////////////////////////
+//                                  RUTAS PARA EJERCICITATE ADMIN
+////////////////////////////////////////////////////////////////////////////////////////////
 //Ruta para la vista de listado entrenador
 Route::get('/ejercicio', [EjerciciosController::class,'index'])->name('ejercicio.index');
 //Ruta para la vista de agregar entrenador
 Route::get('/ejercicio/create', [EjerciciosController::class,'create'])->name('ejercicio.create');
 //Ruta para guardar los datos del entrenado
 Route::post('/ejercicio/create', [EjerciciosController::class,'store'])->name("ejercicio.create.store");
+//Ruta para mandar a la vista de editar ejercicio
+Route::get('/ejercicio/edit/{id}', [EjerciciosController::class, 'edit'])->name('ejercicio.editar');
+//Ruta para modificar la ejercicio en la base de datos
+Route::post('/updateEjercicio', [EjerciciosController::class, 'update'])->name('ejercicio.update');
+//Ruta para eliminar la ejercicio de la base de datos
+Route::get('/ejercicio/delete/{id}', [EjerciciosController::class, 'delete'])->name('ejercicio.eliminar');

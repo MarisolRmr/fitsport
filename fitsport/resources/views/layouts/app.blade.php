@@ -97,6 +97,11 @@
 </head>
 
 <body id="body" class="m-0 font-sans text-base antialiased font-normal dark:bg-slate-900 leading-default bg-gray-50 text-slate-500">
+<<<<<<< HEAD
+=======
+  
+    {{-- @yield('contenido_top') --}}
+>>>>>>> e1af1565f6b0c7a36cddf3477c12df7ff5711c5d
  
     <!-- sidenav  -->
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample">

@@ -67,10 +67,10 @@ class EjerciciosController extends Controller
             'nombre' => 'required',
             'descripcion' => 'required',
             'explicacion' => 'required',
-            'imagen' => 'required',
         ]);
         //Cargar la imagen
-        $nombreImagenUnico='';
+        $ejercicio = Ejercicio::findOrFail($request->id);
+        $nombreImagenUnico = $ejercicio->imagen;
         if ($request->hasFile('imagen')) {
             $imagen = $request->file('imagen');
             $nombreImagenUnico = Str::uuid() . "." . $imagen->getClientOriginalExtension();

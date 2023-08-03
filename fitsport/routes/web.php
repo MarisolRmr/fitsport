@@ -49,10 +49,15 @@ Route::post('/updateNoticia/{id}', [NoticiasController::class, 'update'])->name(
 Route::get('/noticia/delete/{id}', [NoticiasController::class, 'delete'])->name('noticia.eliminar');
 
 
-//Rutas Gyms
+////////////////////////////////////////////////////////////////////////////////////////////
+//                                  RUTAS PARA GYM ADN BOXES ADMIN
+////////////////////////////////////////////////////////////////////////////////////////////
 Route::get('/GymAndBoxes',[GimnasiosController::class,'index'])->name('gymBoxes.index');
-Route::get('/GymAndBoxes/agregar',[GimnasiosController::class,'create'])->name('addgymBoxes');
+Route::get('/GymAndBoxes/agregar',[GimnasiosController::class,'create'])->name('addgymBoxes.create');
 Route::post('/GymAndBoxes/agregar',[GimnasiosController::class,'store'])->name('addgymBoxes.store');
+Route::get('/GymAndBoxes/delete/{id}', [GimnasiosController::class, 'delete'])->name('addgymBoxes.eliminar');
+Route::get('/GymAndBoxes/edit/{id}', [GimnasiosController::class, 'edit'])->name('addgymBoxes.editar');
+Route::post('/updateGymAndBoxes', [GimnasiosController::class, 'update'])->name('addgymBoxes.update');
 
 //Ruta para la vista de listado entrenador
 Route::get('/entrenador', [EntrenadorAdController::class,'index'])->name('entrenador.index');

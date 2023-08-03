@@ -14,6 +14,8 @@ class Gimnasios extends Model
         'telefono',
         'horario',
         'descripcion',
-        'imagen',
+        'longitud',
+        'latitud',
+        'fotografia',
     ];
 }

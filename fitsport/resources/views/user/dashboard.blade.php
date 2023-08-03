@@ -1,9 +1,14 @@
-@extends('layouts.app')
+@extends('layouts.appUser')
 
 @section('titulo')
-    Administrador Dashboard
+    Atleta Dashboard
 @endsection
 
+@section('contenido_top')
+<div class="absolute bg-y-50 w-full top-0 bg-[url('{{asset ('img/admin.png')}}')] min-h-75">
+  <span class="absolute top-0 left-0 w-full h-full bg-black opacity-60"></span>
+</div>
+@endsection
 
 @section('username')
 {{ $usuario }}

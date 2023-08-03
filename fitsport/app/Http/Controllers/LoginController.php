@@ -24,5 +24,6 @@ class LoginController extends Controller
         }
         //credenciales correctas
         return redirect()->route('home');
+        
     }
 }

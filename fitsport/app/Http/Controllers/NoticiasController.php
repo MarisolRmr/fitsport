@@ -23,40 +23,112 @@ class NoticiasController extends Controller
     }
 
     public function store(Request $request)
-{
-    // Reglas de validación
-    $this->validate($request, [
-        'nombre' => 'required',
-        'fecha' => 'required',
-        'descripcion' => 'required',
-        'texto' => 'required',
-        'imagen' => 'required'
-   ]);
+    {
+        // Reglas de validación
+        $this->validate($request, [
+            'nombre' => 'required',
+            'fecha' => 'required',
+            'descripcion' => 'required',
+            'texto' => 'required',
+            'imagen' => 'required'
+        ]);
+    
+        $nombreImagenUnico='';
+        if ($request->hasFile('imagen')) {
+            $imagen = $request->file('imagen');
+            $nombreImagenUnico = Str::uuid() . "." . $imagen->getClientOriginalExtension();
+            $imagenServidor = Image::make($imagen);
+            $imagenServidor->fit(800, 200); // Redimensionar la imagen
+            $imagenPath = public_path('noticias_img') . '/' . $nombreImagenUnico;
+            $imagenServidor->save($imagenPath); // Guardar la imagen redimensionada en la carpeta "public/uploads"
+        }
 
- 
-   $nombreImagenUnico='';
-    if ($request->hasFile('imagen')) {
-        $imagen = $request->file('imagen');
-        $nombreImagenUnico = Str::uuid() . "." . $imagen->getClientOriginalExtension();
-        $imagenServidor = Image::make($imagen);
-        $imagenServidor->fit(800, 200); // Redimensionar la imagen
-        $imagenPath = public_path('noticias_img') . '/' . $nombreImagenUnico;
-        $imagenServidor->save($imagenPath); // Guardar la imagen redimensionada en la carpeta "public/uploads"
+
+        Noticia::create([
+            'nombre' => $request->nombre,
+            'fecha' => $request->fecha,
+            'descripcion' => $request->descripcion,
+            'texto' => $request->texto,
+            'imagen' =>$nombreImagenUnico,
+        ]);
+
+        // Redireccionar a la vista de listado de noticias
+        return redirect()->route('noticias.index')->with('agregada', 'Noticia agregada correctamente');
     }
 
-
+    //Ruta para retornar la vista de editar ejercicio
+    public function edit($id_noticias){
+        //Se busca el ejercicio mediante el ID
+        $noticia= Noticia::find($id_noticias);
+        //Se retorna a la vista
+        return view('admin.noticias.editar',["noticia"=>$noticia]);
+    }
     
-    Noticia::create([
-        'nombre' => $request->nombre,
-        'fecha' => $request->fecha,
-        'descripcion' => $request->descripcion,
-        'texto' => $request->texto,
-        'imagen' =>$nombreImagenUnico,
-    ]);
 
-    // Redireccionar a la vista de listado de noticias
-    return redirect()->route('noticias.index')->with('agregada', 'Noticia agregada correctamente');
-}
+    //Función para actualizar los datos del noticia en la base de datos
+    public function update(Request $request, $id)
+    {
+        //Validaciones de formulario
+        $this->validate($request, [
+            'nombre' => 'required',
+            'fecha' => 'required',
+            'descripcion' => 'required',
+            'texto' => 'required'
+        ]);
+        //Cargar la imagen
+        $nombreImagenUnico='';
+        if ($request->hasFile('imagen')) {
+            $imagen = $request->file('imagen');
+            $nombreImagenUnico = Str::uuid() . "." . $imagen->getClientOriginalExtension();
+            $imagenServidor = Image::make($imagen);
+            $imagenServidor->fit(800, 200); // Redimensionar la imagen
+            $imagenPath = public_path('noticias_img') . '/' . $nombreImagenUnico;
+            $imagenServidor->save($imagenPath); // Guardar la imagen redimensionada en la carpeta "public/uploads"
+            //Actualizacion de datos
+
+            Noticia::where('id', $id)->update([
+                'nombre' => $request->nombre,
+                'fecha' => $request->fecha,
+                'descripcion' => $request->descripcion,
+                'texto' => $request->texto,
+                'imagen' => $nombreImagenUnico,
+            ]);
+        }else{
+            //Actualizacion de datos
+            
+            Noticia::where('id', $id)->update([
+                'nombre' => $request->nombre,
+                'fecha' => $request->fecha,
+                'descripcion' => $request->descripcion,
+                'texto' => $request->texto,
+            ]);
+
+        }
+        
+        
+        //Se retorna a la vista de noticias
+        return redirect()->route('noticias.index')->with('actualizada', 'Noticia actualizada correctamente');
+    }
+
+    //Funcion para eliminar el noticia
+    public function delete($id_noticia)
+    {
+        // Buscar el noticia por su ID
+        $noticia = Noticia::find($id_noticia);
+
+        // Verificar si existe la imagen asociada al noticia y borrarla si es el caso
+        if ($noticia->imagen) {
+            $imagenPath = public_path('noticias_img') . '/' . $noticia->imagen;
+            if (file_exists($imagenPath)) {
+                unlink($imagenPath); // Eliminar la imagen del servidor
+            }
+        }
+
+        // Eliminar el noticia de la base de datos
+        $noticia->delete();
+
+        return redirect()->route('noticias.index')->with('eliminada', 'Noticia eliminada correctamente');
+    }
 
 
 

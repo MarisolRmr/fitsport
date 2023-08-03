@@ -16,6 +16,59 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `ejercicios`
+--
+
+DROP TABLE IF EXISTS `ejercicios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ejercicios` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `descripcion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `explicacion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `imagen` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ejercicios`
+--
+
+LOCK TABLES `ejercicios` WRITE;
+/*!40000 ALTER TABLE `ejercicios` DISABLE KEYS */;
+INSERT INTO `ejercicios` VALUES (6,'ql','qk','qk','00c45e2b-9382-4556-ae11-fede6ce50e92.jpg','2023-08-02 18:47:55','2023-08-02 19:11:38');
+/*!40000 ALTER TABLE `ejercicios` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `entrenadores`
+--
+
+DROP TABLE IF EXISTS `entrenadores`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `entrenadores` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `entrenadores`
+--
+
+LOCK TABLES `entrenadores` WRITE;
+/*!40000 ALTER TABLE `entrenadores` DISABLE KEYS */;
+/*!40000 ALTER TABLE `entrenadores` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `failed_jobs`
 --
 
@@ -45,6 +98,38 @@ LOCK TABLES `failed_jobs` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `gimnasios`
+--
+
+DROP TABLE IF EXISTS `gimnasios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `gimnasios` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `telefono` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `horario` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `descripcion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `latitud` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `longitud` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fotografia` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `gimnasios`
+--
+
+LOCK TABLES `gimnasios` WRITE;
+/*!40000 ALTER TABLE `gimnasios` DISABLE KEYS */;
+INSERT INTO `gimnasios` VALUES (1,'gym1','8341459893','22:20','si',NULL,NULL,NULL,'2023-07-14 16:16:17','2023-07-14 16:16:17'),(2,'gym2','8344280421','10:41','si',NULL,NULL,NULL,'2023-07-14 16:39:39','2023-07-14 16:39:39');
+/*!40000 ALTER TABLE `gimnasios` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -56,7 +141,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,7 +150,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (1,'2023_07_12_145524_create_tipo_usuarios_table',1),(6,'2014_10_12_000000_create_users_table',2),(7,'2014_10_12_100000_create_password_reset_tokens_table',2),(8,'2019_08_19_000000_create_failed_jobs_table',2),(9,'2019_12_14_000001_create_personal_access_tokens_table',2),(10,'2023_07_14_070008_create_noticias_table',3);
+INSERT INTO `migrations` VALUES (1,'2023_07_12_145524_create_tipo_usuarios_table',1),(6,'2014_10_12_000000_create_users_table',2),(7,'2014_10_12_100000_create_password_reset_tokens_table',2),(8,'2019_08_19_000000_create_failed_jobs_table',2),(9,'2019_12_14_000001_create_personal_access_tokens_table',2),(11,'2023_07_14_070008_create_noticias_table',3),(12,'2023_07_14_160306_create_gimnasios_table',4),(13,'2023_07_14_162048_create_entrenadores_table',5),(14,'2023_07_14_162104_create_ejercicios_table',5);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,11 +167,11 @@ CREATE TABLE `noticias` (
   `descripcion` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `texto` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `fecha` datetime NOT NULL,
-  `imagen` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `imagen` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,6 +180,7 @@ CREATE TABLE `noticias` (
 
 LOCK TABLES `noticias` WRITE;
 /*!40000 ALTER TABLE `noticias` DISABLE KEYS */;
+INSERT INTO `noticias` VALUES (4,'x','h','khk','2023-08-01 12:47:00','4fad209b-a0c3-4277-bacb-c099f21d6f39.jpg','2023-08-01 13:44:23','2023-08-03 14:06:55'),(6,'n','jLorem\r\n                        cillum dolore eu fugi','m Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\n                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\n                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\n                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\n                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\n                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.','2023-08-18 09:18:00','b0364443-0ddc-454b-b4ed-50e052d1e527.jpg','2023-08-01 15:19:10','2023-08-03 14:38:23');
 /*!40000 ALTER TABLE `noticias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -215,7 +301,7 @@ CREATE TABLE `users` (
   UNIQUE KEY `users_cedula_unique` (`cedula`),
   KEY `users_tipo_id_foreign` (`tipo_id`),
   CONSTRAINT `users_tipo_id_foreign` FOREIGN KEY (`tipo_id`) REFERENCES `tipo_usuarios` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -224,7 +310,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (5,'Nubia Esmeralda','Cantu Sanchez','cantu.nubia.1am@gmail.com',NULL,'2002-06-04 00:00:00','8344280421',NULL,'nubia','$2y$10$hhTyaoHychtabPfiYmE2.uNRLvU4gxK9CoZcAdOA.N5E/gEOUwjYC',NULL,NULL,NULL,NULL,NULL,NULL,2,NULL,NULL,NULL);
+INSERT INTO `users` VALUES (5,'Nubia Esmeralda','Cantu Sanchez','cantu.nubia.1am@gmail.com',NULL,'2002-06-04 00:00:00','8344280421',NULL,'nubia','$2y$10$hhTyaoHychtabPfiYmE2.uNRLvU4gxK9CoZcAdOA.N5E/gEOUwjYC',NULL,NULL,NULL,NULL,NULL,NULL,2,NULL,NULL,NULL),(6,'Sonia Lizbeth','Muñoz Barrirntos','2030114@upv.edu.mx',NULL,'2023-07-02 00:00:00','8341541335',NULL,'sonia','$2y$10$sHi/IqDWBUCWkwe4CzBqW.rbyd8b.FoTA3nhnyn60MEDcaG.FZhvC',NULL,NULL,NULL,NULL,NULL,NULL,2,NULL,NULL,NULL),(13,'x','d','si@n.m',NULL,'2023-06-27 00:00:00','8341459893',NULL,'zzz','$2y$10$ijpbpidTZ.wVFj33IxDUVu9bAmmh3M7cilFUr2KS4HDO.sTQgi1qK','3470fe72-4e72-495d-a889-bffdd96809a3.jpg',NULL,NULL,NULL,NULL,NULL,2,NULL,NULL,NULL),(14,'j','h','cantu.nubia.1am@gmail.cam',NULL,'2023-08-09 00:00:00','567890098765',NULL,'sisi','$2y$10$WHU7Ucaywn2FM1qU2dPkC.TD2rGNYGhqtUT7STjY/I3RtEmcy3YtC','f5b19863-92b6-4ee9-82c3-eccdf127a1a5.jpg',NULL,NULL,NULL,NULL,NULL,2,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -241,4 +327,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-07-14  2:06:21
+-- Dump completed on 2023-08-03  8:39:35

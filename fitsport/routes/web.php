@@ -21,7 +21,9 @@ use App\Http\Controllers\EntrenadorAdController;
 |
 */
 
+
 Route::get('/', [HomeController::class, 'home'])->name('home');
+Route::get('/fitsport', [HomeController::class, 'index'])->name('paginaprincipal');
 
 Route::get('/login',[LoginController::class,'index'])->name('login');
 Route::post('/login',[LoginController::class,'store']);

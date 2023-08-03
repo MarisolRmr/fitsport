@@ -90,16 +90,13 @@
         background-color: #64677893;
         border-radius: 10px;
       }
-
-
-      
+    
     </style>
 </head>
 
 <body id="body" class="m-0 font-sans text-base antialiased font-normal dark:bg-slate-900 leading-default bg-gray-50 text-slate-500">
- 
     <!-- sidenav  -->
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample">
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" style="height: 100vh; overflow-y: auto;">
     <aside class="fixed inset-y-0 flex-wrap items-center justify-between block w-full p-0 my-4  ">
       <div class="h-19 text-center mb-4">
         <a class="block px-8 py-6 m-0  whitespace-nowrap dark:text-white text-slate-700" href="#">
@@ -117,13 +114,12 @@
               <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Dashboard</span>
             </a>
           </li>
-
           <li class="mt-0.5 w-full">
             <a href="{{route('gymBoxes.index')}}" style="font-size:18px" class="text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors">
               <div class="mr-2 flex h-12 w-12 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                 <i class="relative top-0  leading-normal text-orange-500 ni ni-calendar-grid-58"></i>
               </div>
-              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Gyms and Boxes</span>
+              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Mis Rutinas</span>
             </a>
           </li>
 
@@ -132,7 +128,7 @@
               <div class="mr-2 flex h-12 w-12 items-center justify-center rounded-lg bg-center fill-current stroke-0 text-center xl:p-2.5">
                 <i class="relative top-0  leading-normal text-emerald-500 ni ni-credit-card"></i>
               </div>
-              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Nutriólogos</span>
+              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Mis Metas</span>
             </a>
           </li>
 
@@ -141,25 +137,23 @@
               <div class="mr-2 flex h-12 w-12 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                 <i class="relative top-0  leading-normal text-cyan-500 ni ni-app"></i>
               </div>
-              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Entrenadores</span>
+              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Gyms and Boxes</span>
             </a>
           </li>
-
-          <li class="mt-0.5 w-full">
-            <a style="font-size:18px" class="text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="#">
-              <div class="mr-2 flex h-12 w-12 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                <i class="relative top-0  leading-normal text-red-600 ni ni-world-2"></i>
-              </div>
-              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Atletas</span>
-            </a>
-          </li>
-
           <li class="mt-0.5 w-full hover:bg-white">
             <a href="{{route('ejercicio.index')}}" style="font-size:18px" class="  text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors " >
               <div class="mr-2 flex h-12 w-12 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                 <i class="relative top-0  leading-normal text-slate-700 ni ni-single-02"></i>
               </div>
-              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Ejercítate</span>
+              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Calendario</span>
+            </a>
+          </li>
+          <li class="mt-0.5 w-full hover:bg-white">
+            <a href="{{route('noticias.index')}}" style="font-size:18px" class="  text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors " >
+              <div class="mr-2 flex h-12 w-12 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
+                <i class="relative top-0  leading-normal text-red-600 ni ni-single-02"></i>
+              </div>
+              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Nutriólogos</span>
             </a>
           </li>
           <li class="mt-0.5 w-full hover:bg-white">
@@ -170,17 +164,23 @@
               <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Noticias</span>
             </a>
           </li>
+          <li class="mt-0.5 w-full hover:bg-white">
+            <a href="{{route('noticias.index')}}" style="font-size:18px" class="  text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors " >
+              <div class="mr-2 flex h-12 w-12 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
+                <i class="relative top-0  leading-normal text-red-600 ni ni-single-02"></i>
+              </div>
+              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Ejercítate</span>
+            </a>
+          </li>
 
         </ul>
       </div>
-
     </aside>
     </div>
-
-
     <!-- end sidenav -->
 
-    <div class="absolute w-full h-full top-0 bg-cover bg-center" style="background-image: url('{{asset ('img/admin/fondo4.png')}}'); min-height: 75px; position: fixed;">
+
+    <div class="absolute w-full h-full top-0 bg-cover bg-center" style="background-image: url('{{asset ('img/user/fondo_user.png')}}'); min-height: 75px; position: fixed;">
       <span class="absolute top-0 left-0 w-full h-full bg-black opacity-70"></span>
     </div>
     
@@ -234,7 +234,6 @@
                     <span class="hidden sm:inline"> Cerrar Sesión </span> 
                   </button>
                 </form>
-                
               </li>
 
             </ul>
@@ -242,7 +241,9 @@
         </div>
       </nav>
       <!-- end Navbar -->
+
       @yield('contenido')
+
 
     </main>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>

@@ -17,9 +17,7 @@ class RegisterController extends Controller
     {
         return view('auth.register');
     }
-
-   
-
+    
     public function store(Request $request) {
     
         //validaciones del formulario de registros

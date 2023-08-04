@@ -230,10 +230,9 @@
             
             <ul class="flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full">
               <li class="flex items-center">
-
                 <div class="relative inline-block" style="min-width: 150px;">
                   <div class="p-0 flex items-center justify-center">
-                  <a href="{{route('perfil.index')}}" onclick="toggleDropdown()" class="block px-0 py-2 text-sm font-semibold text-white transition-all ease-nav-brand">
+                  <a style="cursor:pointer" onclick="toggleDropdown()" class="block px-0 py-2 text-sm font-semibold text-white transition-all ease-nav-brand">
                     @if(auth()->user()->fotografia)
                         <img src="{{ asset('uploads/' . auth()->user()->fotografia) }}" alt="Fotografía de usuario" class="sm:inline w-8 h-8 rounded-full sm:mr-1">
                     @else
@@ -244,7 +243,7 @@
                   </div>
                   <div id="dropdown-content" class="hidden absolute right-0 w-48 mt-2 bg-white rounded-lg shadow-lg">
                     <ul style="z-index:10" id="dropdown">
-                      <li id="d1"><a href="#" class="px-3 py-2 mb-0 block text-gray-800 hover:bg-primary">Mi Perfil</a></li>
+                      <li id="d1"><a href="{{route('perfil.index')}}" class="px-3 py-2 mb-0 block text-gray-800 hover:bg-primary">Mi Perfil</a></li>
                       <li id="df" class="flex items-center">
                         <form method="post" action="{{route('logout')}}">
                           @csrf
@@ -258,8 +257,7 @@
                 </div>
               </li>
 
-              
-
+            
             </ul>
           </div>
         </div>

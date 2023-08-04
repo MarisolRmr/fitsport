@@ -133,7 +133,7 @@
           </li>
 
           <li class="mt-0.5 w-full">
-            <a style="font-size:18px" class="text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="#">
+            <a style="font-size:18px" class="text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="{{route('admNutriologo.index')}}">
               <div class="mr-2 flex h-12 w-12 items-center justify-center rounded-lg bg-center fill-current stroke-0 text-center xl:p-2.5">
                 <i class="relative top-0  leading-normal text-emerald-500 ni ni-credit-card"></i>
               </div>

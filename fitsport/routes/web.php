@@ -9,6 +9,7 @@ use App\Http\Controllers\NoticiasController;
 use App\Http\Controllers\GimnasiosController;
 use App\Http\Controllers\EjerciciosController;
 use App\Http\Controllers\EntrenadorAdController;
+use App\Http\Controllers\NutriologoController;
 /*
 /*
 |--------------------------------------------------------------------------
@@ -81,3 +82,14 @@ Route::get('/ejercicio/edit/{id}', [EjerciciosController::class, 'edit'])->name(
 Route::post('/updateEjercicio', [EjerciciosController::class, 'update'])->name('ejercicio.update');
 //Ruta para eliminar la ejercicio de la base de datos
 Route::get('/ejercicio/delete/{id}', [EjerciciosController::class, 'delete'])->name('ejercicio.eliminar');
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+//                                  RUTAS PARA NUTRIOLOGO
+////////////////////////////////////////////////////////////////////////////////////////////
+Route::get('/Nutriologo',[NutriologoController::class,'index'])->name('admNutriologo.index');
+Route::get('/Nutriologo/agregar',[NutriologoController::class,'create'])->name('admNutriologo.create');
+Route::post('/Nutriologo/agregar',[NutriologoController::class,'store'])->name('admNutriologo.store');
+Route::get('/Nutriologo/delete/{id}', [NutriologoController::class, 'delete'])->name('admNutriologo.eliminar');
+Route::get('/Nutriologo/edit/{id}', [NutriologoController::class, 'edit'])->name('admNutriologo.editar');
+Route::post('/updateNutriologo', [NutriologoController::class, 'update'])->name('admNutriologo.update');

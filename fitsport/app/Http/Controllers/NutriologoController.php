@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Gimnasios;
+use App\Models\Nutriologo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
-class GimnasiosController extends Controller
+class NutriologoController extends Controller
 {
     //Constructor del controlador
     public function __construct(){
@@ -17,16 +17,15 @@ class GimnasiosController extends Controller
     //Método para mostrar todos los gimnasios
     public function index() {
         //Obtenemos todos los gimnasios
-        $gimnasios = Gimnasios::all();
+        $nutriologo = Nutriologo::all();
     
         // Retornamos la vista 'verProductos' y pasamos los productos como una variable llamada 'productos'
-        return view('admin.gymAndBoxes.mostrar')->with('gimnasios', $gimnasios);
+        return view('admin.nutriologo.mostrar')->with('nutriologo', $nutriologo);
     }
 
-    //Método para mostrar el formulario de creación
     public function create()
     {
-        return view('admin.gymAndBoxes.crear');
+        return view('admin.nutriologo.crear');
     }
 
     //Método para guardar un nuevo gimnasio
@@ -38,7 +37,7 @@ class GimnasiosController extends Controller
             'telefono' => 'required|max:10',
             'hora' => 'required',
             'horaCierre' => 'required',
-            'descripcion' => 'required',
+            'cedula' => 'required|max:8',
             'imagen' => 'required',
             'longitud' => 'required',
             'latitud' => 'required',
@@ -51,50 +50,49 @@ class GimnasiosController extends Controller
             $nombreImagenUnico = Str::uuid() . "." . $imagen->getClientOriginalExtension();
             $imagenServidor = Image::make($imagen);
             $imagenServidor->fit(1000, 1000); // Redimensionamos la imagen
-            $imagenPath = public_path('ImgGymBoxes') . '/' . $nombreImagenUnico;
+            $imagenPath = public_path('ImgNutriologo') . '/' . $nombreImagenUnico;
             //Guardamos la imagen en el servidor
             $imagenServidor->save($imagenPath);
         }
 
         //Creamos el gimnasio
-        Gimnasios::create([
+        Nutriologo::create([
             'nombre' => $request->nombre,
             'telefono' => $request->telefono,
-            'horario' => $request->hora,
-            'horarioCierre'=> $request->horaCierre,
+            'horaEntrada' => $request->hora,
+            'horaSalida'=> $request->horaCierre,
             'longitud' => $request->longitud,
             'latitud' => $request->latitud,
-            'descripcion' => $request->descripcion,
-            'fotografia' =>$nombreImagenUnico,
+            'cedula' => $request->cedula,
+            'imagen' =>$nombreImagenUnico,
         ]);
 
         //Redireccionamos al index
-        return redirect()->route('gymBoxes.index')->with('success', 'Gym/Box registrado correctamente');
+        return redirect()->route('admNutriologo.index')->with('success', 'Nutriologo registrado correctamente');
     }
-
     //Método para editar un gimnasio
-    public function edit($id_gym){
+    public function edit($id_nutriologo){
         //Buscamos el gimnasio por el ID
-        $gym= Gimnasios::find($id_gym);
+        $nutriologo = Nutriologo::find($id_nutriologo);
         //Devolvemos la vista con los datos del gimnasio
-        return view('admin.gymAndBoxes.editar',["gym"=>$gym]);
+        return view('admin.nutriologo.editar',["nutriologo"=>$nutriologo]);
     }
 
     //Método para actualizar un gimnasio
     public function update(Request $request)
     {
         //Validamos los datos del formulario
-        $this->validate($request, [
+        $request->validate([
             'nombre' => 'required',
-            'telefono' => 'required',
+            'telefono' => 'required|max:10',
             'hora' => 'required',
             'horaCierre' => 'required',
-            'descripcion' => 'required',
+            'cedula' => 'required|max:8',
         ]);
 
         //Busca el gimnasio y lo guarda en gym
-        $gym = Gimnasios::findOrFail($request->id);
-        $nombreImagenUnico = $gym->fotografia;
+        $nutriologo = Nutriologo::findOrFail($request->id);
+        $nombreImagenUnico = $nutriologo->imagen;
 
         if ($request->hasFile('imagen')) {
             $imagen = $request->file('imagen');
@@ -102,36 +100,38 @@ class GimnasiosController extends Controller
             $nombreImagenUnico = Str::uuid() . "." . $imagen->getClientOriginalExtension();
             $imagenServidor = Image::make($imagen);
             $imagenServidor->fit(1000, 1000); // Redimensionamos la imagen
-            $imagenPath = public_path('ImgGymBoxes') . '/' . $nombreImagenUnico;
+            $imagenPath = public_path('ImgNutriologo') . '/' . $nombreImagenUnico;
             //Guardamos la imagen en el servidor
             $imagenServidor->save($imagenPath);
         }
+
+
+
         
         //Actualizamos el gimnasio
-        Gimnasios::where('id', $request->id)->update([
+        Nutriologo::where('id', $request->id)->update([
             'nombre' => $request->nombre,
             'telefono' => $request->telefono,
-            'horario' => $request->hora,
-            'horarioCierre'=> $request->horaCierre,
+            'horaEntrada' => $request->hora,
+            'horaSalida'=> $request->horaCierre,
             'longitud' => $request->longitud,
             'latitud' => $request->latitud,
-            'descripcion' => $request->descripcion,
-            'fotografia' =>$nombreImagenUnico,
+            'cedula' => $request->cedula,
+            'imagen' =>$nombreImagenUnico,
         ]);
 
         //Redireccionamos al index
-        return redirect()->route('gymBoxes.index')->with('success', 'Gym/Box actualizado correctamente');
+        return redirect()->route('admNutriologo.index')->with('success', 'Nutiologo actualizado correctamente');
     }
 
-    //Método para eliminar un gimnasio
-    public function delete($id_gym)
+    public function delete($id_nutriologo)
     {
         // Buscamos el gimnasio por su ID
-        $gymBoxes = Gimnasios::find($id_gym);
+        $nutriologo = Nutriologo::find($id_nutriologo);
 
         // Comprobamos si el gimnasio tiene imagen asociada
-        if ($gymBoxes->fotografia) {
-            $imagenPath = public_path('ImgGymBoxes') . '/' . $gymBoxes->fotografia;
+        if ($nutriologo->imagen) {
+            $imagenPath = public_path('ImgNutriologo') . '/' . $nutriologo->imagen;
             //Si existe la imagen en el servidor, la eliminamos
             if (file_exists($imagenPath)) {
                 unlink($imagenPath); 
@@ -139,9 +139,9 @@ class GimnasiosController extends Controller
         }
 
         // Eliminamos el gimnasio
-        $gymBoxes->delete();
+        $nutriologo->delete();
 
         //Redireccionamos al index con mensaje de éxito
-        return redirect()->route('gymBoxes.index')->with('success', 'Ejercicio eliminado correctamente');
+        return redirect()->route('admNutriologo.index')->with('success', 'Nutriologo eliminado correctamente');
     }
 }

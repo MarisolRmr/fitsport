@@ -11,15 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('gimnasios', function (Blueprint $table) {
+        Schema::create('nutriologo', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
             $table->string('telefono');
-            $table->string('horario');
-            $table->text('descripcion');
-            $table->string('latitud')->nullable();
-            $table->string('longitud')->nullable();
-            $table->string('fotografia')->nullable();
+            $table->string('horaEntrada');
+            $table->string('horaSalida');
+            $table->string('cedula');
+            $table->string('latitud');
+            $table->string('longitud');
+            $table->string('imagen');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('gimnasios');
+        Schema::dropIfExists('nutriologo');
     }
 };

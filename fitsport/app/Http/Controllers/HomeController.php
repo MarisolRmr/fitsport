@@ -40,8 +40,8 @@ class HomeController extends Controller{
 
         } else {
             // El usuario no está autenticado, redirigir a la pagina principal
-            return redirect()->route('paginaprincipal');
-            //return view('principal');
+            //return redirect()->route('paginaprincipal');
+            return view('principal');
         }
     }
 

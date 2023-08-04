@@ -9,6 +9,7 @@ use App\Http\Controllers\NoticiasController;
 use App\Http\Controllers\GimnasiosController;
 use App\Http\Controllers\EjerciciosController;
 use App\Http\Controllers\EntrenadorAdController;
+use App\Http\Controllers\PerfilController;
 /*
 /*
 |--------------------------------------------------------------------------
@@ -81,3 +82,6 @@ Route::get('/ejercicio/edit/{id}', [EjerciciosController::class, 'edit'])->name(
 Route::post('/updateEjercicio', [EjerciciosController::class, 'update'])->name('ejercicio.update');
 //Ruta para eliminar la ejercicio de la base de datos
 Route::get('/ejercicio/delete/{id}', [EjerciciosController::class, 'delete'])->name('ejercicio.eliminar');
+
+
+Route::get('/perfil', [PerfilController::class,'index'])->name('perfil.index');

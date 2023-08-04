@@ -90,9 +90,16 @@
         background-color: #64677893;
         border-radius: 10px;
       }
+      #dropdown li:hover{
+        background-color: #e5e5fb;
+      }
+      #d1:hover{
+        border-radius: 0.5rem 0.5rem 0 0;
+      }
+      #df:hover{
+        border-radius: 0 0 0.5rem 0.5rem;
+      }
 
-
-      
     </style>
 </head>
 
@@ -218,29 +225,40 @@
           <div class="flex items-center mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
             <div class="flex items-center md:ml-auto md:pr-4">
               <div class="relative flex flex-wrap items-stretch w-full transition-all rounded-lg ease">
-               
-                
               </div>
             </div>
             
             <ul class="flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full">
-              
               <li class="flex items-center">
-                <a href="#" class="block px-0 py-2 text-sm font-semibold text-white transition-all ease-nav-brand">
-                  <i class="fa fa-user sm:mr-1"></i>
-                  <span class="hidden sm:inline p-2"> @yield('username') </span>
-                </a>
+
+                <div class="relative inline-block" style="min-width: 150px;">
+                  <div class="p-0 flex items-center justify-center">
+                  <a href="{{route('perfil.index')}}" onclick="toggleDropdown()" class="block px-0 py-2 text-sm font-semibold text-white transition-all ease-nav-brand">
+                    @if(auth()->user()->fotografia)
+                        <img src="{{ asset('uploads/' . auth()->user()->fotografia) }}" alt="Fotografía de usuario" class="sm:inline w-8 h-8 rounded-full sm:mr-1">
+                    @else
+                        <i style="font-size: 20px" class="fa fa-user sm:mr-1"></i>
+                    @endif
+                    <span class="hidden sm:inline pl-0 p-2" style="font-size: 20px">{{ auth()->user()->usuario }}</span>
+                  </a>
+                  </div>
+                  <div id="dropdown-content" class="hidden absolute right-0 w-48 mt-2 bg-white rounded-lg shadow-lg">
+                    <ul style="z-index:10" id="dropdown">
+                      <li id="d1"><a href="#" class="px-3 py-2 mb-0 block text-gray-800 hover:bg-primary">Mi Perfil</a></li>
+                      <li id="df" class="flex items-center">
+                        <form method="post" action="{{route('logout')}}">
+                          @csrf
+                          <button type="submit"  class="px-3 py-2 block text-gray-800">
+                            <span class="hidden sm:inline"> Cerrar Sesión </span> 
+                          </button>
+                        </form>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </li>
 
-              <li class="flex items-center">
-                <form method="post" action="{{route('logout')}}">
-                  @csrf
-                  <button type="submit" class="block px-0 py-2 text-sm font-semibold text-white transition-all ease-nav-brand">
-                    <span class="hidden sm:inline"> Cerrar Sesión </span> 
-                  </button>
-                </form>
-                
-              </li>
+              
 
             </ul>
           </div>
@@ -272,6 +290,11 @@
           body.style.overflow = 'auto';
         });
       });
+
+      function toggleDropdown() {
+        const dropdownContent = document.getElementById('dropdown-content');
+        dropdownContent.classList.toggle('hidden'); // Agregar o quitar la clase 'hidden'
+      }
       
     </script>
 

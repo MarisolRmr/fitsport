@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('titulo')
-    Administrador Dashboard
+    Administrador Gym And Boxes
 @endsection
 
 @section('css')
@@ -116,28 +116,31 @@
 @endsection
 
 @section('contenido')
-<div class=" w-full h-screen flex  flex-col items-center justify-center overflow-auto ">
-    <div class="rounded-xl flex text-white items-center w-4/5 mb-4" style="background-color:rgba(53, 58, 80, 0.67); padding: 15px">
+<div class="w-full h-screen flex flex-col items-center justify-center overflow-auto">
+    <!-- Encabezado -->
+    <div class="rounded-xl flex text-white items-center w-4/5 mb-4" style="background-color: rgba(53, 58, 80, 0.67); padding: 15px">
         <img src="{{asset('img/cuadro.png')}}" alt="Imagen pequeña" class="h-8 w-8">
         <p id="titulo" class="ml-4 mb-0">Gym And Boxes</p>
+        <!-- Enlace para agregar un nuevo gimnasio -->
         <a href="{{route('addgymBoxes.create')}}" class="ml-auto flex items-center rounded-full border-4 border-white w-12 h-12 text-white text-2xl text-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="20" cy="20" r="16" />
-            <line x1="20" y1="12" x2="20" y2="28" />
-            <line x1="12" y1="20" x2="28" y2="20" />
+                <circle cx="20" cy="20" r="16" />
+                <line x1="20" y1="12" x2="20" y2="28" />
+                <line x1="12" y1="20" x2="28" y2="20" />
             </svg>
         </a>
     </div>
 
-
-
-    <div class=" rounded-xl  text-white w-4/5 mb-8" style="background-color:rgba(53, 58, 80, 0.67); padding: 40px">
-        <div class=" rounded-xl p-4 text-white overflow-x-auto" style="background: #64677893;">
+    <!-- Tabla de gimnasios -->
+    <div class="rounded-xl text-white w-4/5 mb-8" style="background-color: rgba(53, 58, 80, 0.67); padding: 40px">
+        <div class="rounded-xl p-4 text-white overflow-x-auto" style="background: #64677893;">
+            <!-- Mensaje de éxito si se agrega un nuevo gimnasio -->
             @if(session('agregada'))
                 <div class="bg-green-200 p-2 rounded-lg mb-6 text-black text-center ">
                     {{ session('agregada') }}
                 </div>
             @endif
+            <!-- Mensaje de éxito con alerta SweetAlert -->
             @if(session('success'))
                 <script>
                     Swal.fire({
@@ -147,10 +150,10 @@
                         timer: 4000, 
                         timerProgressBar: true,
                         showConfirmButton: false,
-                    
                     });
                 </script>
             @endif
+            <!-- Tabla que muestra la lista de gimnasios -->
             <table id="example" class="mt-2 table hover hover:border-collapse">
                 <thead>
                     <tr>
@@ -165,32 +168,37 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach ($gimnasios as $gimnasios)
+                <!-- Ciclo para mostrar la información de cada gimnasio -->
+                @foreach ($gimnasios as $gimnasio)
                     <tr>
-                        <td>{{ $gimnasios->id }}</td>
-                        <td>{{ $gimnasios->nombre }}</td>
-                        <td>{{ $gimnasios->telefono }}</td>
-                        <td>{{ $gimnasios->horario}}</td>
-                        <td>{{ $gimnasios->descripcion}}</td>
-                        <td style="display: flex; align-items: center; justify-content: center;">
-                            @if($gimnasios->fotografia)
-                            <img src="{{ asset('ImgGymBoxes/' . $gimnasios->fotografia)}}" alt="Imagen de la marca" style="height: 80px; weight:80px; border-radius:17px">
-                            @else
-                                Sin Imagen
-                            @endif
+                        <td>{{ $gimnasio->id }}</td>
+                        <td>{{ $gimnasio->nombre }}</td>
+                        <td>{{ $gimnasio->telefono }}</td>
+                        <td>{{ date('g:i a', strtotime($gimnasio->horario)) }} - {{ date('g:i a', strtotime($gimnasio->horarioCierre)) }} </td>
+                        <td>{{ Illuminate\Support\Str::words($gimnasio->descripcion, 10, '...') }}</td>
+                        <td style="text-align: center;">
+                            <!-- Contenedor para centrar la imagen -->
+                            <div style="display: flex; justify-content: center;">
+                                <!-- Mostrar la imagen del gimnasio si existe, si no, mostrar "Sin Imagen" -->
+                                @if($gimnasio->fotografia)
+                                    <img src="{{ asset('ImgGymBoxes/' . $gimnasio->fotografia) }}" alt="Imagen de la marca" style="height: 80px; width: 80px; border-radius: 17px;">
+                                @else
+                                    Sin Imagen
+                                @endif
+                            </div>
                         </td>
-                        <td class="actions-cell"><a href="{{route('addgymBoxes.editar',$gimnasios->id)}}" class="edit-button">Editar</a></td>
-                        <td class="actions-cell"><a href="#" onclick="eliminar({{ $gimnasios->id }})" class="edit-button">Eliminar</a></td>
+                        <!-- Botones para editar y eliminar un gimnasio -->
+                        <td class="actions-cell"><a href="{{ route('addgymBoxes.editar', $gimnasio->id) }}" class="edit-button">Editar</a></td>
+                        <td class="actions-cell"><a href="#" onclick="eliminar({{ $gimnasio->id }})" class="edit-button">Eliminar</a></td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
         </div>
     </div>
-  
 </div>
-
 @endsection
+
 
 @section('js')
 

@@ -13,6 +13,7 @@ class Gimnasios extends Model
         'nombre',
         'telefono',
         'horario',
+        'horarioCierre',
         'descripcion',
         'longitud',
         'latitud',

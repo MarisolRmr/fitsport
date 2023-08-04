@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('titulo')
-    Administrador Dashboard
+    Administrador Gym And Boxes
 @endsection
 
 @section('css')
@@ -94,7 +94,7 @@
     }
     #direccion-container {
         position: absolute;
-        top: 450px; 
+        top: 510px; 
         left: 650px;
         z-index: 1;
     }
@@ -122,102 +122,153 @@
 @endsection
 
 @section('contenido')
-<div  style="font-family: 'Poppins';" class=" w-full h-screen flex  flex-col items-center justify-center overflow-auto ">
+<!-- Contenedor principal -->
+<div style="font-family: 'Poppins';" class="w-full h-screen flex flex-col items-center justify-center overflow-auto">
+    <!-- Encabezado -->
     <div class="rounded-xl flex text-white items-center w-4/5 mb-4" style="background-color:rgba(53, 58, 80, 0.67); padding: 15px">
         <img src="{{asset('img/cuadro.png')}}" alt="Imagen pequeña" class="h-8 w-8">
         <p id="titulo" class="ml-4 mb-0">Editar Gym And Boxes</p>
     </div>
-    
 
-    <div class=" rounded-xl  text-white w-4/5 mb-8" style="background-color:rgba(53, 58, 80, 0.67); padding: 40px">
-    <form action="{{route('addgymBoxes.update')}}" class="text-white rounded-lg p-4" enctype="multipart/form-data" method="POST" novalidate>
-        @csrf
-        <input name="id" type="hidden" value="{{$gym->id }}">
-        <div class="flex">
-        <div class="w-1/2 mr-2 mb-0">
-            <label for="nombre" class="text-lg font-bold">Nombre:</label>
-            <input style="color:black" name="nombre" value="{{$gym->nombre ?? old('nombre')}}" type="text" id="nombre" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error ('nombre') border-red-500 @enderror" placeholder="Ingresa tu nombre">
-            @error('nombre')
-            <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
-                    {{$message}}
-                </p>    
-            @enderror
-        </div>
-        
-        <div class="w-1/2 mr-2 mb-0">
-            <label for="telefono" class="text-lg font-bold">Teléfono:</label>
-            <input type="number" style="color:black" id="telefono" name = "telefono" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error ('telefono') border-red-500 @enderror" value="{{$gym->telefono}}" placeholder="Ingresa tu teléfono">
-            @error('telefono')
-                <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
-                    {{$message}}
-                </p>    
-            @enderror
-        </div>
-        <div class="w-1/2 ml-2 mb-0">
-            <label for="hora" class="text-lg font-bold">Hora:</label>
-            <input type="time" name="hora" style="color:black" id="hora" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error('hora') border-red-500 @enderror" value="{{$gym->horario}}" placeholder="Ingresa la hora">
-            @error('hora')
-                <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
-                    {{$message}}
-                </p>    
-            @enderror
-        </div>
-        <div class="w-1/2 ml-2">
-                        <div class="image-input-container">
-                            <label for="imagen">
-                                <i class="fas fa-camera" style="color: lightgray"></i>
-                                <span class="selected-image" style="background-image: url('{{ asset('ImgGymBoxes/' . $gym->fotografia) }}');">
-                                    <span class="edit-icon">
-                                        <i class="fas fa-pencil-alt" ></i>
-                                    </span>
+    <!-- Formulario de edición -->
+    <div class="rounded-xl text-white w-4/5 mb-8" style="background-color:rgba(53, 58, 80, 0.67); padding: 40px">
+        <form action="{{route('addgymBoxes.update')}}" class="text-white rounded-lg p-4" enctype="multipart/form-data" method="POST" novalidate>
+            @csrf
+            <!-- Campo oculto para el ID del gimnasio a editar -->
+            <input name="id" type="hidden" value="{{$gym->id }}">
+
+            <!-- Sección de datos del gimnasio -->
+            <div class="flex">
+                <div class="w-1/2 mr-2 mb-0">
+                    <label for="nombre" class="text-lg font-bold">Nombre:</label>
+                    <input style="color:black" name="nombre" value="{{$gym->nombre ?? old('nombre')}}" type="text" id="nombre" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error ('nombre') border-red-500 @enderror" placeholder="Ingresa tu nombre">
+                    @error('nombre')
+                    <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                            {{$message}}
+                        </p>    
+                    @enderror
+                </div>
+
+                <div class="w-1/2 mr-2 mb-0">
+                    <label for="telefono" class="text-lg font-bold">Teléfono:</label>
+                    <input type="number" style="color:black" id="telefono" name = "telefono" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error ('telefono') border-red-500 @enderror" value="{{$gym->telefono}}" placeholder="Ingresa tu teléfono">
+                    @error('telefono')
+                        <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                            {{$message}}
+                        </p>    
+                    @enderror
+                </div>
+                <div class="w-1/2 ml-2 mb-0">
+                    <label for="hora" class="text-lg font-bold">Hora:</label>
+                    <input type="time" name="hora" style="color:black" id="hora" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error('hora') border-red-500 @enderror" value="{{$gym->horario}}" placeholder="Ingresa la hora">
+                    @error('hora')
+                        <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                            {{$message}}
+                        </p>    
+                    @enderror
+                </div>
+                <div class="w-1/2 ml-2 mb-0">
+                    <label for="horaCierre" class="text-lg font-bold">Hora de cierre:</label>
+                    <input type="time" name="horaCierre" style="color:black" id="horaCierre" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error('horaCierre') border-red-500 @enderror" value="{{$gym->horarioCierre}}" placeholder="Ingresa la hora de cierre">
+                    @error('horaCierre')
+                        <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                            {{$message}}
+                        </p>    
+                    @enderror
+                </div>
+                <div class="w-1/2 ml-2">
+                    <!-- Contenedor de carga de imagen -->
+                    <div class="image-input-container">
+                        <label for="imagen">
+                            <i class="fas fa-camera" style="color: lightgray"></i>
+                            <!-- Imagen seleccionada -->
+                            <span class="selected-image" style="background-image: url('{{ asset('ImgGymBoxes/' . $gym->fotografia) }}');">
+                                <!-- Icono para editar la imagen -->
+                                <span class="edit-icon">
+                                    <i class="fas fa-pencil-alt"></i>
                                 </span>
-                                <input type="file" class="@error('imagen') border-red-500 @enderror" id="imagen" name="imagen" accept="image/*" onchange="handleImageUpload(event)" />
-                                @error('imagen')
-                                    <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2">
-                                        {{$message}}
-                                    </p>
-                                @enderror
-                            </label>
-                        </div>
-                    </div>  
-    </div>
-    
-    <div class="flex" style="margin-top: -60px;">
-        <div class="w-3/4 mr-2">
-            <label for="descripcion" class="text-lg font-bold mt-0">Descripción:</label>
-            <textarea id="descripcion" name="descripcion" style="color:black" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error('descripcion') border-red-500 @enderror" value="{{old('descripcion')}}" placeholder="Ingresa una descripción">{{$gym->descripcion}}</textarea>
-            @error('descripcion')
-                <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
-                    {{$message}}
-                </p>    
-            @enderror
-        </div>
-    </div>
-     <!-- Código para el mapa -->
-    <div id="map" style="height: 400px;">
-    </div>
-    <input type="hidden" id="latitud" name="latitud" value="{{ $gym->latitud }}">
-    <input type="hidden" id="longitud" name="longitud" value="{{ $gym->longitud }}">
-    <div class="flex justify-end mt-4">
-        <button style="background-color: #FFDE59; width: 150px; text-align: center;" type="submit" class="px-4 py-2 mr-4 text-black font-semibold rounded-2xl hover:bg-blue-600">Agregar</button>
-        <a href="{{route('gymBoxes.index')}}" type="submit" class="px-4 py-2 bg-white text-black font-semibold rounded-2xl hover:bg-blue-600" style="width: 150px; text-align: center;">Cancelar</a>
-    </div>
-</form>
-    <div id="direccion-container">
-        <input type="text" id="direccion" style="color:black"  class="w-full mt-1 p-2 rounded"  placeholder="Buscar dirección">
-    </div>
+                            </span>
+                            <!-- Input para cargar la imagen -->
+                            <input type="file" class="@error('imagen') border-red-500 @enderror" id="imagen" name="imagen" accept="image/*" onchange="handleImageUpload(event)" />
+                            @error('imagen')
+                                <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2">
+                                    {{$message}}
+                                </p>
+                            @enderror
+                        </label>
+                    </div>
+                </div>  
+            </div>
+            
+            <!-- Descripción -->
+            <div class="flex" >
+                <div class="w-3/4 mr-2" style="width: 80%;">
+                    <label for="descripcion" class="text-lg font-bold mt-0">Descripción:</label>
+                    <textarea id="descripcion" name="descripcion" style="color:black;" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error('descripcion') border-red-500 @enderror" value="{{old('descripcion')}}" placeholder="Ingresa una descripción">{{$gym->descripcion}}</textarea>
+                    @error('descripcion')
+                        <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                            {{$message}}
+                        </p>    
+                    @enderror
+                </div>
+            </div>
+             
+            <!-- Código para el mapa -->
+            <div id="map" style="height: 400px;"></div>
+            <!-- Campos ocultos para latitud y longitud del gimnasio -->
+            <input type="hidden" id="latitud" name="latitud" value="{{ $gym->latitud }}">
+            <input type="hidden" id="longitud" name="longitud" value="{{ $gym->longitud }}">
 
+            <!-- Botones de acción -->
+            <div class="flex justify-end mt-4">
+                <button style="background-color: #FFDE59; width: 150px; text-align: center;" type="submit" class="px-4 py-2 mr-4 text-black font-semibold rounded-2xl hover:bg-blue-600">Agregar</button>
+                <a href="{{route('gymBoxes.index')}}" type="submit" class="px-4 py-2 bg-white text-black font-semibold rounded-2xl hover:bg-blue-600" style="width: 150px; text-align: center;">Cancelar</a>
+            </div>
+        </form>
+
+        <!-- Contenedor para buscar dirección -->
+        <div id="direccion-container">
+            <input type="text" id="direccion" style="color:black"  class="w-full mt-1 p-2 rounded"  placeholder="Buscar dirección">
+        </div>
     </div>
 </div>
+@endsection
 
-<!-- Importar el archivo JavaScript de Bootstrap -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+@section('js')
+<!-- Función para manejar la carga de imágenes -->
+<script>
+    function handleImageUpload(event) {
+        const input = event.target;
+        const imageContainer = input.parentElement;
+        const selectedImage = imageContainer.querySelector('.selected-image');
+        const editIcon = imageContainer.querySelector('.edit-icon'); // Elemento que contiene el ícono de edición
+
+        const file = input.files[0];
+        const reader = new FileReader();
+
+        // Cuando la imagen se carga, se asigna la URL de la imagen como fondo del contenedor de la imagen seleccionada
+        reader.onload = function (e) {
+            selectedImage.style.backgroundImage = `url('${e.target.result}')`; // Agregar la URL aquí
+            // Si hay una imagen cargada, se muestra el ícono de edición (ícono de lápiz), de lo contrario, se oculta
+            if (e.target.result) {
+                editIcon.style.display = 'flex'; // Mostrar el ícono de lápiz si hay imagen
+            } else {
+                editIcon.style.display = 'none'; // Ocultar el ícono de lápiz si no hay imagen
+            }
+        };
+
+        // Lee el archivo de imagen como una URL de datos y lo carga en el contenedor de imagen seleccionada
+        reader.readAsDataURL(file);
+    }
+</script>
 
 <!-- Script para el mapa -->
 <script>
     let map;
     let marker;
 
+    // Función para inicializar el mapa con la ubicación del gimnasio actual
     function initMap() {
         const initialLat = parseFloat(document.getElementById('latitud').value);
         const initialLng = parseFloat(document.getElementById('longitud').value);
@@ -228,22 +279,27 @@
             mapId: "c984a1c2512b6347",
         };
         
+        // Crea un nuevo mapa con las opciones especificadas y lo muestra en el elemento con el ID 'map'
         map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
+        // Crea un nuevo marcador en la ubicación del gimnasio actual y lo hace arrastrable
         marker = new google.maps.Marker({
             position: { lat: initialLat, lng: initialLng },
             map: map,
             draggable: true
         });
 
+        // Cuando el marcador se arrastra, actualiza los campos de latitud y longitud en el formulario con las nuevas coordenadas
         marker.addListener('dragend', function(event) {
             document.getElementById('latitud').value = event.latLng.lat();
             document.getElementById('longitud').value = event.latLng.lng();
         });
 
+        // Obtiene el elemento de entrada de dirección y crea una caja de búsqueda de lugares de Google Maps
         const input = document.getElementById('direccion');
         const searchBox = new google.maps.places.SearchBox(input);
 
+        // Cuando se selecciona un lugar de la búsqueda, centra el mapa en esa ubicación y mueve el marcador allí
         searchBox.addListener('places_changed', function() {
             const places = searchBox.getPlaces();
 
@@ -255,38 +311,16 @@
             map.setCenter(ubicacion);
             marker.setPosition(ubicacion);
 
+            // Actualiza los campos de latitud y longitud en el formulario con las coordenadas del lugar seleccionado
             document.getElementById('latitud').value = ubicacion.lat();
             document.getElementById('longitud').value = ubicacion.lng();
         });
     }
 
+    // Cuando se carga el contenido del DOM, se llama a la función initMap para inicializar el mapa
     document.addEventListener('DOMContentLoaded', function() {
         initMap();
     });
 </script>
 
-@endsection
-
-@section('js')
-<script>
-    function handleImageUpload(event) {
-        const input = event.target;
-        const imageContainer = input.parentElement;
-        const selectedImage = imageContainer.querySelector('.selected-image');
-
-        const file = input.files[0];
-        const reader = new FileReader();
-
-        reader.onload = function (e) {
-            selectedImage.style.backgroundImage = `url('${e.target.result}')`; // Add the URL here
-            if (e.target.result) {
-                editIcon.style.display = 'flex'; // Mostrar el ícono de lápiz si hay imagen
-            } else {
-                editIcon.style.display = 'none'; // Ocultar el ícono de lápiz si no hay imagen
-            }
-        };
-
-        reader.readAsDataURL(file);
-    }
-</script>
 @endsection

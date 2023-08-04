@@ -10,6 +10,8 @@ use App\Http\Controllers\GimnasiosController;
 use App\Http\Controllers\EjerciciosController;
 use App\Http\Controllers\EntrenadorAdController;
 use App\Http\Controllers\NutriologoController;
+use App\Http\Controllers\PerfilController;
+
 /*
 /*
 |--------------------------------------------------------------------------
@@ -93,3 +95,5 @@ Route::post('/Nutriologo/agregar',[NutriologoController::class,'store'])->name('
 Route::get('/Nutriologo/delete/{id}', [NutriologoController::class, 'delete'])->name('admNutriologo.eliminar');
 Route::get('/Nutriologo/edit/{id}', [NutriologoController::class, 'edit'])->name('admNutriologo.editar');
 Route::post('/updateNutriologo', [NutriologoController::class, 'update'])->name('admNutriologo.update');
+Route::get('/perfil', [PerfilController::class,'index'])->name('perfil.index');
+

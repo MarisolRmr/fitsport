@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Log; // Agrega esta línea al inicio del archivo
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use App\Models\User;
@@ -19,7 +19,13 @@ class RegisterController extends Controller
     }
     
     public function store(Request $request) {
-    
+        if ($request->hasFile('fotografia') && $request->file('fotografia')->isValid()) {
+            $rutaImagen = $request->file('fotografia')->store('uploads');
+            Session::put('imagen_cargada', asset($rutaImagen));
+        } else {
+            // Si no se ha cargado una imagen válida, elimina la imagen previamente almacenada
+            Session::forget('imagen_cargada');
+        }
         //validaciones del formulario de registros
         $this->validate($request,[
             'nombre' => 'required|regex:/^[a-zA-Z\s]+$/',

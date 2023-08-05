@@ -5,10 +5,6 @@
 @endsection
 
 
-@section('username')
-{{ $usuario }}
-@endsection
-
 @section('contenido')
 
 <!-- cards -->

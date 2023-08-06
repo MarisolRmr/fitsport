@@ -28,9 +28,9 @@ class RegisterController extends Controller
             Session::forget('imagen_cargada');
         }
         //validaciones del formulario de registros
-        $this->validate($request,[
-            'nombre' => 'required|regex:/^[a-zA-Z\s]+$/',
-            'apellido' => 'required|regex:/^[a-zA-Z\s]+$/',
+        $this->validate($request, [
+            'nombre' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚ\s]+$/',
+            'apellido' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚ\s]+$/',
             'telefono' => 'required|regex:/^[0-9]+$/|max:10',
             'fecha_nac' => 'required|date',
             'usuario' => 'required|unique:users|min:3|max:20|regex:/^\S*$/u', // No se permiten espacios en el usuario

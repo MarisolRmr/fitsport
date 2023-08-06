@@ -34,14 +34,13 @@ class PerfilController extends Controller
     //Función para actualizar los datos del noticia en la base de datos
     public function update(Request $request, $id)
     {
-        
-        //Cargar la imagen
-        $nombreImagenUnico='';
+        //Cargar la fotografia
+        $nombrefotografiaUnico='';
         if ($request->password || $request->password_confirmation) {
             //Validaciones de formulario
             $this->validate($request, [
-                'nombre' => 'required|regex:/^[a-zA-Z\s]+$/',
-                'apellido' => 'required|regex:/^[a-zA-Z\s]+$/',
+                'nombre' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚ\s]+$/',
+                'apellido' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚ\s]+$/',
                 'telefono' => 'required|regex:/^[0-9]+$/|max:10',
                 'fecha_nac' => 'required|date',
                 'usuario' => 'required|min:3|max:20|regex:/^\S*$/u', // No se permiten espacios en el usuario
@@ -51,12 +50,25 @@ class PerfilController extends Controller
                 'fotografia' => 'nullable|image|mimes:jpeg,png,gif|max:2048',
             ]);
             if ($request->hasFile('fotografia')) {
+                // Obtener la imagen anterior
+                $fotografiaAnterior = auth()->user()->fotografia;
+
+                // Si la imagen anterior existe, borrarla
+                if ($fotografiaAnterior) {
+                    unlink(public_path('uploads') . '/' . $fotografiaAnterior);
+                }
+
+                // Guardar la nueva imagen
                 $fotografia = $request->file('fotografia');
-                $nombreImagenUnico = Str::uuid() . "." . $imagen->getClientOriginalExtension();
-                $imagenServidor = Image::make($imagen);
-                $imagenServidor->fit(800, 200); // Redimensionar la imagen
-                $imagenPath = public_path('uploads') . '/' . $nombreImagenUnico;
-                $imagenServidor->save($imagenPath); // Guardar la imagen redimensionada en la carpeta "public/uploads"
+                $nombrefotografiaUnico = Str::uuid() . "." . $fotografia->getClientOriginalExtension();
+                $fotografiaServidor = Image::make($fotografia);
+                $fotografiaServidor->fit(1000, 1000); // Redimensionar la fotografia
+                $fotografiaPath = public_path('uploads') . '/' . $nombrefotografiaUnico;
+                $fotografiaServidor->save($fotografiaPath); // Guardar la fotografia redimensionada en la carpeta "public/uploads"
+
+                // Actualizar los datos del usuario
+                auth()->user()->fotografia = $nombrefotografiaUnico;
+                auth()->user()->save();
                 //Actualizacion de datos
 
                 User::where('id', $id)->update([
@@ -67,7 +79,7 @@ class PerfilController extends Controller
                     'fecha_nac' => $request->fecha_nac,
                     'usuario' => $request->usuario,
                     'password' => Hash::make($request->password),
-                    'fotografia' => $nombreImagenUnico,
+                    'fotografia' => $nombrefotografiaUnico,
                 ]);
             }else{
                 //Actualizacion de datos
@@ -87,8 +99,8 @@ class PerfilController extends Controller
         }else{
             //Validaciones de formulario
             $this->validate($request, [
-                'nombre' => 'required|regex:/^[a-zA-Z\s]+$/',
-                'apellido' => 'required|regex:/^[a-zA-Z\s]+$/',
+                'nombre' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚ\s]+$/',
+                'apellido' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚ\s]+$/',
                 'telefono' => 'required|regex:/^[0-9]+$/|max:10',
                 'fecha_nac' => 'required|date',
                 'usuario' => 'required|min:3|max:20|regex:/^\S*$/u', // No se permiten espacios en el usuario
@@ -96,12 +108,25 @@ class PerfilController extends Controller
                 'fotografia' => 'nullable|image|mimes:jpeg,png,gif|max:2048',
             ]);
             if ($request->hasFile('fotografia')) {
+                // Obtener la imagen anterior
+                $fotografiaAnterior = auth()->user()->fotografia;
+
+                // Si la imagen anterior existe, borrarla
+                if ($fotografiaAnterior) {
+                    unlink(public_path('uploads') . '/' . $fotografiaAnterior);
+                }
+
+                // Guardar la nueva imagen
                 $fotografia = $request->file('fotografia');
-                $nombreImagenUnico = Str::uuid() . "." . $imagen->getClientOriginalExtension();
-                $imagenServidor = Image::make($imagen);
-                $imagenServidor->fit(800, 200); // Redimensionar la imagen
-                $imagenPath = public_path('uploads') . '/' . $nombreImagenUnico;
-                $imagenServidor->save($imagenPath); // Guardar la imagen redimensionada en la carpeta "public/uploads"
+                $nombrefotografiaUnico = Str::uuid() . "." . $fotografia->getClientOriginalExtension();
+                $fotografiaServidor = Image::make($fotografia);
+                $fotografiaServidor->fit(1000, 1000); // Redimensionar la fotografia
+                $fotografiaPath = public_path('uploads') . '/' . $nombrefotografiaUnico;
+                $fotografiaServidor->save($fotografiaPath); // Guardar la fotografia redimensionada en la carpeta "public/uploads"
+
+                // Actualizar los datos del usuario
+                auth()->user()->fotografia = $nombrefotografiaUnico;
+                auth()->user()->save();
                 //Actualizacion de datos
 
                 User::where('id', $id)->update([
@@ -111,7 +136,7 @@ class PerfilController extends Controller
                     'telefono' => $request->telefono,
                     'fecha_nac' => $request->fecha_nac,
                     'usuario' => $request->usuario,
-                    'fotografia' => $nombreImagenUnico,
+                    'fotografia' => $nombrefotografiaUnico,
                 ]);
             }else{
                 //Actualizacion de datos

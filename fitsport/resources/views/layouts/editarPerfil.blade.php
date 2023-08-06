@@ -115,6 +115,9 @@
 
 @section('contenido')
 <div class="w-full h-screen flex flex-col items-center justify-center overflow-auto">
+    <form enctype="multipart/form-data" class="p-0 w-full" action="{{route('perfil.update', auth()->user()->id)}}"  method="POST" novalidate>
+    @csrf
+            
     <div class="w-full px-6 py-6 mx-auto">
         <div class="flex flex-wrap -mx-3">
             <div class="w-full h-1/2 max-w-full px-6 mt-0 lg:w-6/12 lg:flex-none">
@@ -145,9 +148,7 @@
         </div>
 
     </div>
-    <form enctype="multipart/form-data" class="p-0 w-full" action="{{route('perfil.update', auth()->user()->id)}}"  method="POST" novalidate>
-        @csrf
-        <div class="flex w-full justify-center items-start  px-6">       
+    <div class="flex w-full justify-center items-start  px-6">       
             <div id="name" class="rounded-xl flex text-white justify-center items-center mb-4 " >
                 <img src="{{asset('img/cuadro.png')}}" alt="Imagen pequeña" class="h-6 w-6 ml-2 ">
                 <p class="ml-4 mb-0">{{auth()->user()->usuario}}</p>

@@ -9,7 +9,12 @@ use Intervention\Image\Facades\Image;
 
 class EjerciciosController extends Controller
 {
-    //
+    //Constructor del controlador
+    public function __construct(){
+        //Middleware para proteger las rutas con autenticación
+        $this->middleware('auth');
+    }
+    
     public function index(){
         $ejercicio=Ejercicio::all();
         return view('admin.ejercicios.mostrar',["ejercicio"=>$ejercicio]);

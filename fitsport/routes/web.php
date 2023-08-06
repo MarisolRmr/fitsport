@@ -95,5 +95,9 @@ Route::post('/Nutriologo/agregar',[NutriologoController::class,'store'])->name('
 Route::get('/Nutriologo/delete/{id}', [NutriologoController::class, 'delete'])->name('admNutriologo.eliminar');
 Route::get('/Nutriologo/edit/{id}', [NutriologoController::class, 'edit'])->name('admNutriologo.editar');
 Route::post('/updateNutriologo', [NutriologoController::class, 'update'])->name('admNutriologo.update');
+
+//perfil
 Route::get('/perfil', [PerfilController::class,'index'])->name('perfil.index');
+Route::get('/perfil/edit/{id}', [PerfilController::class, 'edit'])->name('perfil.editar');
+Route::post('/updatePerfil/{id}', [PerfilController::class, 'update'])->name('perfil.update');
 

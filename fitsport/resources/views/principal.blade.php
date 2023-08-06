@@ -19,8 +19,8 @@
 	<!-- Barra de navegación -->
 	<nav>
 		<div class="topnav">
-		  <a class="nav-a" href="{{route('login')}}">Iniciar Sesion</a>
-		  <a class="nav-a" href="{{route('register')}}">Crear Cuenta</a>
+		  <a class="nav-a" href="{{route('login')}}"><h4 style="margin-bottom:0px">Iniciar Sesión</h4></a>
+		  <a class="nav-a" href="{{route('register')}}"><h4 style="margin-bottom:0px">Crear Cuenta</h4></a>
 		</div>
 	</nav>
 	

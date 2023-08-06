@@ -46,6 +46,12 @@
         font-size: 20px;
         font-family: 'Poppins', sans-serif;
     }
+    #editar-icono{
+        color:gray;
+    }
+    #editar-icono:hover{
+        color:white;
+    }
 </style>
 @endsection
 @section('contenido_top')
@@ -92,25 +98,38 @@
 
         <div class="rounded-xl text-white mb-8 ml-2 mt-6" style="width: 55%; margin-left: 50px; background-color:rgba(53, 58, 80, 0.67); padding: 10px; font-size: 20px; margin-right: 35px; border-radius: 20px">
             <div class="w-full flex justify-end items-start">
-                <a href="{{route('perfil.editar',auth()->user()->id)}}" class="text-end mr-2" ><i class="fas fa-pencil-alt" ></i></a>
+                <a id="editar-icono" href="{{route('perfil.editar',auth()->user()->id)}}" class="text-end mr-2"  ><i class="fas fa-pencil-alt" ></i></a>
             </div>
             <div id="datos" class="flex py-0 px-5 mb-4 ">
-                <div class="mr-6">
-                    Nombre:<br>
-                    Email: <br>
-                    Fecha de <br>Nacimiento:<br>
-                    Teléfono:<br>
-                    Usuario: <br>
-                    Contraseña: 
-                </div>
-                <div>
-                    {{auth()->user()->nombre}} {{auth()->user()->apellido}} <br>
-                    {{auth()->user()->correo}} <br><br>
-                    {{ \Carbon\Carbon::parse(auth()->user()->fecha_nac)->format('d-m-Y') }} <br>
-                    {{auth()->user()->telefono}} <br>
-                    {{auth()->user()->usuario}} <br>
-                    ●●●●●●
-                </div>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Nombre:</td>
+                            <td>{{auth()->user()->nombre}} {{auth()->user()->apellido}}</td>
+                        </tr>
+                        <tr>
+                            <td>Email:</td>
+                            <td>{{auth()->user()->correo}}</td>
+                        </tr>
+                        <tr>
+                            <td class="pr-3">Fecha de Nacimiento:</td>
+                            <td>{{ \Carbon\Carbon::parse(auth()->user()->fecha_nac)->format('d-m-Y') }}</td>
+                        </tr>
+                        <tr>
+                            <td>Teléfono:</td>
+                            <td>{{auth()->user()->telefono}}</td>
+                        </tr>
+                        <tr>
+                            <td>Usuario:</td>
+                            <td>{{auth()->user()->usuario}}</td>
+                        </tr>
+                        <tr>
+                            <td>Contraseña:</td>
+                            <td>●●●●●●</td>
+                        </tr>
+                    </tbody>
+                </table>
+
             </div>
         </div>
     </div>

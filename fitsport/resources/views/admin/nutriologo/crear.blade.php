@@ -26,14 +26,9 @@
     .image-input-container {
         display: inline-block;
         position: relative;
-        margin-left: 38%;
+        margin-left: 10%;
     }
 
-    .image-input-container {
-    display: inline-block;
-    position: relative;
-    margin-left: 38%;
-    }
     .image-input-container label {
         display: flex;
         justify-content: center;
@@ -120,50 +115,66 @@
 
             <!-- Información del Gym And Boxes -->
             <div class="flex">
-                <!-- Campo Nombre -->
-                <div class="w-1/2 mr-2 mb-0">
-                    <label for="nombre" class="text-lg font-bold">Nombre:</label>
-                    <input style="color:black" name="nombre" value="{{old('nombre')}}" type="text" id="nombre" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error ('nombre') border-red-500 @enderror" placeholder="Ingresa tu nombre">
-                    @error('nombre')
-                        <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
-                            {{$message}}
-                        </p>    
-                    @enderror
-                </div>
+                <div class=" flex flex-col mb-2" style="width:80% !important">
+                    <div class="mb-0 flex">
+                        <!-- Campo Nombre -->
+                        <div class="w-1/2 mr-2 mb-2">
+                            <label for="nombre" class="text-lg font-bold">Nombre:</label>
+                            <input style="color:black" name="nombre" value="{{old('nombre')}}" type="text" id="nombre" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error ('nombre') border-red-500 @enderror" placeholder="Ingresa tu nombre">
+                            @error('nombre')
+                                <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                                    {{$message}}
+                                </p>    
+                            @enderror
+                        </div>
 
-                <!-- Campo Teléfono -->
-                <div class="w-1/2 mr-2 mb-0">
-                    <label for="telefono" class="text-lg font-bold">Teléfono:</label>
-                    <input type="number" style="color:black" id="telefono" name="telefono" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error ('telefono') border-red-500 @enderror" value="{{old('telefono')}}" placeholder="Ingresa tu teléfono">
-                    @error('telefono')
-                        <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
-                            {{$message}}
-                        </p>    
-                    @enderror
-                </div>
+                        <!-- Campo Apellido -->
+                        <div class="w-1/2 mr-2 mb-0">
+                            <label for="nombre" class="text-lg font-bold">Apellido:</label>
+                            <input style="color:black" name="apellido" value="{{old('apellido')}}" type="text" id="apellido" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error ('apellido') border-red-500 @enderror" placeholder="Ingresa tu apellido">
+                            @error('apellido')
+                                <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                                    {{$message}}
+                                </p>    
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="mb-0 flex">
+                        <!-- Campo Teléfono -->
+                        <div class="w-1/3 mr-2 mb-0">
+                            <label for="telefono" class="text-lg font-bold">Teléfono:</label>
+                            <input type="number" style="color:black" id="telefono" name="telefono" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error ('telefono') border-red-500 @enderror" value="{{old('telefono')}}" placeholder="Ingresa tu teléfono">
+                            @error('telefono')
+                                <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                                    {{$message}}
+                                </p>    
+                            @enderror
+                        </div>
 
-                <!-- Campo Hora -->
-                <div class="w-1/2 ml-2 mb-0">
-                    <label for="hora" class="text-lg font-bold">Hora de apertura:</label>
-                    <input type="time" name="hora" style="color:black" id="hora" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error('hora') border-red-500 @enderror" value="{{old('hora')}}" placeholder="Ingresa la hora de apertura">
-                    @error('hora')
-                        <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
-                            {{$message}}
-                        </p>    
-                    @enderror
-                </div>
-                <div class="w-1/2 ml-2 mb-0">
-                    <label for="horaCierre" class="text-lg font-bold">Hora de cierre:</label>
-                    <input type="time" name="horaCierre" style="color:black" id="horaCierre" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error('horaCierre') border-red-500 @enderror" value="{{old('horaCierre')}}" placeholder="Ingresa la hora de cierre">
-                    @error('horaCierre')
-                        <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
-                            {{$message}}
-                        </p>    
-                    @enderror
+                        <!-- Campo Hora -->
+                        <div class="w-1/3 ml-2 mb-0">
+                            <label for="hora" class="text-lg font-bold">Hora de apertura:</label>
+                            <input type="time" name="hora" style="color:black" id="hora" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error('hora') border-red-500 @enderror" value="{{old('hora')}}" placeholder="Ingresa la hora de apertura">
+                            @error('hora')
+                                <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                                    {{$message}}
+                                </p>    
+                            @enderror
+                        </div>
+                        <div class="w-1/3 ml-2 mb-0">
+                            <label for="horaCierre" class="text-lg font-bold">Hora de cierre:</label>
+                            <input type="time" name="horaCierre" style="color:black" id="horaCierre" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error('horaCierre') border-red-500 @enderror" value="{{old('horaCierre')}}" placeholder="Ingresa la hora de cierre">
+                            @error('horaCierre')
+                                <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                                    {{$message}}
+                                </p>    
+                            @enderror
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Campo Imagen -->
-                <div class="w-1/2 ml-2">
+                <div class=" ml-2"  style="width:20% !important">
                     <div class="image-input-container">
                         <label for="imagen">
                             <i class="fas fa-camera" style="color: lightgray; font-size:40px"></i>
@@ -179,11 +190,10 @@
                 </div>
             </div>
 
-            <!-- Descripción -->
             <div class="flex" >
                 <div class="w-3/4 mr-2" style="width: 80%;">
                     <label for="cedula" class="text-lg font-bold mt-0">Cédula Profesional:</label>
-                    <input type="number" style="color:black" id="cedula" name = "cedula" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error('cedula') border-red-500 @enderror" value="{{old('cedula')}}" placeholder="Ingresa una descripción" placeholder="Ingresa tu cedula">
+                    <input type="number" style="color:black" id="cedula" name = "cedula" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error('cedula') border-red-500 @enderror" value="{{old('cedula')}}" placeholder="Ingresa tu cedula">
                     @error('cedula')
                         <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                             {{$message}}
@@ -206,7 +216,7 @@
         </form>
         <!-- Campo de búsqueda de dirección -->
         <div id="direccion-container">
-            <input type="text" id="direccion" style="color:black"  class="w-full mt-1 p-2 rounded"  placeholder="Buscar dirección">
+            <input type="text" id="direccion" style="color:black"  class="w-full mt-6 p-2 rounded"  placeholder="Buscar dirección">
         </div>
 
     </div>

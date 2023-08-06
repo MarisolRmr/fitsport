@@ -150,6 +150,16 @@
                 </div>
 
                 <div class="w-1/2 mr-2 mb-0">
+                    <label for="apellido" class="text-lg font-bold">Nombre:</label>
+                    <input style="color:black" name="apellido" value="{{$nutriologo->apellido ?? old('apellido')}}" type="text" id="apellido" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error ('apellido') border-red-500 @enderror" placeholder="Ingresa tu apellido">
+                    @error('apellido')
+                    <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                            {{$message}}
+                        </p>    
+                    @enderror
+                </div>
+
+                <div class="w-1/2 mr-2 mb-0">
                     <label for="telefono" class="text-lg font-bold">Teléfono:</label>
                     <input type="number" style="color:black" id="telefono" name = "telefono" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error ('telefono') border-red-500 @enderror" value="{{$nutriologo->telefono}}" placeholder="Ingresa tu teléfono">
                     @error('telefono')
@@ -228,7 +238,7 @@
 
         <!-- Contenedor para buscar dirección -->
         <div id="direccion-container">
-            <input type="text" id="direccion" style="color:black"  class="w-full mt-1 p-2 rounded"  placeholder="Buscar dirección">
+            <input type="text" id="direccion" style="color:black"  class="w-full mt-6 p-2 rounded"  placeholder="Buscar dirección">
         </div>
     </div>
 </div>

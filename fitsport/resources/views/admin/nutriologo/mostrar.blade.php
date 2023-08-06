@@ -159,6 +159,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
+                        <th>Apellido</th>
                         <th>Telefono</th>
                         <th>Horario</th>
                         <th>Cédula Profesional</th>
@@ -173,6 +174,7 @@
                     <tr>
                         <td>{{ $nutriologo->id }}</td>
                         <td>{{ $nutriologo->nombre }}</td>
+                        <td>{{ $nutriologo->apellido }}</td>
                         <td>{{ $nutriologo->telefono }}</td>
                         <td>{{ date('g:i a', strtotime($nutriologo->horaEntrada)) }} - {{ date('g:i a', strtotime($nutriologo->horaSalida)) }} </td>
                         <td>{{ $nutriologo->cedula }}</td>
@@ -180,8 +182,8 @@
                             <!-- Contenedor para centrar la imagen -->
                             <div style="display: flex; justify-content: center;">
                                 <!-- Mostrar la imagen del gimnasio si existe, si no, mostrar "Sin Imagen" -->
-                                @if($nutriologo->imagen)
-                                    <img src="{{ asset('ImgNutriologo/' . $nutriologo->imagen) }}" alt="Imagen de la marca" style="height: 80px; width: 80px; border-radius: 17px;">
+                                @if($nutriologo->fotografia)
+                                    <img src="{{ asset('ImgNutriologo/' . $nutriologo->fotografia) }}" alt="Imagen de la marca" style="height: 80px; width: 80px; border-radius: 17px;">
                                 @else
                                     Sin Imagen
                                 @endif
@@ -223,7 +225,7 @@
         order: [[0, 'asc']],
         "lengthMenu":[[5,10,50,-1],[5,10,50,"All"]],
         language: {
-            emptyTable: "Aún no hay Gimnasios que mostrar."
+            emptyTable: "Aún no hay Nutriologos que mostrar."
         }
     });
 

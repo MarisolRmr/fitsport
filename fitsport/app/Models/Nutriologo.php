@@ -8,15 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Nutriologo extends Model
 {
     use HasFactory;
-    protected $table = 'nutriologo';
+    protected $table = 'users';
     protected $fillable = [
         'nombre',
+        'apellido',
         'telefono',
         'horaEntrada',
         'horaSalida',
         'cedula',
         'longitud',
         'latitud',
-        'imagen',
+        'fotografia',
+        'tipo_id'
     ];
 }

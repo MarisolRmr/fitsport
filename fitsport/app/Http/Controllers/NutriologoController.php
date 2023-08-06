@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\User;
 use App\Models\Nutriologo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -17,7 +18,7 @@ class NutriologoController extends Controller
     //Método para mostrar todos los gimnasios
     public function index() {
         //Obtenemos todos los gimnasios
-        $nutriologo = Nutriologo::all();
+        $nutriologo = User::where('tipo_id', 4)->get();
     
         // Retornamos la vista 'verProductos' y pasamos los productos como una variable llamada 'productos'
         return view('admin.nutriologo.mostrar')->with('nutriologo', $nutriologo);
@@ -34,10 +35,11 @@ class NutriologoController extends Controller
         //Validamos los datos del formulario
         $request->validate([
             'nombre' => 'required',
+            'apellido' => 'required',
             'telefono' => 'required|max:10',
             'hora' => 'required',
             'horaCierre' => 'required',
-            'cedula' => 'required|max:8',
+            'cedula' => 'required|max:15|unique:users',
             'imagen' => 'required',
             'longitud' => 'required',
             'latitud' => 'required',
@@ -58,13 +60,15 @@ class NutriologoController extends Controller
         //Creamos el gimnasio
         Nutriologo::create([
             'nombre' => $request->nombre,
+            'apellido' => $request->apellido,
             'telefono' => $request->telefono,
             'horaEntrada' => $request->hora,
             'horaSalida'=> $request->horaCierre,
             'longitud' => $request->longitud,
             'latitud' => $request->latitud,
             'cedula' => $request->cedula,
-            'imagen' =>$nombreImagenUnico,
+            'fotografia' =>$nombreImagenUnico,
+            'tipo_id' => 4,
         ]);
 
         //Redireccionamos al index
@@ -73,7 +77,7 @@ class NutriologoController extends Controller
     //Método para editar un gimnasio
     public function edit($id_nutriologo){
         //Buscamos el gimnasio por el ID
-        $nutriologo = Nutriologo::find($id_nutriologo);
+        $nutriologo = User::find($id_nutriologo);
         //Devolvemos la vista con los datos del gimnasio
         return view('admin.nutriologo.editar',["nutriologo"=>$nutriologo]);
     }
@@ -84,14 +88,15 @@ class NutriologoController extends Controller
         //Validamos los datos del formulario
         $request->validate([
             'nombre' => 'required',
+            'apellido' => 'required',
             'telefono' => 'required|max:10',
             'hora' => 'required',
             'horaCierre' => 'required',
-            'cedula' => 'required|max:8',
+            'cedula' => 'required|max:15|unique:users',
         ]);
 
         //Busca el gimnasio y lo guarda en gym
-        $nutriologo = Nutriologo::findOrFail($request->id);
+        $nutriologo = User::findOrFail($request->id);
         $nombreImagenUnico = $nutriologo->imagen;
 
         if ($request->hasFile('imagen')) {
@@ -111,13 +116,15 @@ class NutriologoController extends Controller
         //Actualizamos el gimnasio
         Nutriologo::where('id', $request->id)->update([
             'nombre' => $request->nombre,
+            'apellido' => $request->apellido,
             'telefono' => $request->telefono,
             'horaEntrada' => $request->hora,
             'horaSalida'=> $request->horaCierre,
             'longitud' => $request->longitud,
             'latitud' => $request->latitud,
             'cedula' => $request->cedula,
-            'imagen' =>$nombreImagenUnico,
+            'fotografia' =>$nombreImagenUnico,
+            'tipo_id' => 4,
         ]);
 
         //Redireccionamos al index
@@ -127,7 +134,7 @@ class NutriologoController extends Controller
     public function delete($id_nutriologo)
     {
         // Buscamos el gimnasio por su ID
-        $nutriologo = Nutriologo::find($id_nutriologo);
+        $nutriologo = User::find($id_nutriologo);
 
         // Comprobamos si el gimnasio tiene imagen asociada
         if ($nutriologo->imagen) {

@@ -99,7 +99,7 @@
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" style="height: 100vh; overflow-y: auto;">
     <aside class="fixed inset-y-0 flex-wrap items-center justify-between block w-full p-0 my-4  ">
       <div class="h-19 text-center mb-4">
-        <a class="block px-8 py-6 m-0  whitespace-nowrap dark:text-white text-slate-700" href="#">
+        <a class="block px-8 py-6 m-0  whitespace-nowrap dark:text-white text-slate-700" href="{{route('home')}}">
           <img src="{{asset ('img/logo.svg')}}" class="inline h-full max-w-full" alt="main_logo" />
         </a>
       </div>
@@ -115,7 +115,7 @@
             </a>
           </li>
           <li class="mt-0.5 w-full">
-            <a href="{{route('gymBoxes.index')}}" style="font-size:18px" class="text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors">
+            <a href="#" style="font-size:18px" class="text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors">
               <div class="mr-2 flex h-12 w-12 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                 <i class="relative top-0  leading-normal text-orange-500 ni ni-calendar-grid-58"></i>
               </div>
@@ -133,7 +133,7 @@
           </li>
 
           <li class="mt-0.5 w-full">
-            <a href="{{route('entrenador.index')}}" style="font-size:18px" class="text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors">
+            <a href="#" style="font-size:18px" class="text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors">
               <div class="mr-2 flex h-12 w-12 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                 <i class="relative top-0  leading-normal text-cyan-500 ni ni-app"></i>
               </div>
@@ -141,7 +141,7 @@
             </a>
           </li>
           <li class="mt-0.5 w-full hover:bg-white">
-            <a href="{{route('ejercicio.index')}}" style="font-size:18px" class="  text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors " >
+            <a href="#" style="font-size:18px" class="  text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors " >
               <div class="mr-2 flex h-12 w-12 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                 <i class="relative top-0  leading-normal text-slate-700 ni ni-single-02"></i>
               </div>
@@ -149,7 +149,7 @@
             </a>
           </li>
           <li class="mt-0.5 w-full hover:bg-white">
-            <a href="{{route('noticias.index')}}" style="font-size:18px" class="  text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors " >
+            <a href="#" style="font-size:18px" class="  text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors " >
               <div class="mr-2 flex h-12 w-12 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                 <i class="relative top-0  leading-normal text-red-600 ni ni-single-02"></i>
               </div>
@@ -157,7 +157,7 @@
             </a>
           </li>
           <li class="mt-0.5 w-full hover:bg-white">
-            <a href="{{route('noticias.index')}}" style="font-size:18px" class="  text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors " >
+            <a href="#" style="font-size:18px" class="  text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors " >
               <div class="mr-2 flex h-12 w-12 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                 <i class="relative top-0  leading-normal text-red-600 ni ni-single-02"></i>
               </div>
@@ -165,7 +165,7 @@
             </a>
           </li>
           <li class="mt-0.5 w-full hover:bg-white">
-            <a href="{{route('noticias.index')}}" style="font-size:18px" class="  text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors " >
+            <a href="#" style="font-size:18px" class="  text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors " >
               <div class="mr-2 flex h-12 w-12 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                 <i class="relative top-0  leading-normal text-red-600 ni ni-single-02"></i>
               </div>

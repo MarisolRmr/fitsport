@@ -21,7 +21,7 @@
   <!-- cards row 2 -->
   <div class="flex flex-wrap -mx-3">
     <div class="w-full h-1/2 max-w-full px-3 mt-0 lg:w-6/12 lg:flex-none">
-      <img src="{{asset ('img/admin/admin_dash.png')}}" class="h-full w-full" alt="admin_dashboard" />   
+      <img src="{{asset ('img/user/user_dash.png')}}" class="h-full w-full" alt="admin_dashboard" />   
     </div>
   </div>
 

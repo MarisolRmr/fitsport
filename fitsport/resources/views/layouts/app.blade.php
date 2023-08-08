@@ -97,17 +97,12 @@
 </head>
 
 <body id="body" class="m-0 font-sans text-base antialiased font-normal dark:bg-slate-900 leading-default bg-gray-50 text-slate-500">
-<<<<<<< HEAD
-=======
-  
-    {{-- @yield('contenido_top') --}}
->>>>>>> e1af1565f6b0c7a36cddf3477c12df7ff5711c5d
- 
+
     <!-- sidenav  -->
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample">
     <aside class="fixed inset-y-0 flex-wrap items-center justify-between block w-full p-0 my-4  ">
       <div class="h-19 text-center mb-4">
-        <a class="block px-8 py-6 m-0  whitespace-nowrap dark:text-white text-slate-700" href="#">
+        <a class="block px-8 py-6 m-0  whitespace-nowrap dark:text-white text-slate-700" href="{{route('home')}}">
           <img src="{{asset ('img/logo.svg')}}" class="inline h-full max-w-full" alt="main_logo" />
         </a>
       </div>

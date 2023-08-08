@@ -92,12 +92,11 @@ class NutriologoController extends Controller
             'telefono' => 'required|max:10',
             'hora' => 'required',
             'horaCierre' => 'required',
-            'cedula' => 'required|max:15|unique:users',
         ]);
 
         //Busca el gimnasio y lo guarda en gym
         $nutriologo = User::findOrFail($request->id);
-        $nombreImagenUnico = $nutriologo->imagen;
+        $nombreImagenUnico = $nutriologo->fotografia;
 
         if ($request->hasFile('imagen')) {
             $imagen = $request->file('imagen');
@@ -122,7 +121,6 @@ class NutriologoController extends Controller
             'horaSalida'=> $request->horaCierre,
             'longitud' => $request->longitud,
             'latitud' => $request->latitud,
-            'cedula' => $request->cedula,
             'fotografia' =>$nombreImagenUnico,
             'tipo_id' => 4,
         ]);

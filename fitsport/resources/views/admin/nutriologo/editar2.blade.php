@@ -133,7 +133,7 @@
     <!-- Formulario -->
     <div class="rounded-xl text-white w-4/5 mb-8" style="background-color:rgba(53, 58, 80, 0.67); padding: 40px">
         <!-- Formulario para agregar Gym And Boxes -->
-        <form action="{{route('admNutriologo.update')}}" class="text-white rounded-lg p-4" enctype="multipart/form-data" method="POST" novalidate>
+        <form action="{{route('admNutriologo.store')}}" class="text-white rounded-lg p-4" enctype="multipart/form-data" method="POST" novalidate>
             @csrf
 
             <!-- Mensaje de sesión -->
@@ -142,8 +142,6 @@
                     {{session('mensaje')}}
                 </p>
             @endif
-            <!-- Campo oculto para el ID del gimnasio a editar -->
-            <input name="id" type="hidden" value="{{$nutriologo->id }}">
 
             <!-- Información del Gym And Boxes -->
             <div class="flex">
@@ -212,7 +210,7 @@
                         <label for="imagen">
                             <i class="fas fa-camera" style="color: lightgray"></i>
                             <!-- Imagen seleccionada -->
-                            <span class="selected-image" style="background-image: url('{{ asset('ImgNutriologo/' . $nutriologo->fotografia) }}');">
+                            <span class="selected-image" style="background-image: url('{{ asset('ImgGymBoxes/' . $gym->fotografia) }}');">
                                 <!-- Icono para editar la imagen -->
                                 <span class="edit-icon">
                                     <i class="fas fa-pencil-alt"></i>
@@ -233,7 +231,7 @@
             <div class="flex" >
                 <div class="w-3/4 mr-2" style="width: 80%;">
                     <label for="cedula" class="text-lg font-bold mt-0">Cédula Profesional:</label>
-                    <input type="number"  disabled='true' style="color:black;" id="cedula" name = "cedula" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error('cedula') border-red-500 @enderror" value="{{$nutriologo->cedula}}" placeholder="Ingresa tu cedula">
+                    <input type="number" style="color:black" id="cedula" name = "cedula" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error('cedula') border-red-500 @enderror" value="{{$nutriologo->cedula}}" placeholder="Ingresa tu cedula">
                     @error('cedula')
                         <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                             {{$message}}

@@ -119,10 +119,15 @@
   <div class="rounded-xl flex text-white items-center w-4/5 mb-4" style="background-color:rgba(53, 58, 80, 0.67); padding: 15px">
     <img src="{{asset('img/cuadro.png')}}" alt="Imagen pequeña" class="h-8 w-8">
     <p id="titulo" class="ml-4 mb-0">Entrenador</p>
-    <a href="{{route('entrenador.create')}}" class="ml-auto"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg></a>
+    <a href="{{route('entrenador.create')}}" class="ml-auto flex items-center rounded-full border-4 border-white w-12 h-12 text-white text-2xl text-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="20" cy="20" r="16" />
+                <line x1="20" y1="12" x2="20" y2="28" />
+                <line x1="12" y1="20" x2="28" y2="20" />
+            </svg>
+        </a>
   </div>
+  
 
   <div class=" rounded-xl  text-white w-4/5 mb-8" style="background-color:rgba(53, 58, 80, 0.67); padding: 40px">
     <div class=" rounded-xl p-4 text-white overflow-x-auto" style="background: #64677893;">

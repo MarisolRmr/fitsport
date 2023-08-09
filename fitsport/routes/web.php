@@ -84,7 +84,8 @@ Route::get('/ejercicio/edit/{id}', [EjerciciosController::class, 'edit'])->name(
 Route::post('/updateEjercicio', [EjerciciosController::class, 'update'])->name('ejercicio.update');
 //Ruta para eliminar la ejercicio de la base de datos
 Route::get('/ejercicio/delete/{id}', [EjerciciosController::class, 'delete'])->name('ejercicio.eliminar');
-
+//Ruta para visualizar el ejercicio 
+Route::get('/ejercicio/view/{id}', [EjerciciosController::class, 'view'])->name('ejercicio.verEjercicio');
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 //                                  RUTAS PARA NUTRIOLOGO

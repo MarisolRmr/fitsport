@@ -116,4 +116,13 @@ class EjerciciosController extends Controller
         return redirect()->route('ejercicio.index')->with('success', 'Ejercicio eliminado correctamente');
     }
 
+    public function view($id_ejercicio){
+
+        //Se busca el ejercicio mediante el ID
+        $ejercicio= Ejercicio::find($id_ejercicio);
+        //Se retorna a la vista
+        return view('admin.ejercicios.verEjercicio',["ejercicio"=>$ejercicio]);
+
+    }
+
 }

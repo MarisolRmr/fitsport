@@ -166,9 +166,17 @@
                     @foreach ($ejercicio as $data)
                     <tr>
                         <td>{{$data->id}}</td>
-                        <td>{{$data->nombre}}</td>
-                        <td>{{$data->descripcion}}</td>
-                        <td>{{$data->explicacion}}</td>
+                        <td class="actions-cell"><a href="{{route('ejercicio.verEjercicio',$data->id)}}" class="edit-button">{{$data->nombre}}</a></td>
+                        <td>
+                            <div class="truncated-text-d" style="width: 200px;">{{ $data->descripcion }}</div>
+                            <button class="view-more-button-d" style="display:none; color: #72def1 !important">Ver más</button>
+                            <button class="view-less-button-d" style="display:none; color: #72def1 !important">Ver menos</button>
+                        </td>
+                        <td>
+                            <div class="truncated-text-d" style="width: 200px;">{{$data->explicacion}}</div>
+                            <button class="view-more-button-d" style="display:none; color: #72def1 !important">Ver más</button>
+                            <button class="view-less-button-d" style="display:none; color: #72def1 !important">Ver menos</button>
+                        </td>
                         <td>
                             @if($data->imagen)
                             <img src="{{ asset('ImgEjercicios/' . $data->imagen)}}" alt="Imagen de la marca" style="height: 80px; weight:80px; border-radius:17px">
@@ -196,6 +204,94 @@
 @section('js')
 
 <script>
+    // Función para truncar el texto y mostrar el botón "ver más"
+    function truncateText() {
+        const textElements = document.querySelectorAll('.truncated-text-t');
+        const textElements2 = document.querySelectorAll('.truncated-text-d');
+        const maxCharacters = 100; // Cambia este valor al número máximo de caracteres que deseas mostrar inicialmente
+
+        textElements.forEach((element) => {
+            const text = element.textContent;
+            if (text.length > maxCharacters) {
+                const truncatedText = text.slice(0, maxCharacters) + ' ...';
+                const fullText = text;
+
+                element.textContent = truncatedText;
+
+                const viewMoreButton = document.createElement('button');
+                viewMoreButton.innerText = 'Ver más';
+                viewMoreButton.className = 'view-more-button-t';
+                viewMoreButton.setAttribute('style', ' color: #72def1 !important;'); 
+                viewMoreButton.addEventListener('click', () => {
+                    element.textContent = fullText;
+                    viewMoreButton.style.display = 'none';
+                    viewLessButton.style.display = 'inline-block';
+                    viewMoreButton.style.color = '#72def1';
+                    viewLessButton.style.color = '#72def1';
+                });
+
+                const viewLessButton = document.createElement('button');
+                viewLessButton.innerText = 'Ver menos';
+                viewLessButton.className = 'view-less-button-t';
+                viewLessButton.style.display = 'none';
+                viewLessButton.setAttribute('style', 'display: none; color: #72def1 !important;'); // Agrega el estilo aquí
+                viewLessButton.addEventListener('click', () => {
+                    element.textContent = truncatedText;
+                    viewMoreButton.style.display = 'inline-block';
+                    viewLessButton.style.display = 'none';
+                    viewMoreButton.style.color = '#72def1';
+                    viewLessButton.style.color = '#72def1';
+                });
+
+                element.parentNode.appendChild(viewMoreButton);
+                element.parentNode.appendChild(viewLessButton);
+            }
+        });
+
+        textElements2.forEach((element) => {
+            const text = element.textContent;
+            if (text.length > maxCharacters) {
+                const truncatedText = text.slice(0, maxCharacters) + ' ...';
+                const fullText = text;
+
+                element.textContent = truncatedText;
+
+                const viewMoreButton = document.createElement('button');
+                viewMoreButton.innerText = 'Ver más';
+                viewMoreButton.className = 'view-more-button-d';
+                viewMoreButton.setAttribute('style', ' color: #72def1 !important;'); // Agrega el estilo aquí
+                
+                viewMoreButton.addEventListener('click', () => {
+                    element.textContent = fullText;
+                    viewMoreButton.style.display = 'none';
+                    viewLessButton.style.display = 'inline-block';
+                    
+                });
+
+                const viewLessButton = document.createElement('button');
+                viewLessButton.innerText = 'Ver menos';
+                viewLessButton.className = 'view-less-button-d';
+                viewLessButton.style.display = 'none';
+                viewLessButton.setAttribute('style', 'display: none; color: #72def1 !important;'); // Agrega el estilo aquí
+                
+                viewLessButton.addEventListener('click', () => {
+                    element.textContent = truncatedText;
+                    viewMoreButton.style.display = 'inline-block';
+                    viewLessButton.style.display = 'none';
+                    viewMoreButton.style.color = '#72def1';
+                    viewLessButton.style.color = '#72def1';
+                });
+
+                element.parentNode.appendChild(viewMoreButton);
+                element.parentNode.appendChild(viewLessButton);
+            }
+        });
+    }
+
+    // Ejecutar la función al cargar la página
+    window.addEventListener('DOMContentLoaded', truncateText);
+
+
     // Función para mostrar el SweetAlert de confirmación antes de eliminar
     function eliminar(id) {
         Swal.fire({

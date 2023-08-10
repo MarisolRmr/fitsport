@@ -120,7 +120,7 @@
             @endif
 
             <!-- Información del Gym And Boxes -->
-            <div class="flex">
+            <div class="flex w-full" >
                 <div class=" flex flex-col mb-2" style="width:80% !important">
                     <div class="mb-0 flex">
                         <!-- Campo Nombre -->
@@ -135,7 +135,7 @@
                         </div>
 
                         <!-- Campo Apellido -->
-                        <div class="w-1/2 mr-2 mb-0">
+                        <div class="w-1/2  mb-0">
                             <label for="nombre" class="text-lg font-bold">Apellido:</label>
                             <input style="color:black" name="apellido" value="{{old('apellido')}}" type="text" id="apellido" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error ('apellido') border-red-500 @enderror" placeholder="Ingresa tu apellido">
                             @error('apellido')
@@ -180,7 +180,7 @@
                 </div>
 
                 <!-- Campo Imagen -->
-                <div class=" ml-2"  style="width:20% !important">
+                <div class=""  style="width:20% !important">
                     <div class="image-input-container">
                         <label for="imagen">
                             <i class="fas fa-camera" style="color: lightgray; font-size:40px"></i>

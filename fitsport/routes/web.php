@@ -24,7 +24,6 @@ use App\Http\Controllers\PerfilController;
 |
 */
 
-
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/fitsport', [HomeController::class, 'index'])->name('paginaprincipal');
 
@@ -102,3 +101,4 @@ Route::get('/perfil', [PerfilController::class,'index'])->name('perfil.index');
 Route::get('/perfil/edit/{id}', [PerfilController::class, 'edit'])->name('perfil.editar');
 Route::post('/updatePerfil/{id}', [PerfilController::class, 'update'])->name('perfil.update');
 
+Route::get('/Noticias-atleta', [NoticiasController::class,'index_atleta'])->name('noticias.index_atleta');

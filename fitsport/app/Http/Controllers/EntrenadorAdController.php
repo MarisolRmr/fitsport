@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Entrenador;
+use App\Models\Gimnasios;
 use Illuminate\Http\Request;
+use App\Models\Ejercicio;
 
 class EntrenadorAdController extends Controller
 {
@@ -16,7 +18,9 @@ class EntrenadorAdController extends Controller
         return view('admin.entrenador.mostrar');
     }
     public function create(){
-        return view('admin.entrenador.crear');
+        // Obtener todos los gimnasios
+        $gimnasios = Gimnasios::all();
+        return view('admin.entrenador.crear', ['gimnasios' => $gimnasios]);
     }
 
     //Funcion para registrar los entrenador en la tabla

@@ -90,6 +90,7 @@ class NutriologoController extends Controller
             'nombre' => 'required',
             'apellido' => 'required',
             'telefono' => 'required|max:10',
+            'cedula' => 'required|max:15|unique:users,cedula,' . $request->id,
             'hora' => 'required',
             'horaCierre' => 'required',
         ]);

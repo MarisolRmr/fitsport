@@ -87,6 +87,7 @@
         display: flex;
     }
     #map {
+        position: relative;
         height: 400px;
         border: 1px solid;
         border-radius: 20px;
@@ -94,23 +95,28 @@
     }
     #direccion-container {
         position: absolute;
-        top: 510px; 
-        left: 650px;
-        z-index: 1;
+        left: 550px;
+        transform: translateX(-50%);
+        z-index: 2000 !important;
     }
 
     #direccion {
-        position: sticky;
+        top: 10px;    
+        left: 10px;  
+        z-index: 1000; 
         color: black;
         padding: 8px;
         border-radius: 5px;
         background-color: #fff;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        width: calc(200px);
+        width: 400px;
     }
     #busqueda {
-        position: sticky;
-        top: 0;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important; /* Ajusta según tus necesidades */
+        right: 0 !important; /* Esto asegurará que el div de búsqueda tenga el ancho completo */
+        z-index: 999 !important;
     }
 
 </style>
@@ -233,7 +239,7 @@
             <div class="flex" >
                 <div class="w-3/4 mr-2" style="width: 80%;">
                     <label for="cedula" class="text-lg font-bold mt-0">Cédula Profesional:</label>
-                    <input type="number"  disabled='true' style="color:black;" id="cedula" name = "cedula" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error('cedula') border-red-500 @enderror" value="{{$nutriologo->cedula}}" placeholder="Ingresa tu cedula">
+                    <input type="number"  style="color:black;" id="cedula" name = "cedula" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error('cedula') border-red-500 @enderror" value="{{$nutriologo->cedula}}" placeholder="Ingresa tu cedula">
                     @error('cedula')
                         <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                             {{$message}}
@@ -243,8 +249,13 @@
             </div>
 
             <!-- Código para el mapa -->
-            <div id="map" style="height: 400px;">
+            <div style="position: relative;">
+                <div id="direccion-container">
+                    <input style="box-shadow: 0 4px 8px rgba(165, 164, 163 );" type="text" id="direccion" placeholder="Buscar dirección">
+                </div>
+                <div id="map" style="height: 400px;"></div>
             </div>
+            
             <input type="hidden" id="latitud" name="latitud" value="{{ $nutriologo->latitud }}">
             <input type="hidden" id="longitud" name="longitud" value="{{ $nutriologo->longitud }}">
 

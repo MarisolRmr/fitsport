@@ -13,7 +13,10 @@ class Gimnasios extends Model
         'nombre',
         'telefono',
         'horario',
+        'horarioCierre',
         'descripcion',
-        'imagen',
+        'longitud',
+        'latitud',
+        'fotografia',
     ];
 }

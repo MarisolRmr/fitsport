@@ -9,7 +9,12 @@ use Intervention\Image\Facades\Image;
 
 class EjerciciosController extends Controller
 {
-    //
+    //Constructor del controlador
+    public function __construct(){
+        //Middleware para proteger las rutas con autenticación
+        $this->middleware('auth');
+    }
+    
     public function index(){
         $ejercicio=Ejercicio::all();
         return view('admin.ejercicios.mostrar',["ejercicio"=>$ejercicio]);
@@ -67,10 +72,10 @@ class EjerciciosController extends Controller
             'nombre' => 'required',
             'descripcion' => 'required',
             'explicacion' => 'required',
-            'imagen' => 'required',
         ]);
         //Cargar la imagen
-        $nombreImagenUnico='';
+        $ejercicio = Ejercicio::findOrFail($request->id);
+        $nombreImagenUnico = $ejercicio->imagen;
         if ($request->hasFile('imagen')) {
             $imagen = $request->file('imagen');
             $nombreImagenUnico = Str::uuid() . "." . $imagen->getClientOriginalExtension();
@@ -109,6 +114,15 @@ class EjerciciosController extends Controller
         $ejercicio->delete();
 
         return redirect()->route('ejercicio.index')->with('success', 'Ejercicio eliminado correctamente');
+    }
+
+    public function view($id_ejercicio){
+
+        //Se busca el ejercicio mediante el ID
+        $ejercicio= Ejercicio::find($id_ejercicio);
+        //Se retorna a la vista
+        return view('admin.ejercicios.verEjercicio',["ejercicio"=>$ejercicio]);
+
     }
 
 }

@@ -8,7 +8,7 @@
     <link rel="icon" href="#" type="image/x-icon">
    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
 
- 
+    
     {{-- Estilos de tailwind --}}
     @vite('resources/css/app.css')
 
@@ -90,14 +90,28 @@
         background-color: #64677893;
         border-radius: 10px;
       }
+      #dropdown li:hover{
+        background-color: #e5e5fb;
+      }
+      #d1:hover{
+        border-radius: 0.5rem 0.5rem 0 0;
+      }
+      #df:hover{
+        border-radius: 0 0 0.5rem 0.5rem;
+      }
 
-
-      
     </style>
+    
 </head>
 
 <body id="body" class="m-0 font-sans text-base antialiased font-normal dark:bg-slate-900 leading-default bg-gray-50 text-slate-500">
 
+<<<<<<< HEAD
+=======
+  
+    {{-- @yield('contenido_top') --}}
+ 
+>>>>>>> e485ad4a930cecc0166a464479c93ba7ffb90f7c
     <!-- sidenav  -->
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample">
     <aside class="fixed inset-y-0 flex-wrap items-center justify-between block w-full p-0 my-4  ">
@@ -128,7 +142,7 @@
           </li>
 
           <li class="mt-0.5 w-full">
-            <a style="font-size:18px" class="text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="#">
+            <a style="font-size:18px" class="text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="{{route('admNutriologo.index')}}">
               <div class="mr-2 flex h-12 w-12 items-center justify-center rounded-lg bg-center fill-current stroke-0 text-center xl:p-2.5">
                 <i class="relative top-0  leading-normal text-emerald-500 ni ni-credit-card"></i>
               </div>
@@ -185,18 +199,14 @@
     </div>
     
   
-    <main id="main" class=" relative h-full max-h-screen rounded-xl transition-all duration-200 ease-in-out rounded-xl flex-grow">
-
-
-        <!-- Navbar -->
-        
-      <nav class="relative flex flex-wrap items-center justify-between px-0 py-3 mx-6 transition-all ease-in shadow-none duration-250 rounded-2xl lg:flex-nowrap lg:justify-start" navbar-main navbar-scroll="false">
+    <main id="main" class=" relative h-full max-h-screen rounded-xl transition-all duration-200 ease-in-out rounded-xl flex-grow"> 
+      <nav class="relative flex flex-wrap items-center justify-between px-0 py-3 mx-4 transition-all ease-in shadow-none duration-250 rounded-2xl lg:flex-nowrap lg:justify-start" navbar-main navbar-scroll="false">
         <div class="flex items-center">
             <a class="block px-2 py-3 text-4xl font-bold text-white transition-all ease-nav-brand" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
               <i style="height: 25px; width: 25px;" class="fas fa-bars sm:mr-1"></i>
             </a>
         </div>
-        <div class="flex items-center justify-between w-full px-4 py-1 mx-auto flex-wrap-inherit">
+        <div class="flex items-center justify-between w-full pl-4 py-1 mx-auto flex-wrap-inherit">
           <nav>
             <!-- breadcrumb -->
             <ol class="flex flex-wrap pt-1 mr-12 bg-transparent rounded-lg sm:mr-16">
@@ -213,37 +223,53 @@
           <div class="flex items-center mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
             <div class="flex items-center md:ml-auto md:pr-4">
               <div class="relative flex flex-wrap items-stretch w-full transition-all rounded-lg ease">
-               
-                
               </div>
             </div>
             
             <ul class="flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full">
-              
               <li class="flex items-center">
-                <a href="#" class="block px-0 py-2 text-sm font-semibold text-white transition-all ease-nav-brand">
-                  <i class="fa fa-user sm:mr-1"></i>
-                  <span class="hidden sm:inline p-2"> @yield('username') </span>
-                </a>
+                <div class="relative inline-block" style="min-width: 180px;">
+                  <div class="p-0 flex items-center justify-center">
+                    <a style="cursor:pointer" onclick="toggleDropdown()" class="block px-0 py-2 text-sm font-semibold text-white transition-all ease-nav-brand">
+                      @if(auth()->user()->fotografia)
+                          <img src="{{ asset('uploads/' . auth()->user()->fotografia) }}" alt="Fotografía de usuario" class="sm:inline w-8 h-8 rounded-full sm:mr-1">
+                      @else
+                          <i style="font-size: 20px" class="fa fa-user sm:mr-1"></i>
+                      @endif
+                      <span class="hidden sm:inline pl-0 p-2" style="font-size: 20px">{{ auth()->user()->usuario }}</span>
+                    </a>
+                  </div>
+                  <div style="right: 5px" id="dropdown-content" class="hidden absolute w-48 mt-2 bg-white rounded-lg shadow-lg">
+                    <ul style="z-index:10" id="dropdown">
+                      <li id="d1"><a href="{{route('perfil.index')}}" class="px-3 py-2 mb-0 block text-gray-800 hover:bg-primary">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                      Mi Perfil</a></li>
+                      <li id="df" class="flex items-center">
+                        <form method="post" action="{{route('logout')}}">
+                          @csrf
+                          <button type="submit"  class="px-3 py-2 block text-gray-800">
+                            <span stroke-width="1.5" class="hidden sm:inline">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                              </svg>
+                            Cerrar Sesión </span> 
+                          </button>
+                        </form>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </li>
 
-              <li class="flex items-center">
-                <form method="post" action="{{route('logout')}}">
-                  @csrf
-                  <button type="submit" class="block px-0 py-2 text-sm font-semibold text-white transition-all ease-nav-brand">
-                    <span class="hidden sm:inline"> Cerrar Sesión </span> 
-                  </button>
-                </form>
-                
-              </li>
-
+            
             </ul>
           </div>
         </div>
       </nav>
       <!-- end Navbar -->
       @yield('contenido')
-
     </main>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
@@ -267,6 +293,11 @@
           body.style.overflow = 'auto';
         });
       });
+
+      function toggleDropdown() {
+        const dropdownContent = document.getElementById('dropdown-content');
+        dropdownContent.classList.toggle('hidden'); // Agregar o quitar la clase 'hidden'
+      }
       
     </script>
 

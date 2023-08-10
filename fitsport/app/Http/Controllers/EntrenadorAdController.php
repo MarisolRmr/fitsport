@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class EntrenadorAdController extends Controller
 {
+    //Constructor del controlador
+    public function __construct(){
+        //Middleware para proteger las rutas con autenticación
+        $this->middleware('auth');
+    }
     public function index(){
         return view('admin.entrenador.mostrar');
     }

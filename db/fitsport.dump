@@ -141,7 +141,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -150,7 +150,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (1,'2023_07_12_145524_create_tipo_usuarios_table',1),(6,'2014_10_12_000000_create_users_table',2),(7,'2014_10_12_100000_create_password_reset_tokens_table',2),(8,'2019_08_19_000000_create_failed_jobs_table',2),(9,'2019_12_14_000001_create_personal_access_tokens_table',2),(11,'2023_07_14_070008_create_noticias_table',3),(12,'2023_07_14_160306_create_gimnasios_table',4),(13,'2023_07_14_162048_create_entrenadores_table',5),(14,'2023_07_14_162104_create_ejercicios_table',5);
+INSERT INTO `migrations` VALUES (1,'2023_07_12_145524_create_tipo_usuarios_table',1),(6,'2014_10_12_000000_create_users_table',2),(7,'2014_10_12_100000_create_password_reset_tokens_table',2),(8,'2019_08_19_000000_create_failed_jobs_table',2),(9,'2019_12_14_000001_create_personal_access_tokens_table',2),(11,'2023_07_14_070008_create_noticias_table',3),(12,'2023_07_14_160306_create_gimnasios_table',4),(13,'2023_07_14_162048_create_entrenadores_table',5),(14,'2023_07_14_162104_create_ejercicios_table',5),(17,'2023_08_06_214518_add_hora_to_users_table',6),(18,'2023_08_06_223707_make_email_nullable_in_users_table',7);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -278,9 +278,9 @@ CREATE TABLE `users` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `apellido` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `correo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `correo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `fecha_nac` datetime NOT NULL,
+  `fecha_nac` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `telefono` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `genero` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `usuario` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -295,13 +295,15 @@ CREATE TABLE `users` (
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `horaEntrada` time DEFAULT NULL,
+  `horaSalida` time DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_correo_unique` (`correo`),
   UNIQUE KEY `users_usuario_unique` (`usuario`),
   UNIQUE KEY `users_cedula_unique` (`cedula`),
   KEY `users_tipo_id_foreign` (`tipo_id`),
   CONSTRAINT `users_tipo_id_foreign` FOREIGN KEY (`tipo_id`) REFERENCES `tipo_usuarios` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -310,7 +312,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (5,'Nubia Esmeralda','Cantu Sanchez','cantu.nubia.1am@gmail.com',NULL,'2002-06-04 00:00:00','8344280421',NULL,'nubia','$2y$10$hhTyaoHychtabPfiYmE2.uNRLvU4gxK9CoZcAdOA.N5E/gEOUwjYC',NULL,NULL,NULL,NULL,NULL,NULL,2,NULL,NULL,NULL),(6,'Sonia Lizbeth','Muñoz Barrirntos','2030114@upv.edu.mx',NULL,'2023-07-02 00:00:00','8341541335',NULL,'sonia','$2y$10$sHi/IqDWBUCWkwe4CzBqW.rbyd8b.FoTA3nhnyn60MEDcaG.FZhvC',NULL,NULL,NULL,NULL,NULL,NULL,2,NULL,NULL,NULL),(13,'x','d','si@n.m',NULL,'2023-06-27 00:00:00','8341459893',NULL,'zzz','$2y$10$ijpbpidTZ.wVFj33IxDUVu9bAmmh3M7cilFUr2KS4HDO.sTQgi1qK','3470fe72-4e72-495d-a889-bffdd96809a3.jpg',NULL,NULL,NULL,NULL,NULL,2,NULL,NULL,NULL),(14,'j','h','cantu.nubia.1am@gmail.cam',NULL,'2023-08-09 00:00:00','567890098765',NULL,'sisi','$2y$10$WHU7Ucaywn2FM1qU2dPkC.TD2rGNYGhqtUT7STjY/I3RtEmcy3YtC','f5b19863-92b6-4ee9-82c3-eccdf127a1a5.jpg',NULL,NULL,NULL,NULL,NULL,2,NULL,NULL,NULL);
+INSERT INTO `users` VALUES (5,'Nubia Esmeralda','Cantu Sanchez','cantu.nubia.1am@gmail.com',NULL,'2002-06-04 00:00:00','8344280422',NULL,'nubia','$2y$10$iFvD8o5lmwj/cMzoQnfRtuenwZzwTfwSeMn53MioZSZwh735LOI/O','b2bbd061-5735-4f78-89ff-aecae4bcf5fe.jpg',NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL),(6,'Sonia Lizbeth','Muñoz Barrirntos','2030114@upv.edu.mx',NULL,'2023-07-02 00:00:00','8341541335',NULL,'sonia','$2y$10$sHi/IqDWBUCWkwe4CzBqW.rbyd8b.FoTA3nhnyn60MEDcaG.FZhvC',NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL),(13,'xi','dedo','si@n.mii',NULL,'2023-06-08 00:00:00','834145983',NULL,'hola','123456789','3470fe72-4e72-495d-a889-bffdd96809a3.jpg',NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL),(14,'j','h','cantu.nubia.1am@gmail.cam',NULL,'2023-08-09 00:00:00','567890098765',NULL,'sisi','$2y$10$WHU7Ucaywn2FM1qU2dPkC.TD2rGNYGhqtUT7STjY/I3RtEmcy3YtC','f5b19863-92b6-4ee9-82c3-eccdf127a1a5.jpg',NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL),(15,'NUbia esm','Cantú','si@si.cpm',NULL,'2023-08-04 00:00:00','6767677660',NULL,'nubiaatleta','$2y$10$JLZL2QtzitI3rV09WEUtIOjTIm9CQnB32c73dlAxvejQxAGa4KM7i','9232ed1f-2a5f-4785-8d45-6e0c3fca3f25.png',NULL,NULL,NULL,NULL,NULL,2,NULL,NULL,NULL,NULL,NULL),(17,'q','q',NULL,NULL,NULL,'1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'6',4,NULL,NULL,NULL,'17:11:00','19:08:00'),(19,'w','w',NULL,NULL,NULL,'5',NULL,NULL,NULL,'0f971d62-c8af-4325-bd15-e80bb96a83e0.png','23.7273088','-99.1232',NULL,NULL,'7',4,NULL,'2023-08-06 23:18:57','2023-08-06 23:18:57','19:18:00','20:18:00');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -327,4 +329,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-08-03  8:39:35
+-- Dump completed on 2023-08-07  9:10:59

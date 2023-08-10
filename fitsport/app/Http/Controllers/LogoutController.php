@@ -10,6 +10,6 @@ class LogoutController extends Controller
         //cerrar sesion con el helper out implementando elmetodo logout
         auth()->logout();
         //enviar la vista del login
-        return redirect()->route('paginaprincipal');
+        return redirect()->route('home');
     }
 }

@@ -9,7 +9,7 @@ class HomeController extends Controller{
     public function __construct(){
         //protegemos la url
         //al metodo index con el constructor le pasamos el parametro de autenticacion
-        $this->middleware('auth')->except('index');
+        $this->middleware('auth')->except('index', 'home');
     }
     
     public function index(){
@@ -39,9 +39,7 @@ class HomeController extends Controller{
             }
 
         } else {
-            // El usuario no está autenticado, redirigir a la pagina principal
-            return redirect()->route('paginaprincipal');
-            //return view('principal');
+            return view('principal');
         }
     }
 

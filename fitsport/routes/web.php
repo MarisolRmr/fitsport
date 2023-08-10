@@ -9,6 +9,9 @@ use App\Http\Controllers\NoticiasController;
 use App\Http\Controllers\GimnasiosController;
 use App\Http\Controllers\EjerciciosController;
 use App\Http\Controllers\EntrenadorAdController;
+use App\Http\Controllers\NutriologoController;
+use App\Http\Controllers\PerfilController;
+
 /*
 /*
 |--------------------------------------------------------------------------
@@ -48,10 +51,15 @@ Route::post('/updateNoticia/{id}', [NoticiasController::class, 'update'])->name(
 Route::get('/noticia/delete/{id}', [NoticiasController::class, 'delete'])->name('noticia.eliminar');
 
 
-//Rutas Gyms
+////////////////////////////////////////////////////////////////////////////////////////////
+//                                  RUTAS PARA GYM ADN BOXES ADMIN
+////////////////////////////////////////////////////////////////////////////////////////////
 Route::get('/GymAndBoxes',[GimnasiosController::class,'index'])->name('gymBoxes.index');
-Route::get('/GymAndBoxes/agregar',[GimnasiosController::class,'create'])->name('addgymBoxes');
+Route::get('/GymAndBoxes/agregar',[GimnasiosController::class,'create'])->name('addgymBoxes.create');
 Route::post('/GymAndBoxes/agregar',[GimnasiosController::class,'store'])->name('addgymBoxes.store');
+Route::get('/GymAndBoxes/delete/{id}', [GimnasiosController::class, 'delete'])->name('addgymBoxes.eliminar');
+Route::get('/GymAndBoxes/edit/{id}', [GimnasiosController::class, 'edit'])->name('addgymBoxes.editar');
+Route::post('/updateGymAndBoxes', [GimnasiosController::class, 'update'])->name('addgymBoxes.update');
 
 //Ruta para la vista de listado entrenador
 Route::get('/entrenador', [EntrenadorAdController::class,'index'])->name('entrenador.index');
@@ -75,3 +83,22 @@ Route::get('/ejercicio/edit/{id}', [EjerciciosController::class, 'edit'])->name(
 Route::post('/updateEjercicio', [EjerciciosController::class, 'update'])->name('ejercicio.update');
 //Ruta para eliminar la ejercicio de la base de datos
 Route::get('/ejercicio/delete/{id}', [EjerciciosController::class, 'delete'])->name('ejercicio.eliminar');
+//Ruta para visualizar el ejercicio 
+Route::get('/ejercicio/view/{id}', [EjerciciosController::class, 'view'])->name('ejercicio.verEjercicio');
+
+////////////////////////////////////////////////////////////////////////////////////////////
+//                                  RUTAS PARA NUTRIOLOGO
+////////////////////////////////////////////////////////////////////////////////////////////
+Route::get('/Nutriologo',[NutriologoController::class,'index'])->name('admNutriologo.index');
+Route::get('/Nutriologo/agregar',[NutriologoController::class,'create'])->name('admNutriologo.create');
+Route::post('/Nutriologo/agregar',[NutriologoController::class,'store'])->name('admNutriologo.store');
+Route::get('/Nutriologo/delete/{id}', [NutriologoController::class, 'delete'])->name('admNutriologo.eliminar');
+Route::get('/Nutriologo/edit/{id}', [NutriologoController::class, 'edit'])->name('admNutriologo.editar');
+Route::post('/updateNutriologo', [NutriologoController::class, 'update'])->name('admNutriologo.update');
+
+//perfil
+Route::get('/perfil', [PerfilController::class,'index'])->name('perfil.index');
+Route::get('/perfil/edit/{id}', [PerfilController::class, 'edit'])->name('perfil.editar');
+Route::post('/updatePerfil/{id}', [PerfilController::class, 'update'])->name('perfil.update');
+
+Route::get('/Noticias', [NoticiasController::class,'index_atleta'])->name('noticias.index_atleta');

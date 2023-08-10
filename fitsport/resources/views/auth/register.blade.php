@@ -120,18 +120,19 @@
 					  </div>
 
 					  <!-- Sección para cargar una imagen -->
-					   <div class="image-input-container mb-5">
-					    <label for="fotografia">
-					      <i class="fas fa-camera" style="color: lightgray"></i>
-					      <span class="selected-image"></span>
-					      <input type="file" class=" @error ('fotografia') border-red-500 @enderror" id="fotografia" name="fotografia" value="{{old('fotografia')}}" accept="image/*" onchange="handleImageUpload(event)" />
-					      @error ('fotografia')
-							<p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2">
-								{{$message}}
-							</p>
-						  @enderror
-						</label>
+					  <div class="image-input-container mb-5">
+					  	<label for="fotografia">
+					  		<i class="fas fa-camera" style="color: lightgray"></i>
+					  		<span class="selected-image" style="background-image: url('{{ Session::get('imagen_cargada') }}')"></span>
+					  		<input type="file" class="@error('fotografia') border-red-500 @enderror" id="fotografia" name="fotografia" value="{{old('fotografia')}}" accept="image/*" onchange="handleImageUpload(event)" />
+					  		@error ('fotografia')
+					  		<p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2">
+					  			{{$message}}
+					  		</p>
+					  		@enderror
+					  	</label>
 					  </div>
+
 
 					  <!-- Botón de registro -->
 				      <div class="row">
@@ -159,6 +160,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 	<!-- Función para manejar la carga de imágenes -->
 	<script>
+		
 		function handleImageUpload(event) {
 		  const input = event.target;
 		  const imageContainer = input.parentElement;
@@ -168,6 +170,7 @@
 		  const reader = new FileReader();
 
 		  reader.onload = function (e) {
+			console.log(e.target.result);
 		    selectedImage.style.backgroundImage = `url(${e.target.result})`;
 		  };
 

@@ -18,6 +18,15 @@ class NoticiasController extends Controller
         $noticias = Noticia::all();
         return view('admin.noticias.mostrar')->with(['noticias' => $noticias]);
     }
+    public function index_atleta(){
+        $noticias = Noticia::all();
+        // Ordenar las noticias por fecha (asumiendo que la columna de fecha se llama "fecha")
+        $noticiasOrdenadas = $noticias->sortBy('fecha');
+
+        // Obtener las 3 noticias más cercanas a la fecha actual
+        $noticiasCercanas = $noticiasOrdenadas->take(3);
+        return view('atleta.noticias.mostrar')->with(['noticias' => $noticias, 'noticiasCercanas' => $noticiasCercanas]);
+    }
     public function create(){
         return view('admin.noticias.crear');
     }

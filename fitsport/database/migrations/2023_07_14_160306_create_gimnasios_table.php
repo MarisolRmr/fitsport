@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('telefono');
             $table->string('horario');
-            $table->string('descripcion');
+            $table->text('descripcion');
             $table->string('latitud')->nullable();
             $table->string('longitud')->nullable();
             $table->string('fotografia')->nullable();

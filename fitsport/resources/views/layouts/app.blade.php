@@ -106,13 +106,10 @@
 
 <body id="body" class="m-0 font-sans text-base antialiased font-normal dark:bg-slate-900 leading-default bg-gray-50 text-slate-500">
 
-<<<<<<< HEAD
-=======
-  
+
     {{-- @yield('contenido_top') --}}
  
->>>>>>> e485ad4a930cecc0166a464479c93ba7ffb90f7c
-    <!-- sidenav  -->
+<!-- sidenav  -->
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample">
     <aside class="fixed inset-y-0 flex-wrap items-center justify-between block w-full p-0 my-4  ">
       <div class="h-19 text-center mb-4">

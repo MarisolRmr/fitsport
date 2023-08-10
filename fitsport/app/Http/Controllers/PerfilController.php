@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
-
+use Illuminate\Validation\Rule;
+use Carbon\Carbon;
 class PerfilController extends Controller
 {
     public function __construct(){
@@ -39,12 +40,34 @@ class PerfilController extends Controller
         if ($request->password || $request->password_confirmation) {
             //Validaciones de formulario
             $this->validate($request, [
-                'nombre' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚ\s]+$/',
-                'apellido' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚ\s]+$/',
+                'nombre' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚÑñ\s]+$/',
+                'apellido' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚÑñ\s]+$/',
                 'telefono' => 'required|regex:/^[0-9]+$/|max:10',
-                'fecha_nac' => 'required|date',
-                'usuario' => 'required|min:3|max:20|regex:/^\S*$/u', // No se permiten espacios en el usuario
-                'correo' => 'required|email|max:60',
+                'fecha_nac' => [
+                    'required',
+                    'date',
+                    function ($attribute, $value, $fail) {
+                        $fechaNacimiento = Carbon::createFromFormat('Y-m-d', $value);
+                        $edadMinima = Carbon::now()->subYears(3);
+            
+                        if ($fechaNacimiento->greaterThan($edadMinima)) {
+                            $fail('La fecha de nacimiento debe ser al menos 3 años anterior a la fecha actual.');
+                        }
+                    },
+                ],
+                'usuario' => [
+                    'required',
+                    'min:3',
+                    'max:20',
+                    'regex:/^\S*$/u',
+                    Rule::unique('users')->ignore(auth()->user()->id ?? null),
+                ],
+                'correo' => [
+                    'required',
+                    'email',
+                    'max:60',
+                    Rule::unique('users')->ignore(auth()->user()->id ?? null),
+                ],
                 'password' => 'required|confirmed|min:6',
                 'password_confirmation' => 'required',
                 'fotografia' => 'nullable|image|mimes:jpeg,png,gif|max:2048',
@@ -74,7 +97,6 @@ class PerfilController extends Controller
                 User::where('id', $id)->update([
                     'nombre' => $request->nombre,
                     'apellido' => $request->apellido,
-                    'correo' => $request->correo,
                     'telefono' => $request->telefono,
                     'fecha_nac' => $request->fecha_nac,
                     'usuario' => $request->usuario,
@@ -99,12 +121,34 @@ class PerfilController extends Controller
         }else{
             //Validaciones de formulario
             $this->validate($request, [
-                'nombre' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚ\s]+$/',
-                'apellido' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚ\s]+$/',
+                'nombre' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÑñÚ\s]+$/',
+                'apellido' => 'required|regex:/^[a-zA-ZáéíóúÁÉÑñÍÓÚ\s]+$/',
                 'telefono' => 'required|regex:/^[0-9]+$/|max:10',
-                'fecha_nac' => 'required|date',
-                'usuario' => 'required|min:3|max:20|regex:/^\S*$/u', // No se permiten espacios en el usuario
-                'correo' => 'required|email|max:60',
+                'fecha_nac' => [
+                    'required',
+                    'date',
+                    function ($attribute, $value, $fail) {
+                        $fechaNacimiento = Carbon::createFromFormat('Y-m-d', $value);
+                        $edadMinima = Carbon::now()->subYears(3);
+            
+                        if ($fechaNacimiento->greaterThan($edadMinima)) {
+                            $fail('La fecha de nacimiento debe ser al menos 3 años anterior a la fecha actual.');
+                        }
+                    },
+                ],
+                'usuario' => [
+                    'required',
+                    'min:3',
+                    'max:20',
+                    'regex:/^\S*$/u',
+                    Rule::unique('users')->ignore(auth()->user()->id ?? null),
+                ],
+                'correo' => [
+                    'required',
+                    'email',
+                    'max:60',
+                    Rule::unique('users')->ignore(auth()->user()->id ?? null),
+                ],
                 'fotografia' => 'nullable|image|mimes:jpeg,png,gif|max:2048',
             ]);
             if ($request->hasFile('fotografia')) {

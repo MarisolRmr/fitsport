@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\User;
 class LoginController extends Controller
 {
     
@@ -18,10 +18,19 @@ class LoginController extends Controller
             'usuario'=>'required',
             'password'=>'required'
         ]);
-        //verificar que las credenciales sean correctas
-        if(!auth()->attempt($request->only('usuario','password'),$request->remember)){
-            //usar la directica with para llenar los valores de la sesión
-            return back()->with('mensaje','Usuario y/o contraseña incorrectas, vuelva a intentarlo.');
+        // Comprobar si el usuario existe como correo electrónico o nombre de usuario
+        $user = User::where('correo', $request->usuario)
+        ->orWhere('usuario', $request->usuario)
+        ->first();
+
+        if (!$user) {
+        return back()->with('mensaje', 'El usuario o correo electrónico no fue encontrado.');
+        }
+
+        // Verificar las credenciales
+        if (!auth()->attempt(['password' => $request->password, 'usuario' => $user->usuario], $request->remember) &&
+        !auth()->attempt(['password' => $request->password, 'correo' => $user->correo], $request->remember)) {
+        return back()->with('mensaje', 'Contraseña incorrecta, vuelva a intentarlo.');
         }
         //credenciales correctas
         return redirect()->route('home');

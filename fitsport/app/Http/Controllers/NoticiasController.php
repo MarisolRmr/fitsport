@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use Illuminate\Http\Request;
 use App\Models\Noticia;
+use Carbon\Carbon;
 
 class NoticiasController extends Controller
 {
@@ -18,16 +19,32 @@ class NoticiasController extends Controller
         $noticias = Noticia::all();
         return view('admin.noticias.mostrar')->with(['noticias' => $noticias]);
     }
+    public function index_atleta(){
+        $noticias = Noticia::all();
+        // Ordenar las noticias por fecha (asumiendo que la columna de fecha se llama "fecha")
+        $noticiasOrdenadas = $noticias->sortBy('fecha');
+
+        // Obtener las 3 noticias más cercanas a la fecha actual
+        $noticiasCercanas = $noticiasOrdenadas->take(3);
+        return view('atleta.noticias.mostrar')->with(['noticias' => $noticias, 'noticiasCercanas' => $noticiasCercanas]);
+    }
     public function create(){
         return view('admin.noticias.crear');
     }
 
     public function store(Request $request)
     {
+        
+    // Obtener la fecha actual en la zona horaria por defecto del servidor
+    $fechaActual = Carbon::now();
+
+    // Cambiar la zona horaria a la zona especificada en $request->zona_horaria
+    $fechaActual->setTimezone($request->zona_horaria);
+
         // Reglas de validación
         $this->validate($request, [
             'nombre' => 'required',
-            'fecha' => 'required',
+            'fecha' => ['required', 'date', 'after_or_equal:' . $fechaActual->toDateTimeString()],
             'descripcion' => 'required',
             'texto' => 'required',
             'imagen' => 'required'
@@ -68,10 +85,15 @@ class NoticiasController extends Controller
     //Función para actualizar los datos del noticia en la base de datos
     public function update(Request $request, $id)
     {
+        // Obtener la fecha actual en la zona horaria por defecto del servidor
+        $fechaActual = Carbon::now();
+
+        // Cambiar la zona horaria a la zona especificada en $request->zona_horaria
+        $fechaActual->setTimezone($request->zona_horaria);
         //Validaciones de formulario
         $this->validate($request, [
             'nombre' => 'required',
-            'fecha' => 'required',
+            'fecha' => ['required', 'date', 'after_or_equal:' . $fechaActual->toDateTimeString()],
             'descripcion' => 'required',
             'texto' => 'required'
         ]);

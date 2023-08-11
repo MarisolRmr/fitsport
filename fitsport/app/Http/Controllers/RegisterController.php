@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use App\Models\User;
 use Auth;
+use Carbon\Carbon;
 
 class RegisterController extends Controller
 {
@@ -29,10 +30,21 @@ class RegisterController extends Controller
         }
         //validaciones del formulario de registros
         $this->validate($request, [
-            'nombre' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚ\s]+$/',
-            'apellido' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚ\s]+$/',
+            'nombre' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚÑñ\s]+$/',
+            'apellido' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚÑñ\s]+$/',
             'telefono' => 'required|regex:/^[0-9]+$/|max:10',
-            'fecha_nac' => 'required|date',
+            'fecha_nac' => [
+                'required',
+                'date',
+                function ($attribute, $value, $fail) {
+                    $fechaNacimiento = Carbon::createFromFormat('Y-m-d', $value);
+                    $edadMinima = Carbon::now()->subYears(3);
+        
+                    if ($fechaNacimiento->greaterThan($edadMinima)) {
+                        $fail('La fecha de nacimiento debe ser al menos 3 años anterior a la fecha actual.');
+                    }
+                },
+            ],
             'usuario' => 'required|unique:users|min:3|max:20|regex:/^\S*$/u', // No se permiten espacios en el usuario
             'correo' => 'required|unique:users|email|max:60',
             'password' => 'required|confirmed|min:6',

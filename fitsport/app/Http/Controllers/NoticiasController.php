@@ -35,21 +35,36 @@ class NoticiasController extends Controller
     public function store(Request $request)
     {
         
-    // Obtener la fecha actual en la zona horaria por defecto del servidor
-    $fechaActual = Carbon::now();
+        // Guardar la imagen temporalmente en el sistema de archivos si la validación falla
+        if ($request->hasFile('imagen') && $request->file('imagen')->isValid()) {
+            $imagenTemporal = file_get_contents($request->file('imagen')->getRealPath());
+            $request->session()->flash('cachedImage', base64_encode($imagenTemporal));
+        }elseif ($request->has('cachedImage')) {
+            // Si la solicitud incluye un campo "cachedImage", reutiliza el valor existente
+            $request->session()->flash('cachedImage', $request->cachedImage);
+        }
+        
+        // Obtener la fecha actual en la zona horaria por defecto del servidor
+        $fechaActual = Carbon::now();
 
-    // Cambiar la zona horaria a la zona especificada en $request->zona_horaria
-    $fechaActual->setTimezone($request->zona_horaria);
-
+        // Cambiar la zona horaria a la zona especificada en $request->zona_horaria
+        $fechaActual->setTimezone($request->zona_horaria);
         // Reglas de validación
         $this->validate($request, [
             'nombre' => 'required',
             'fecha' => ['required', 'date', 'after_or_equal:' . $fechaActual->toDateTimeString()],
             'descripcion' => 'required',
             'texto' => 'required',
-            'imagen' => 'required'
+            'imagen' => [
+                function ($attribute, $value, $fail) use ($request) {
+                    // Verificar si no hay una imagen en la sesión flash ('cachedImage')
+                    if (!$request->session()->has('cachedImage') && !$request->hasFile('imagen')) {
+                        $fail('La imagen es obligatoria si no hay imagen en la sesión.');
+                    }
+                },
+            ],
         ]);
-    
+        
         $nombreImagenUnico='';
         if ($request->hasFile('imagen')) {
             $imagen = $request->file('imagen');
@@ -58,9 +73,35 @@ class NoticiasController extends Controller
             $imagenServidor->fit(800, 200); // Redimensionar la imagen
             $imagenPath = public_path('noticias_img') . '/' . $nombreImagenUnico;
             $imagenServidor->save($imagenPath); // Guardar la imagen redimensionada en la carpeta "public/uploads"
+        }elseif (session()->has('cachedImage')) {
+            // Obtener la imagen codificada en base64 de la sesión flash
+            $imagenCodificada = session('cachedImage');
+        
+            // Decodificar la imagen base64 y crear un objeto de imagen desde los datos decodificados
+            $imagenDecodificada = base64_decode($imagenCodificada);
+        
+            // Asumir que la extensión es jpg si no podemos determinarla
+            $extensionOriginal = 'jpg';
+        
+            // Crear un nombre único para la imagen con la extensión original
+            $nombreImagenUnico = Str::uuid() . "." . $extensionOriginal;
+        
+            // Obtener la ubicación completa para guardar la imagen en el disco
+            $imagenPath = public_path('noticias_img') . '/' . $nombreImagenUnico;
+        
+            // Crear una instancia de Image a partir de los datos decodificados
+            $imagenServidor = Image::make($imagenDecodificada);
+        
+            // Redimensionar la imagen (ajustar esto según tus necesidades)
+            $imagenServidor->fit(800, 200);
+        
+            // Guardar la imagen redimensionada en el disco
+            $imagenServidor->save($imagenPath);
         }
-
-
+        
+        
+        // Aquí puedes usar $nombreImagenUnico en el resto de tu lógica
+        
         Noticia::create([
             'nombre' => $request->nombre,
             'fecha' => $request->fecha,
@@ -68,7 +109,8 @@ class NoticiasController extends Controller
             'texto' => $request->texto,
             'imagen' =>$nombreImagenUnico,
         ]);
-
+        // Eliminar la imagen de la sesión flash después de haberla guardado
+         $request->session()->forget('cachedImage');
         // Redireccionar a la vista de listado de noticias
         return redirect()->route('noticias.index')->with('agregada', 'Noticia agregada correctamente');
     }
@@ -85,6 +127,15 @@ class NoticiasController extends Controller
     //Función para actualizar los datos del noticia en la base de datos
     public function update(Request $request, $id)
     {
+        // Guardar la imagen temporalmente en el sistema de archivos si la validación falla
+        if ($request->hasFile('imagen') && $request->file('imagen')->isValid()) {
+            $imagenTemporal = file_get_contents($request->file('imagen')->getRealPath());
+            $request->session()->flash('cachedImage', base64_encode($imagenTemporal));
+        }elseif ($request->has('cachedImage')) {
+            // Si la solicitud incluye un campo "cachedImage", reutiliza el valor existente
+            $request->session()->flash('cachedImage', $request->cachedImage);
+        }
+
         // Obtener la fecha actual en la zona horaria por defecto del servidor
         $fechaActual = Carbon::now();
 
@@ -95,7 +146,15 @@ class NoticiasController extends Controller
             'nombre' => 'required',
             'fecha' => ['required', 'date', 'after_or_equal:' . $fechaActual->toDateTimeString()],
             'descripcion' => 'required',
-            'texto' => 'required'
+            'texto' => 'required',
+            'imagen' => [
+                function ($attribute, $value, $fail) use ($request) {
+                    // Verificar si no hay una imagen en la sesión flash ('cachedImage')
+                    if (!$request->session()->has('cachedImage') && !$request->hasFile('imagen')) {
+                        $fail('La imagen es obligatoria si no hay imagen en la sesión.');
+                    }
+                },
+            ],
         ]);
         //Cargar la imagen
         $nombreImagenUnico='';
@@ -115,6 +174,38 @@ class NoticiasController extends Controller
                 'texto' => $request->texto,
                 'imagen' => $nombreImagenUnico,
             ]);
+        }elseif (session()->has('cachedImage')) {
+            // Obtener la imagen codificada en base64 de la sesión flash
+            $imagenCodificada = session('cachedImage');
+        
+            // Decodificar la imagen base64 y crear un objeto de imagen desde los datos decodificados
+            $imagenDecodificada = base64_decode($imagenCodificada);
+        
+            // Asumir que la extensión es jpg si no podemos determinarla
+            $extensionOriginal = 'jpg';
+        
+            // Crear un nombre único para la imagen con la extensión original
+            $nombreImagenUnico = Str::uuid() . "." . $extensionOriginal;
+        
+            // Obtener la ubicación completa para guardar la imagen en el disco
+            $imagenPath = public_path('noticias_img') . '/' . $nombreImagenUnico;
+        
+            // Crear una instancia de Image a partir de los datos decodificados
+            $imagenServidor = Image::make($imagenDecodificada);
+        
+            // Redimensionar la imagen (ajustar esto según tus necesidades)
+            $imagenServidor->fit(800, 200);
+        
+            // Guardar la imagen redimensionada en el disco
+            $imagenServidor->save($imagenPath);
+
+            Noticia::where('id', $id)->update([
+                'nombre' => $request->nombre,
+                'fecha' => $request->fecha,
+                'descripcion' => $request->descripcion,
+                'texto' => $request->texto,
+                'imagen' => $nombreImagenUnico,
+            ]);
         }else{
             //Actualizacion de datos
             
@@ -124,9 +215,11 @@ class NoticiasController extends Controller
                 'descripcion' => $request->descripcion,
                 'texto' => $request->texto,
             ]);
-
+            
         }
         
+        // Eliminar la imagen de la sesión flash después de haberla guardado
+         $request->session()->forget('cachedImage');
         
         //Se retorna a la vista de noticias
         return redirect()->route('noticias.index')->with('actualizada', 'Noticia actualizada correctamente');

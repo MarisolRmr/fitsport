@@ -109,20 +109,35 @@
         @enderror
     </div>
     <input type="hidden" id="zona_horaria" name="zona_horaria" value="">
-
-    <!-- Sección para cargar una imagen -->
-    <div class="image-input-container mb-5 w-full">
-    <label for="imagen">
-        <i class="fas fa-camera" style="color: lightgray; font-size:35px"></i>
-        <span class="selected-image"></span>
-        <input type="file" class=" @error ('imagen') border-red-500 @enderror" id="imagen" name="imagen" value="{{old('imagen')}}" accept="image/*" onchange="handleImageUpload(event)" />
-        @error ('imagen')
-        <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2">
-            {{$message}}
-        </p>
-        @enderror
-    </label>
-    </div>
+    @if(session()->has('cachedImage'))
+        <div class="image-input-container mb-5 w-full">
+            <label for="imagen">
+                <i class="fas fa-camera" style="color: lightgray; font-size:35px"></i>
+                <span class="selected-image" style="background-image: url('data:image;base64,{{ session('cachedImage') }}');"></span>
+                <input type="hidden" name="cachedImage" value="{{ session('cachedImage') }}" />
+                <input type="file" class=" @error ('imagen') border-red-500 @enderror" id="imagen" name="imagen" value="{{old('imagen')}}" accept="image/*" onchange="handleImageUpload(event)" />
+                @error ('imagen')
+                <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2">
+                    {{$message}}
+                </p>
+                @enderror
+            </label>
+        </div>
+    @else
+        <!-- Sección para cargar una imagen -->
+        <div class="image-input-container mb-5 w-full">
+            <label for="imagen">
+                <i class="fas fa-camera" style="color: lightgray; font-size:35px"></i>
+                <span class="selected-image"></span>
+                <input type="file" class=" @error ('imagen') border-red-500 @enderror" id="imagen" name="imagen" value="{{old('imagen')}}" accept="image/*" onchange="handleImageUpload(event)" />
+                @error ('imagen')
+                <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2">
+                    {{$message}}
+                </p>
+                @enderror
+            </label>
+        </div>
+    @endif
     <div class="flex text-end justify-end">
         <button style=" background-color:#FFDE59; " type="submit" class="mt-4 px-4 py-2 mr-4 text-black font-semibold rounded-2xl hover:bg-blue-600">Agregar</button>
         <a href="{{route('noticias.index')}}" class="mt-4 px-4 py-2 bg-white text-black font-semibold rounded-2xl hover:bg-blue-600">Cancelar</a>   

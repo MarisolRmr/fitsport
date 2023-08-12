@@ -374,7 +374,7 @@ nav {
   right: 0;
   margin-bottom: 1.5%;
   margin-right: 0;
-  transform: translate(0%, 370%);
+  transform: translate(0%, 400px);
 }
 
 .img33 {
@@ -385,7 +385,7 @@ nav {
   right: 0;
   margin-bottom: 1.5%;
   margin-right: 0;
-  transform: translate(0%, 45%);
+  transform: translate(0px, 45px);
 }
 
 .label-check {

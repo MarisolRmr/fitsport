@@ -42,8 +42,8 @@
                                     {{ session('mensaje') }}
                                 </div>
                             @endif
-                              <label for="usuario" style="color: white; margin-left: 2%" class="form-label label">Nombre de usuario</label>
-                              <input type="text" class="form-control @error ('usuario') border-red-500 @enderror"  value="{{old('usuario')}}" style="height: 43px; margin-bottom: 8%" id="usuario" name="usuario" required placeholder="Ingrese aquí su nombre de usuario">
+                              <label for="usuario" style="color: white; margin-left: 2%" class="form-label label">Nombre de usuario o correo electrónico</label>
+                              <input type="text" class="form-control @error ('usuario') border-red-500 @enderror"  value="{{old('usuario')}}" style="height: 43px; margin-bottom: 8%" id="usuario" name="usuario" required placeholder="Ingrese aquí su nombre de usuario o correo electrónico">
                               @error ('usuario')
                                 <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2">
                                     {{$message}}

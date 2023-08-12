@@ -108,6 +108,8 @@
             </p>    
         @enderror
     </div>
+    <input type="hidden" id="zona_horaria" name="zona_horaria" value="">
+
     <!-- Sección para cargar una imagen -->
     <div class="image-input-container mb-5 w-full">
     <label for="imagen">
@@ -137,6 +139,12 @@
 @section('js')
 
 <script>
+    // Obtener la zona horaria del cliente en JavaScript
+    const zonaHorariaCliente = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+    // Asignar la zona horaria al campo oculto
+    document.getElementById('zona_horaria').value = zonaHorariaCliente;
+    
     function handleImageUpload(event) {
         const input = event.target;
         const imageContainer = input.parentElement;

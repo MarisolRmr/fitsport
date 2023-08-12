@@ -122,7 +122,21 @@ class EjerciciosController extends Controller
         $ejercicio= Ejercicio::find($id_ejercicio);
         //Se retorna a la vista
         return view('admin.ejercicios.verEjercicio',["ejercicio"=>$ejercicio]);
-
     }
+
+
+    ////////////////USUARIO//////////////7
+
+    public function ejercitate(){
+        $ejercicio=Ejercicio::all();
+        return view('user.ejercitate.verEjercicios',["ejercicio"=>$ejercicio]);
+    }
+    public function buscar(Request $request) {
+        $query = $request->input('query');
+        $ejercicios = Ejercicio::where('nombre', 'LIKE', '%' . $query . '%')->get();
+        
+        return response()->json($ejercicios);
+    }
+    
 
 }

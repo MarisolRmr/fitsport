@@ -85,6 +85,12 @@ Route::post('/updateEjercicio', [EjerciciosController::class, 'update'])->name('
 Route::get('/ejercicio/delete/{id}', [EjerciciosController::class, 'delete'])->name('ejercicio.eliminar');
 //Ruta para visualizar el ejercicio 
 Route::get('/ejercicio/view/{id}', [EjerciciosController::class, 'view'])->name('ejercicio.verEjercicio');
+//////////////////////////////Lado usuario
+Route::get('/ejercitate', [EjerciciosController::class,'ejercitate'])->name('ejercitate.mostrar');
+//Ruta para buscar el ejercicio
+Route::get('/ejercicio/buscando', [EjerciciosController::class, 'buscar'])->name('ejercitate.buscar'); 
+//Ruta para visualizar el ejercicio 
+Route::get('/ejercitate/view/{id}', [EjerciciosController::class, 'viewE'])->name('ejercicio.verDetallesEjercicio');
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 //                                  RUTAS PARA NUTRIOLOGO

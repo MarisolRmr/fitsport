@@ -109,7 +109,7 @@
     <!-- Formulario -->
     <div class="rounded-xl text-white w-4/5 mb-8" style="background-color:rgba(53, 58, 80, 0.67); padding: 40px">
         <!-- Formulario para agregar Gym And Boxes -->
-        <form action="{{route('admNutriologo.store')}}" class="text-white rounded-lg p-4" enctype="multipart/form-data" method="POST" novalidate>
+        <form action="{{route('entrenador.store')}}" class="text-white rounded-lg p-4" enctype="multipart/form-data" method="POST" novalidate>
             @csrf
 
             <!-- Mensaje de sesión -->
@@ -136,7 +136,7 @@
 
                         <!-- Campo Apellido -->
                         <div class="w-1/2 mb-0">
-                            <label for="nombre" class="text-lg font-bold">Apellido:</label>
+                            <label for="apellido" class="text-lg font-bold">Apellido:</label>
                             <input style="color:black" name="apellido" value="{{old('apellido')}}" type="text" id="apellido" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error ('apellido') border-red-500 @enderror" placeholder="Ingresa tu apellido">
                             @error('apellido')
                                 <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
@@ -198,13 +198,29 @@
 
             <div class="flex" >
                 <div class="w-3/4 mr-2" style="width: 80%;">
-                    <label for="cedula" class="text-lg font-bold mt-0">Cédula Profesional:</label>
-                    <input type="number" style="color:black" id="cedula" name = "cedula" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error('cedula') border-red-500 @enderror" value="{{old('cedula')}}" placeholder="Ingresa tu cedula">
-                    @error('cedula')
+                    <label for="email" class="text-lg font-bold mt-0">Email:</label>
+                    <input type="email" style="color:black" id="email" name = "email" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error('email') border-red-500 @enderror" value="{{old('email')}}" placeholder="Ingresa tu email">
+                    @error('email')
                         <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                             {{$message}}
                         </p>    
                     @enderror
+                </div>
+            </div>
+            <div class="flex" >
+                <div class="w-3/4 mr-2" style="width: 382px;">
+                    <label for="gym" class="text-lg font-bold mt-0">Selecciona un Gym:</label>
+                    <select id="gym" name="gym" style="color:black;width: 234%;" class="select2 w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error('gym') border-red-500 @enderror">
+                        <option value="">-- Selecciona un Gym --</option>
+                            @foreach ($gimnasios as $gimnasio)
+                                <option value="{{ $gimnasio->id }}">{{ $gimnasio->nombre }}</option>
+                            @endforeach
+                        </select>
+                @error('gym')
+                    <p style="background-color: #f56565; color: #fff;width: 234%; margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                        {{$message}}
+                    </p>
+                @enderror
                 </div>
             </div>
             

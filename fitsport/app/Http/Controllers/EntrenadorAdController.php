@@ -29,15 +29,27 @@ class EntrenadorAdController extends Controller
         //Validaciones de formulario
         $this->validate($request, [
             'nombre' => 'required',
-            'codigo' => 'required',
-            'empresa' => 'required',
+            'apellido' => 'required',
+            'hora' => 'required',
+            'horaCierre' => 'required',
+            'gym' => 'required',
             'email' => 'required|email|min:3|max:20',
             'telefono' => 'required|min:10|max:10',
             'imagen' => 'required'
         ]);
         //Se hace el registro en la tabla de entrenador
         Entrenador::create([
-            ''
+            'nombre' => $request->nombre,
+            'apellido' => $request->apellido,
+            'hora' => $request->hora,
+            'horaCierre' => $request->horaCierre,
+            'gym' => $request->gym,
+            'email' => $request->email,
+            'telefono' => $request->telefono,
+            'imagen' => $request->imagen,
+            'tipo_id' => 3,
+            'gimnasios_id'=> $request->gym,
+            // Si hay más campos, continúa agregándolos aquí
         ]);
         //Se retorna a la vista de entrenador 
         return redirect()->route('entrenador.index');

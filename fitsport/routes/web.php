@@ -66,7 +66,7 @@ Route::get('/entrenador', [EntrenadorAdController::class,'index'])->name('entren
 //Ruta para la vista de agregar entrenador
 Route::get('/entrenador/create', [EntrenadorAdController::class,'create'])->name('entrenador.create');
 //Ruta para guardar los datos del entrenado
-Route::get('/entrenador/create', [EntrenadorAdController::class,'create'])->name('entrenador.create');
+Route::post('/entrenador/create', [EntrenadorAdController::class,'store'])->name('entrenador.store');
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 //                                  RUTAS PARA EJERCICITATE ADMIN

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Gimnasios;
+use App\Models\Entrenador;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
@@ -128,6 +129,20 @@ class GimnasiosController extends Controller
     {
         // Buscamos el gimnasio por su ID
         $gymBoxes = Gimnasios::find($id_gym);
+        // Elimina todos los entrenadores asociados al gimnasio
+        foreach ($gymBoxes->entrenadores as $entrenador) {
+            // Si el entrenador tiene una imagen asociada, elimínala
+            if ($entrenador->fotografia) {
+                $imagenPathEntrenador = public_path('ImgEntrenador') . '/' . $entrenador->fotografia;
+                //Si existe la imagen en el servidor, la eliminamos
+                if (file_exists($imagenPathEntrenador)) {
+                    unlink($imagenPathEntrenador);
+                }
+            }
+
+            // Elimina el entrenador
+            $entrenador->delete();
+        }
 
         // Comprobamos si el gimnasio tiene imagen asociada
         if ($gymBoxes->fotografia) {
@@ -142,6 +157,6 @@ class GimnasiosController extends Controller
         $gymBoxes->delete();
 
         //Redireccionamos al index con mensaje de éxito
-        return redirect()->route('gymBoxes.index')->with('success', 'Ejercicio eliminado correctamente');
+        return redirect()->route('gymBoxes.index')->with('success', 'Gym/Box eliminado correctamente');
     }
 }

@@ -28,7 +28,6 @@ class User extends Authenticatable
         'telefono',
         'fotografia',
         'tipo_id',
-        'gimnasios_id'
     ];
     public $timestamps = false;
     /**

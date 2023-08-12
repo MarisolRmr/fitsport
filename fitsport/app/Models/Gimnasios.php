@@ -19,7 +19,9 @@ class Gimnasios extends Model
         'latitud',
         'fotografia',
     ];
-    public function users() {
-        return $this->hasMany('App\Models\User', 'gimnasios_id');
+    // En el modelo Gimnasio
+    public function entrenadores()
+    {
+        return $this->hasMany(Entrenador::class, 'gimnasio_id');
     }
 }

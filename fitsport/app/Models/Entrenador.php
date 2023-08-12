@@ -15,9 +15,14 @@ class Entrenador extends Model
         'telefono',
         'horaEntrada',
         'horaSalida',
-        'email',
-        'gimnasios_id',
+        'correo',
+        'gimnasio_id',
         'fotografia',
         'tipo_id'
     ];
+    public function gimnasio()
+{
+    return $this->belongsTo(Gimnasios::class, 'gimnasio_id');
+}
+
 }

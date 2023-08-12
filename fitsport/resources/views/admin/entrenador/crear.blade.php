@@ -159,7 +159,7 @@
 
                         <!-- Campo Hora -->
                         <div class="w-1/3 ml-2 mb-0">
-                            <label for="hora" class="text-lg font-bold">Hora de apertura:</label>
+                            <label for="hora" class="text-lg font-bold">Hora de entrada:</label>
                             <input type="time" name="hora" style="color:black" id="hora" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error('hora') border-red-500 @enderror" value="{{old('hora')}}" placeholder="Ingresa la hora de apertura">
                             @error('hora')
                                 <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
@@ -168,7 +168,7 @@
                             @enderror
                         </div>
                         <div class="w-1/3 ml-2 mb-0">
-                            <label for="horaCierre" class="text-lg font-bold">Hora de cierre:</label>
+                            <label for="horaCierre" class="text-lg font-bold">Hora de salida:</label>
                             <input type="time" name="horaCierre" style="color:black" id="horaCierre" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error('horaCierre') border-red-500 @enderror" value="{{old('horaCierre')}}" placeholder="Ingresa la hora de cierre">
                             @error('horaCierre')
                                 <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
@@ -230,7 +230,7 @@
             <!-- Botones de acción -->
             <div class="flex justify-end mt-4">
                 <button style="background-color: #FFDE59; width: 150px; text-align: center;" type="submit" class="px-4 py-2 mr-4 text-black font-semibold rounded-2xl hover:bg-blue-600">Agregar</button>
-                <a href="{{route('admNutriologo.index')}}" type="submit" class="px-4 py-2 bg-white text-black font-semibold rounded-2xl hover:bg-blue-600" style="width: 150px; text-align: center;">Cancelar</a>
+                <a href="{{route('entrenador.index')}}" type="submit" class="px-4 py-2 bg-white text-black font-semibold rounded-2xl hover:bg-blue-600" style="width: 150px; text-align: center;">Cancelar</a>
             </div>
         </form>
     </div>

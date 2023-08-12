@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->time('horaEntrada')->nullable();
-            $table->time('horaSalida')->nullable();
+            $table->foreignId('gimnasio_id')->nullable()->constrained('gimnasios')->onDelete('cascade');
         });
     }
 
@@ -23,8 +22,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('horaEntrada');
-            $table->dropColumn('horaSalida');
+            $table->dropForeign(['gimnasio_id']); 
+            $table->dropColumn('gimnasio_id');
         });
     }
 };

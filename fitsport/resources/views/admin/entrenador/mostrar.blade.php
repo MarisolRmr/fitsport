@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('titulo')
-    Administrador Noticias
+    Administrador Entrenador
 @endsection
 @section('css')
 <style>
@@ -129,151 +129,65 @@
   </div>
   
 
-  <div class=" rounded-xl  text-white w-4/5 mb-8" style="background-color:rgba(53, 58, 80, 0.67); padding: 40px">
-    <div class=" rounded-xl p-4 text-white overflow-x-auto" style="background: #64677893;">
-    <table id="example" class="mt-2 table hover hover:border-collapse">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Imagen</th>
-                <th>Nombre</th>
-                <th>Fecha</th>
-                <th>Descripción</th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Jane</td>
-                <td>Smith</td>
-                <td>30</td>
-                <td>25</td>
-                <td></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Editar</a></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Eliminar</a></td>
-            </tr>
-            <tr>
-                <td>Jane</td>
-                <td>Smith</td>
-                <td>30</td>
-                <td>25</td>
-                <td></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Editar</a></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Eliminar</a></td>
-            </tr>
-            <tr>
-                <td>Jane</td>
-                <td>Smith</td>
-                <td>30</td>
-                <td>25</td>
-                <td></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Editar</a></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Eliminar</a></td>
-            </tr>
-            <tr>
-                <td>Jane</td>
-                <td>Smith</td>
-                <td>30</td>
-                <td>25</td>
-                <td></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Editar</a></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Eliminar</a></td>
-            </tr>
-            <tr>
-                <td>Jane</td>
-                <td>Smith</td>
-                <td>30</td>
-                <td>25</td>
-                <td></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Editar</a></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Eliminar</a></td>
-            </tr>
-            <tr>
-                <td>Jane</td>
-                <td>Smith</td>
-                <td>30</td>
-                <td>25</td>
-                <td></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Editar</a></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Eliminar</a></td>
-            </tr>
-            <tr>
-                <td>Jane</td>
-                <td>Smith</td>
-                <td>30</td>
-                <td>25</td>
-                <td></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Editar</a></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Eliminar</a></td>
-            </tr>
-            <tr>
-                <td>Jane</td>
-                <td>Smith</td>
-                <td>30</td>
-                <td>25</td>
-                <td></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Editar</a></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Eliminar</a></td>
-            </tr>
-            <tr>
-                <td>Jane</td>
-                <td>Smith</td>
-                <td>30</td>
-                <td>25</td>
-                <td></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Editar</a></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Eliminar</a></td>
-            </tr>
-            <tr>
-                <td>Jane</td>
-                <td>Smith</td>
-                <td>30</td>
-                <td>25</td>
-                <td></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Editar</a></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Eliminar</a></td>
-            </tr>
-            <tr>
-                <td>Jane</td>
-                <td>Smith</td>
-                <td>30</td>
-                <td>25</td>
-                <td></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Editar</a></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Eliminar</a></td>
-            </tr>
-            <tr>
-                <td>Jane</td>
-                <td>Smith</td>
-                <td>30</td>
-                <td>25</td>
-                <td></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Editar</a></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Eliminar</a></td>
-            </tr>
-            <tr>
-                <td>Jane</td>
-                <td>Smith</td>
-                <td>30</td>
-                <td>25</td>
-                <td></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Editar</a></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Eliminar</a></td>
-            </tr>
-            <tr>
-                <td>Jane</td>
-                <td>Smith</td>
-                <td>30</td>
-                <td>25</td>
-                <td></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Editar</a></td>
-                <td class="actions-cell"><a href="#" class="edit-button">Eliminar</a></td>
-            </tr>
-        </tbody>
-    </table>
+    <div class=" rounded-xl  text-white w-4/5 mb-8" style="background-color:rgba(53, 58, 80, 0.67); padding: 40px">
+        <div class=" rounded-xl p-4 text-white overflow-x-auto" style="background: #64677893;">
+            @if(session('success'))
+                <script>
+                    Swal.fire({
+                        title: 'Éxito',
+                        text: '{{ session('success') }}',
+                        icon: 'success',
+                        timer: 4000, 
+                        timerProgressBar: true,
+                        showConfirmButton: false,
+                    });
+                    </script>
+            @endif
+            <table id="example" class="mt-2 table hover hover:border-collapse">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Imagen</th>
+                        <th>Nombre</th>
+                        <th>Horario</th>
+                        <th>Gimnasio/Box</th>
+                        <th>Telefono</th>
+                        <th>Correo</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($entrenador as $entrenador)
+                    <tr>
+                        <td>{{ $entrenador->id }}</td>
+                        <td style="text-align: center;">
+                                    <!-- Contenedor para centrar la imagen -->
+                                    <div style="display: flex; justify-content: center;">
+                                        <!-- Mostrar la imagen del gimnasio si existe, si no, mostrar "Sin Imagen" -->
+                                        @if($entrenador->fotografia)
+                                            <img src="{{ asset('ImgEntrenador/' . $entrenador->fotografia) }}" alt="Imagen de la marca" style="height: 80px; width: 80px; border-radius: 17px;">
+                                        @else
+                                            Sin Imagen
+                                        @endif
+                                    </div>
+                                </td>
+                        <td>{{ $entrenador->nombre }} {{ $entrenador->apellido }}</td>
+                        <td>{{ date('g:i a', strtotime($entrenador->horaEntrada)) }} - {{ date('g:i a', strtotime($entrenador->horaSalida)) }}</td>
+                        <td>{{ $entrenador->gimnasio->nombre}}</td>
+                        <td>{{ $entrenador->telefono }}</td>
+                        <td>{{ $entrenador->correo }}</td>
+                        <td class="actions-cell"><a href="{{ route('entrenador.editar', $entrenador->id) }}" class="edit-button">Editar</a></td>
+                        <td class="actions-cell"><a href="#" onclick="eliminar({{ $entrenador->id }})" class="edit-button">Eliminar</a></td>
+                    </tr>
+                    @endforeach
+                    
+                    
+                    
+                </tbody>
+            </table>
+        </div>
     </div>
-  </div>
   
 </div>
 
@@ -282,6 +196,22 @@
 @section('js')
 
 <script>
+     function eliminar(id) {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¡No podrás revertir esto!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#4fe37d',
+            cancelButtonColor: '#80828f',
+            confirmButtonText: 'Sí, eliminarlo'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Si el usuario confirma la eliminación, redirigimos a la ruta de eliminar
+                window.location.href = "{{ route('entrenador.eliminar', ':id') }}".replace(':id', id);
+            }
+        });
+    }
     new DataTable('#example', {
         order: [[3, 'desc']],
         "lengthMenu":[[5,10,50,-1],[5,10,50,"All"]],

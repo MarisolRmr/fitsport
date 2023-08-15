@@ -26,7 +26,7 @@ class NoticiasController extends Controller
 
         // Obtener las 3 noticias más cercanas a la fecha actual
         $noticiasCercanas = $noticiasOrdenadas->take(3);
-        return view('atleta.noticias.mostrar')->with(['noticias' => $noticias, 'noticiasCercanas' => $noticiasCercanas]);
+        return view('user.noticias.mostrar')->with(['noticias' => $noticias, 'noticiasCercanas' => $noticiasCercanas]);
     }
     public function create(){
         return view('admin.noticias.crear');
@@ -123,7 +123,6 @@ class NoticiasController extends Controller
         return view('admin.noticias.editar',["noticia"=>$noticia]);
     }
     
-
     //Función para actualizar los datos del noticia en la base de datos
     public function update(Request $request, $id)
     {
@@ -182,7 +181,7 @@ class NoticiasController extends Controller
             $imagenDecodificada = base64_decode($imagenCodificada);
         
             // Asumir que la extensión es jpg si no podemos determinarla
-            $extensionOriginal = 'jpg';
+            $extensionOriginal = 'png';
         
             // Crear un nombre único para la imagen con la extensión original
             $nombreImagenUnico = Str::uuid() . "." . $extensionOriginal;
@@ -245,6 +244,11 @@ class NoticiasController extends Controller
         return redirect()->route('noticias.index')->with('eliminada', 'Noticia eliminada correctamente');
     }
 
-
+    public function buscar(Request $request) {
+        $query = $request->input('query');
+        $noticias = Noticia::where('nombre', 'LIKE', '%' . $query . '%')->get();
+        
+        return response()->json($noticias);
+    }
 
 }

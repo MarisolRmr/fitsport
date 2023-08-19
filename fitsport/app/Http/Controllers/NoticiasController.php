@@ -21,7 +21,7 @@ class NoticiasController extends Controller
     }
     public function index_atleta(){
         $noticias = Noticia::all();
-        // Ordenar las noticias por fecha (asumiendo que la columna de fecha se llama "fecha")
+        // Ordenar las noticias por fecha
         $noticiasOrdenadas = $noticias->sortBy('fecha');
 
         // Obtener las 3 noticias más cercanas a la fecha actual
@@ -30,6 +30,12 @@ class NoticiasController extends Controller
     }
     public function create(){
         return view('admin.noticias.crear');
+    }
+    //vista de detalles de noticia
+    public function detalles_index($id){
+        // Busca la noticia por ID 
+        $noticia = Noticia::find($id);
+        return view('user.noticias.detalles')->with(['noticia' => $noticia ]);
     }
 
     public function store(Request $request)
@@ -80,8 +86,8 @@ class NoticiasController extends Controller
             // Decodificar la imagen base64 y crear un objeto de imagen desde los datos decodificados
             $imagenDecodificada = base64_decode($imagenCodificada);
         
-            // Asumir que la extensión es jpg si no podemos determinarla
-            $extensionOriginal = 'jpg';
+            // Asumir que la extensión es png si no podemos determinarla
+            $extensionOriginal = 'png';
         
             // Crear un nombre único para la imagen con la extensión original
             $nombreImagenUnico = Str::uuid() . "." . $extensionOriginal;
@@ -180,7 +186,7 @@ class NoticiasController extends Controller
             // Decodificar la imagen base64 y crear un objeto de imagen desde los datos decodificados
             $imagenDecodificada = base64_decode($imagenCodificada);
         
-            // Asumir que la extensión es jpg si no podemos determinarla
+            // Asumir que la extensión es png si no podemos determinarla
             $extensionOriginal = 'png';
         
             // Crear un nombre único para la imagen con la extensión original

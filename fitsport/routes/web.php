@@ -109,3 +109,4 @@ Route::post('/updatePerfil/{id}', [PerfilController::class, 'update'])->name('pe
 
 Route::get('/Noticias-atleta', [NoticiasController::class,'index_atleta'])->name('noticias.index_atleta');
 Route::get('/noticias/buscando', [NoticiasController::class, 'buscar'])->name('ejercitate.buscar'); 
+Route::get('/Noticias/{id}/detalle', [NoticiasController::class, 'detalles_index'])->name('noticias.detalles');

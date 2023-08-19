@@ -185,7 +185,7 @@
         @foreach($noticias as $noticia)
             <tr>
                 <td>{{ $noticia->id }}</td>
-                <td>{{ $noticia->nombre }}</td>
+                <td class="actions-cell"><a href="{{route('noticias.detalles',$noticia->id)}}" class="edit-button">{{$noticia->nombre}}</a></td>
                 <td>
                     @if($noticia->imagen)
                     <img src="{{ asset('noticias_img/' . $noticia->imagen) }}" alt="Imagen de la marca" style="height: 80px; border-radius:17px">

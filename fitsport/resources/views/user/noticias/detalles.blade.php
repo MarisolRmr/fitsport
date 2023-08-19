@@ -104,7 +104,7 @@
             @auth
                 @if(auth()->user()->tipo_id === 1)
                 <div class="flex text-end justify-end">
-                    <a href="{{route('noticia.index')}}" type="submit" class="mt-4 px-4 py-2 bg-white text-black font-semibold rounded-2xl hover:bg-blue-600">Regresar</a>   
+                    <a href="{{route('noticias.index')}}" type="submit" class="mt-4 px-4 py-2 bg-white text-black font-semibold rounded-2xl hover:bg-blue-600">Regresar</a>   
                 </div>
                 @endif
             @endauth

@@ -138,5 +138,11 @@ class EjerciciosController extends Controller
         return response()->json($ejercicios);
     }
     
+    public function viewE($id_ejercicio){
+        //Se busca el ejercicio mediante el ID
+        $ejercicio= Ejercicio::find($id_ejercicio);
+        //Se retorna a la vista
+        return view('user.ejercitate.verEjercicio',["ejercicio"=>$ejercicio]);
+    }
 
 }

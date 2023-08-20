@@ -24,14 +24,14 @@ DROP TABLE IF EXISTS `ejercicios`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ejercicios` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `descripcion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `explicacion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `imagen` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nombre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `descripcion` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `explicacion` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `imagen` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `ejercicios` (
 
 LOCK TABLES `ejercicios` WRITE;
 /*!40000 ALTER TABLE `ejercicios` DISABLE KEYS */;
-INSERT INTO `ejercicios` VALUES (6,'ql','qk','qk','00c45e2b-9382-4556-ae11-fede6ce50e92.jpg','2023-08-02 18:47:55','2023-08-02 19:11:38');
+INSERT INTO `ejercicios` VALUES (6,'ql','qk','qk','00c45e2b-9382-4556-ae11-fede6ce50e92.jpg','2023-08-02 18:47:55','2023-08-20 04:45:08');
 /*!40000 ALTER TABLE `ejercicios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -77,11 +77,11 @@ DROP TABLE IF EXISTS `failed_jobs`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `failed_jobs` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uuid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
@@ -106,17 +106,18 @@ DROP TABLE IF EXISTS `gimnasios`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `gimnasios` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `telefono` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `horario` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `descripcion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `latitud` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `longitud` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `fotografia` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nombre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `telefono` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `horario` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `descripcion` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `latitud` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `longitud` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fotografia` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `horarioCierre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -125,7 +126,7 @@ CREATE TABLE `gimnasios` (
 
 LOCK TABLES `gimnasios` WRITE;
 /*!40000 ALTER TABLE `gimnasios` DISABLE KEYS */;
-INSERT INTO `gimnasios` VALUES (1,'gym1','8341459893','22:20','si',NULL,NULL,NULL,'2023-07-14 16:16:17','2023-07-14 16:16:17'),(2,'gym2','8344280421','10:41','si',NULL,NULL,NULL,'2023-07-14 16:39:39','2023-07-14 16:39:39');
+INSERT INTO `gimnasios` VALUES (3,'fvd','456877','06:42','qwertyiu','23.7505821','-99.1108047','4f5a8616-a1ec-46d8-85f1-e9acecc6a025.jpg','2023-08-12 08:42:46','2023-08-20 03:46:07','05:42');
 /*!40000 ALTER TABLE `gimnasios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -138,10 +139,10 @@ DROP TABLE IF EXISTS `migrations`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `migrations` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -150,7 +151,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (1,'2023_07_12_145524_create_tipo_usuarios_table',1),(6,'2014_10_12_000000_create_users_table',2),(7,'2014_10_12_100000_create_password_reset_tokens_table',2),(8,'2019_08_19_000000_create_failed_jobs_table',2),(9,'2019_12_14_000001_create_personal_access_tokens_table',2),(11,'2023_07_14_070008_create_noticias_table',3),(12,'2023_07_14_160306_create_gimnasios_table',4),(13,'2023_07_14_162048_create_entrenadores_table',5),(14,'2023_07_14_162104_create_ejercicios_table',5),(17,'2023_08_06_214518_add_hora_to_users_table',6),(18,'2023_08_06_223707_make_email_nullable_in_users_table',7);
+INSERT INTO `migrations` VALUES (1,'2023_07_12_145524_create_tipo_usuarios_table',1),(6,'2014_10_12_000000_create_users_table',2),(7,'2014_10_12_100000_create_password_reset_tokens_table',2),(8,'2019_08_19_000000_create_failed_jobs_table',2),(9,'2019_12_14_000001_create_personal_access_tokens_table',2),(11,'2023_07_14_070008_create_noticias_table',3),(12,'2023_07_14_160306_create_gimnasios_table',4),(13,'2023_07_14_162048_create_entrenadores_table',5),(14,'2023_07_14_162104_create_ejercicios_table',5),(17,'2023_08_06_214518_add_hora_to_users_table',6),(18,'2023_08_06_223707_make_email_nullable_in_users_table',7),(19,'2023_08_03_235746_add_hora_cierre_table_gym',8),(20,'2023_08_12_045122_add_gimnasio_id_to_table_users',8);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -163,11 +164,11 @@ DROP TABLE IF EXISTS `noticias`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `noticias` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `descripcion` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `texto` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nombre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `descripcion` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `texto` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `fecha` datetime NOT NULL,
-  `imagen` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `imagen` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -192,8 +193,8 @@ DROP TABLE IF EXISTS `password_reset_tokens`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `password_reset_tokens` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -217,11 +218,11 @@ DROP TABLE IF EXISTS `personal_access_tokens`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `personal_access_tokens` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `tokenable_id` bigint unsigned NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `expires_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -250,7 +251,7 @@ DROP TABLE IF EXISTS `tipo_usuarios`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tipo_usuarios` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nombre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -276,34 +277,37 @@ DROP TABLE IF EXISTS `users`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `apellido` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `correo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nombre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `apellido` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `correo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `fecha_nac` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `telefono` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `genero` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `usuario` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `fotografia` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `latitud` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `longitud` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `horario` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `direccion` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cedula` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fecha_nac` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `telefono` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `genero` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `usuario` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fotografia` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `latitud` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `longitud` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `horario` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `direccion` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cedula` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tipo_id` bigint unsigned NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `horaEntrada` time DEFAULT NULL,
   `horaSalida` time DEFAULT NULL,
+  `gimnasio_id` bigint unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_correo_unique` (`correo`),
   UNIQUE KEY `users_usuario_unique` (`usuario`),
   UNIQUE KEY `users_cedula_unique` (`cedula`),
   KEY `users_tipo_id_foreign` (`tipo_id`),
+  KEY `users_gimnasio_id_foreign` (`gimnasio_id`),
+  CONSTRAINT `users_gimnasio_id_foreign` FOREIGN KEY (`gimnasio_id`) REFERENCES `gimnasios` (`id`) ON DELETE CASCADE,
   CONSTRAINT `users_tipo_id_foreign` FOREIGN KEY (`tipo_id`) REFERENCES `tipo_usuarios` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -312,7 +316,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (5,'Nubia Esmeralda','Cantu Sanchez','cantu.nubia.1am@gmail.com',NULL,'2002-06-04 00:00:00','8344280422',NULL,'nubia','$2y$10$iFvD8o5lmwj/cMzoQnfRtuenwZzwTfwSeMn53MioZSZwh735LOI/O','b2bbd061-5735-4f78-89ff-aecae4bcf5fe.jpg',NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL),(6,'Sonia Lizbeth','Muñoz Barrirntos','2030114@upv.edu.mx',NULL,'2023-07-02 00:00:00','8341541335',NULL,'sonia','$2y$10$sHi/IqDWBUCWkwe4CzBqW.rbyd8b.FoTA3nhnyn60MEDcaG.FZhvC',NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL),(13,'xi','dedo','si@n.mii',NULL,'2023-06-08 00:00:00','834145983',NULL,'hola','123456789','3470fe72-4e72-495d-a889-bffdd96809a3.jpg',NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL),(14,'j','h','cantu.nubia.1am@gmail.cam',NULL,'2023-08-09 00:00:00','567890098765',NULL,'sisi','$2y$10$WHU7Ucaywn2FM1qU2dPkC.TD2rGNYGhqtUT7STjY/I3RtEmcy3YtC','f5b19863-92b6-4ee9-82c3-eccdf127a1a5.jpg',NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL),(15,'NUbia esm','Cantú','si@si.cpm',NULL,'2023-08-04 00:00:00','6767677660',NULL,'nubiaatleta','$2y$10$JLZL2QtzitI3rV09WEUtIOjTIm9CQnB32c73dlAxvejQxAGa4KM7i','9232ed1f-2a5f-4785-8d45-6e0c3fca3f25.png',NULL,NULL,NULL,NULL,NULL,2,NULL,NULL,NULL,NULL,NULL),(17,'q','q',NULL,NULL,NULL,'1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'6',4,NULL,NULL,NULL,'17:11:00','19:08:00'),(19,'w','w',NULL,NULL,NULL,'5',NULL,NULL,NULL,'0f971d62-c8af-4325-bd15-e80bb96a83e0.png','23.7273088','-99.1232',NULL,NULL,'7',4,NULL,'2023-08-06 23:18:57','2023-08-06 23:18:57','19:18:00','20:18:00');
+INSERT INTO `users` VALUES (5,'Nubia Esmeralda','Cantu Sanchez','cantu.nubia.1am@gmail.com',NULL,'2002-06-04 00:00:00','8344280422',NULL,'nubia','$2y$10$iFvD8o5lmwj/cMzoQnfRtuenwZzwTfwSeMn53MioZSZwh735LOI/O','b2bbd061-5735-4f78-89ff-aecae4bcf5fe.jpg',NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,NULL),(6,'Sonia Lizbeth','Muñoz Barrirntos','2030114@upv.edu.mx',NULL,'2023-07-02 00:00:00','8341541335',NULL,'sonia','$2y$10$sHi/IqDWBUCWkwe4CzBqW.rbyd8b.FoTA3nhnyn60MEDcaG.FZhvC',NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,NULL),(13,'xi','dedo','si@n.mii',NULL,'2023-06-08 00:00:00','834145983',NULL,'hola','123456789','3470fe72-4e72-495d-a889-bffdd96809a3.jpg',NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,NULL),(14,'j','h','cantu.nubia.1am@gmail.cam',NULL,'2023-08-09 00:00:00','567890098765',NULL,'sisi','$2y$10$WHU7Ucaywn2FM1qU2dPkC.TD2rGNYGhqtUT7STjY/I3RtEmcy3YtC','f5b19863-92b6-4ee9-82c3-eccdf127a1a5.jpg',NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,NULL),(15,'NUbia esm','Cantú','si@si.cpm',NULL,'2023-08-04 00:00:00','6767677660',NULL,'nubiaatleta','$2y$10$JLZL2QtzitI3rV09WEUtIOjTIm9CQnB32c73dlAxvejQxAGa4KM7i','9232ed1f-2a5f-4785-8d45-6e0c3fca3f25.png',NULL,NULL,NULL,NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL),(19,'w','w',NULL,NULL,NULL,'5',NULL,NULL,NULL,'26663823-ded6-420c-8ca3-4079a43769cf.png','23.7273088','-99.1232',NULL,NULL,'7',4,NULL,'2023-08-06 23:18:57','2023-08-20 04:34:39','19:18:00','20:18:00',NULL),(20,'Vanessa','Atleta','vanessaAtleta@gmail.com',NULL,'2002-11-17','8342211814',NULL,'vaneAtleta','$2y$10$DdCstooowYZ6ydwXFfEfR.lzidH4db1HEpgCmc7xWvuRFhiZIE9fm','a53870fc-0214-4d95-874e-62a5aba9a06c.jpg',NULL,NULL,NULL,NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL),(21,'Vanessa','Garcia','vanessa-17@live.com',NULL,'2002-11-17','8342211814',NULL,'vanessa','$2y$10$jIMBQo17YjWWGWrwczqlae3H.E76E40CFtHai44K71Gruf5IjHcrO','06d347af-8e55-4809-99ca-7915f37a44de.jpg',NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,NULL),(23,'Vanessa','Garcia',NULL,NULL,NULL,'8342211814',NULL,NULL,NULL,'b9db829c-d140-4e90-8274-79c47df7c4b2.png','23.7469696','-99.1100928',NULL,NULL,'2345',4,NULL,'2023-08-20 04:33:24','2023-08-20 04:34:32','12:33:00','13:33:00',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -329,4 +333,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-08-07  9:10:59
+-- Dump completed on 2023-08-19 22:55:13

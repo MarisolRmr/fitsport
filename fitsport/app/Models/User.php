@@ -27,7 +27,7 @@ class User extends Authenticatable
         'fecha_nac',
         'telefono',
         'fotografia',
-        'tipo_id'
+        'tipo_id',
     ];
     public $timestamps = false;
     /**
@@ -52,5 +52,10 @@ class User extends Authenticatable
     {
         return $this->password;
     }
+
+    public function gimnasio() {
+        return $this->belongsTo('App\Models\Gimnasios', 'gimnasios_id');
+    }
+    
 
 }

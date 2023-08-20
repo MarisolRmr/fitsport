@@ -32,6 +32,14 @@ class NutriologoController extends Controller
     //Método para guardar un nuevo gimnasio
     public function store(Request $request)
     {
+        // Guardar la imagen temporalmente en el sistema de archivos si la validación falla
+        if ($request->hasFile('imagen') && $request->file('imagen')->isValid()) {
+            $imagenTemporal = file_get_contents($request->file('imagen')->getRealPath());
+            $request->session()->flash('cachedImage', base64_encode($imagenTemporal));
+        }elseif ($request->has('cachedImage')) {
+            // Si la solicitud incluye un campo "cachedImage", reutiliza el valor existente
+            $request->session()->flash('cachedImage', $request->cachedImage);
+        }
         //Validamos los datos del formulario
         $request->validate([
             'nombre' => 'required',
@@ -40,7 +48,14 @@ class NutriologoController extends Controller
             'hora' => 'required',
             'horaCierre' => 'required',
             'cedula' => 'required|max:15|unique:users',
-            'imagen' => 'required',
+            'imagen' => [
+                function ($attribute, $value, $fail) use ($request) {
+                    // Verificar si no hay una imagen en la sesión flash ('cachedImage')
+                    if (!$request->session()->has('cachedImage') && !$request->hasFile('imagen')) {
+                        $fail('La imagen es obligatoria si no hay imagen en la sesión.');
+                    }
+                },
+            ],
             'longitud' => 'required',
             'latitud' => 'required',
         ]);
@@ -55,7 +70,32 @@ class NutriologoController extends Controller
             $imagenPath = public_path('ImgNutriologo') . '/' . $nombreImagenUnico;
             //Guardamos la imagen en el servidor
             $imagenServidor->save($imagenPath);
+        }elseif (session()->has('cachedImage')) {
+            // Obtener la imagen codificada en base64 de la sesión flash
+            $imagenCodificada = session('cachedImage');
+        
+            // Decodificar la imagen base64 y crear un objeto de imagen desde los datos decodificados
+            $imagenDecodificada = base64_decode($imagenCodificada);
+        
+            // Asumir que la extensión es jpg si no podemos determinarla
+            $extensionOriginal = 'jpg';
+        
+            // Crear un nombre único para la imagen con la extensión original
+            $nombreImagenUnico = Str::uuid() . "." . $extensionOriginal;
+        
+            // Obtener la ubicación completa para guardar la imagen en el disco
+            $imagenPath = public_path('ImgNutriologo') . '/' . $nombreImagenUnico;
+        
+            // Crear una instancia de Image a partir de los datos decodificados
+            $imagenServidor = Image::make($imagenDecodificada);
+        
+            // Redimensionar la imagen (ajustar esto según tus necesidades)
+            $imagenServidor->fit(1000, 1000);
+        
+            // Guardar la imagen redimensionada en el disco
+            $imagenServidor->save($imagenPath);
         }
+
 
         //Creamos el gimnasio
         Nutriologo::create([
@@ -70,6 +110,8 @@ class NutriologoController extends Controller
             'fotografia' =>$nombreImagenUnico,
             'tipo_id' => 4,
         ]);
+        // Eliminar la imagen de la sesión flash después de haberla guardado
+        $request->session()->forget('cachedImage');
 
         //Redireccionamos al index
         return redirect()->route('admNutriologo.index')->with('success', 'Nutriologo registrado correctamente');
@@ -85,13 +127,31 @@ class NutriologoController extends Controller
     //Método para actualizar un gimnasio
     public function update(Request $request)
     {
+        // Guardar la imagen temporalmente en el sistema de archivos si la validación falla
+        if ($request->hasFile('imagen') && $request->file('imagen')->isValid()) {
+            $imagenTemporal = file_get_contents($request->file('imagen')->getRealPath());
+            $request->session()->flash('cachedImage', base64_encode($imagenTemporal));
+        }elseif ($request->has('cachedImage')) {
+            // Si la solicitud incluye un campo "cachedImage", reutiliza el valor existente
+            $request->session()->flash('cachedImage', $request->cachedImage);
+        }
+
         //Validamos los datos del formulario
         $request->validate([
             'nombre' => 'required',
             'apellido' => 'required',
             'telefono' => 'required|max:10',
+            'cedula' => 'required|max:15|unique:users,cedula,' . $request->id,
             'hora' => 'required',
             'horaCierre' => 'required',
+            'imagen' => [
+                function ($attribute, $value, $fail) use ($request) {
+                    // Verificar si no hay una imagen en la sesión flash ('cachedImage')
+                    if (!$request->session()->has('cachedImage') && !$request->hasFile('imagen')) {
+                        $fail('La imagen es obligatoria si no hay imagen en la sesión.');
+                    }
+                },
+            ],
         ]);
 
         //Busca el gimnasio y lo guarda en gym
@@ -106,6 +166,30 @@ class NutriologoController extends Controller
             $imagenServidor->fit(1000, 1000); // Redimensionamos la imagen
             $imagenPath = public_path('ImgNutriologo') . '/' . $nombreImagenUnico;
             //Guardamos la imagen en el servidor
+            $imagenServidor->save($imagenPath);
+        }elseif (session()->has('cachedImage')) {
+            // Obtener la imagen codificada en base64 de la sesión flash
+            $imagenCodificada = session('cachedImage');
+        
+            // Decodificar la imagen base64 y crear un objeto de imagen desde los datos decodificados
+            $imagenDecodificada = base64_decode($imagenCodificada);
+        
+            // Asumir que la extensión es jpg si no podemos determinarla
+            $extensionOriginal = 'jpg';
+        
+            // Crear un nombre único para la imagen con la extensión original
+            $nombreImagenUnico = Str::uuid() . "." . $extensionOriginal;
+        
+            // Obtener la ubicación completa para guardar la imagen en el disco
+            $imagenPath = public_path('ImgGymBoxes') . '/' . $nombreImagenUnico;
+        
+            // Crear una instancia de Image a partir de los datos decodificados
+            $imagenServidor = Image::make($imagenDecodificada);
+        
+            // Redimensionar la imagen (ajustar esto según tus necesidades)
+            $imagenServidor->fit(1000, 1000);
+        
+            // Guardar la imagen redimensionada en el disco
             $imagenServidor->save($imagenPath);
         }
 
@@ -124,6 +208,9 @@ class NutriologoController extends Controller
             'fotografia' =>$nombreImagenUnico,
             'tipo_id' => 4,
         ]);
+
+        // Eliminar la imagen de la sesión flash después de haberla guardado
+        $request->session()->forget('cachedImage');
 
         //Redireccionamos al index
         return redirect()->route('admNutriologo.index')->with('success', 'Nutiologo actualizado correctamente');

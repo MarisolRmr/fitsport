@@ -57,6 +57,7 @@
         display: none;
     }
     #map {
+        position: relative;
         height: 400px;
         border: 1px solid;
         border-radius: 20px;
@@ -64,23 +65,28 @@
     }
     #direccion-container {
         position: absolute;
-        top: 470px;  
-        left: 650px;
-        z-index: 1;
+        left: 550px;
+        transform: translateX(-50%);
+        z-index: 2000 !important;
     }
 
     #direccion {
-        position: sticky;
+        top: 10px;    
+        left: 10px;  
+        z-index: 1000; 
         color: black;
         padding: 8px;
         border-radius: 5px;
         background-color: #fff;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        width: calc(200px);
+        width: 400px;
     }
     #busqueda {
-        position: sticky;
-        top: 0;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important; /* Ajusta según tus necesidades */
+        right: 0 !important; /* Esto asegurará que el div de búsqueda tenga el ancho completo */
+        z-index: 999 !important;
     }
 
 </style>
@@ -174,19 +180,35 @@
                 </div>
 
                 <!-- Campo Imagen -->
-                <div class=""  style="width:20% !important">
-                    <div class="image-input-container">
-                        <label for="imagen">
-                            <i class="fas fa-camera" style="color: lightgray; font-size:40px"></i>
-                            <span class="selected-image"></span>
-                            <input type="file" class="@error('imagen') border-red-500 @enderror" id="imagen" name="imagen" value="{{old('imagen')}}" accept="image/*" onchange="handleImageUpload(event)" />
-                            @error('imagen')
-                                <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
-                                    {{$message}}
-                                </p>    
-                            @enderror
-                        </label>
-                    </div> 
+                <div class="ml-2"  style="width:20% !important">
+                    @if(session()->has('cachedImage'))
+                        <div class="image-input-container">
+                            <label for="imagen">
+                                <i class="fas fa-camera" style="color: lightgray; font-size:40px"></i>
+                                <span class="selected-image" style="background-image: url('data:image;base64,{{ session('cachedImage') }}');"></span>
+                                <input type="hidden" name="cachedImage" value="{{ session('cachedImage') }}" />
+                                <input type="file" class="@error('imagen') border-red-500 @enderror" id="imagen" name="imagen" value="{{old('imagen')}}" accept="image/*" onchange="handleImageUpload(event)" />
+                                @error('imagen')
+                                    <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                                        {{$message}}
+                                    </p>    
+                                @enderror
+                            </label>
+                        </div> 
+                    @else
+                        <div class="image-input-container">
+                            <label for="imagen">
+                                <i class="fas fa-camera" style="color: lightgray; font-size:40px"></i>
+                                <span class="selected-image"></span>
+                                <input type="file" class="@error('imagen') border-red-500 @enderror" id="imagen" name="imagen" value="{{old('imagen')}}" accept="image/*" onchange="handleImageUpload(event)" />
+                                @error('imagen')
+                                    <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                                        {{$message}}
+                                    </p>    
+                                @enderror
+                            </label>
+                        </div> 
+                    @endif
                 </div>
             </div>
 
@@ -203,7 +225,11 @@
             </div>
 
             <!-- Código para el mapa -->
-            <div id="map" style="height: 400px;">
+            <div style="position: relative;">
+                <div id="direccion-container">
+                    <input style="box-shadow: 0 4px 8px rgba(165, 164, 163 );" type="text" id="direccion" placeholder="Buscar dirección">
+                </div>
+                <div id="map" style="height: 400px;"></div>
             </div>
             <input type="hidden" id="latitud" name="latitud">
             <input type="hidden" id="longitud" name="longitud">
@@ -214,11 +240,6 @@
                 <a href="{{route('admNutriologo.index')}}" type="submit" class="px-4 py-2 bg-white text-black font-semibold rounded-2xl hover:bg-blue-600" style="width: 150px; text-align: center;">Cancelar</a>
             </div>
         </form>
-        <!-- Campo de búsqueda de dirección -->
-        <div id="direccion-container">
-            <input type="text" id="direccion" style="color:black"  class="w-full mt-6 p-2 rounded"  placeholder="Buscar dirección">
-        </div>
-
     </div>
 </div>
 
@@ -232,19 +253,13 @@
         const imageContainer = input.parentElement;
         const selectedImage = imageContainer.querySelector('.selected-image');
 
-        // Obtener el archivo seleccionado
         const file = input.files[0];
-
-        // Crear un objeto FileReader para leer el contenido del archivo
         const reader = new FileReader();
 
-        // Cuando se termine de leer el archivo, se ejecutará esta función
         reader.onload = function (e) {
-            // Establecer el fondo del elemento con la imagen seleccionada
-            selectedImage.style.backgroundImage = `url(${e.target.result})`;
+        selectedImage.style.backgroundImage = `url(${e.target.result})`;
         };
 
-        // Leer el contenido del archivo como una URL de datos
         reader.readAsDataURL(file);
     }
 </script>

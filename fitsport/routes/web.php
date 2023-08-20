@@ -61,7 +61,9 @@ Route::get('/GymAndBoxes/delete/{id}', [GimnasiosController::class, 'delete'])->
 Route::get('/GymAndBoxes/edit/{id}', [GimnasiosController::class, 'edit'])->name('addgymBoxes.editar');
 Route::post('/updateGymAndBoxes', [GimnasiosController::class, 'update'])->name('addgymBoxes.update');
 
-//Ruta para la vista de listado entrenador
+////////////////////////////////////////////////////////////////////////////////////////////
+//                                  RUTAS PARA EMTRENADOR ADMIN
+////////////////////////////////////////////////////////////////////////////////////////////
 Route::get('/entrenador', [EntrenadorAdController::class,'index'])->name('entrenador.index');
 //Ruta para la vista de agregar entrenador
 Route::get('/entrenador/create', [EntrenadorAdController::class,'create'])->name('entrenador.create');
@@ -69,6 +71,10 @@ Route::get('/entrenador/create', [EntrenadorAdController::class,'create'])->name
 Route::get('/entrenador/create', [EntrenadorAdController::class,'create'])->name('entrenador.create');
 //Ruta para visualizar el entrenador
 Route::get('/entrenador/view/{id}', [EntrenadorAdController::class, 'view'])->name('entrenador.verEntrenador');
+Route::post('/entrenador/create', [EntrenadorAdController::class,'store'])->name('entrenador.store');
+Route::get('/entreador/edit/{id}', [EntrenadorAdController::class, 'edit'])->name('entrenador.editar');
+Route::post('/updateEntrenador', [EntrenadorAdController::class, 'update'])->name('entrenador.update');
+Route::get('/entrenador/delete/{id}', [EntrenadorAdController::class, 'delete'])->name('entrenador.eliminar');
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 //                                  RUTAS PARA EJERCICITATE ADMIN
@@ -120,3 +126,7 @@ Route::post('/updatePerfil/{id}', [PerfilController::class, 'update'])->name('pe
 Route::get('/Noticias-atleta', [NoticiasController::class,'index_atleta'])->name('noticias.index_atleta');
 Route::get('/noticias/buscando', [NoticiasController::class, 'buscar'])->name('ejercitate.buscar'); 
 Route::get('/Noticias/{id}/detalle', [NoticiasController::class, 'detalles_index'])->name('noticias.detalles');
+
+Route::get('/GymAndBoxes-atleta',[GimnasiosController::class,'index_atleta'])->name('gymBoxes.index_atleta');
+Route::get('/gimnasios/buscando', [GimnasiosController::class, 'buscar'])->name('gymBoxes.buscar'); 
+Route::get('/GymAndBoxes/{id}/detalle', [GimnasiosController::class, 'detalles_index'])->name('gymBoxes.detalles');

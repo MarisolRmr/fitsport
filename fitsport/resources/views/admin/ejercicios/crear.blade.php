@@ -81,18 +81,34 @@
                         @enderror
                     </div>
                     <div class="w-1/2 ml-2">
-                        <div class="image-input-container">
-                            <label for="imagen">
-                            <i class="fas fa-camera" style="color: lightgray; font-size: 40px;"></i>
-                            <span class="selected-image"></span>
-                            <input type="file" class="@error('imagen') border-red-500 @enderror" id="imagen" name="imagen" value="{{old('imagen')}}" accept="image/*" onchange="handleImageUpload(event)" />
-                            @error('imagen')
-                                <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2">
-                                {{$message}}
-                                </p>
-                            @enderror
-                            </label>
-                        </div>
+                        @if(session()->has('cachedImage'))
+                            <div class="image-input-container">
+                                <label for="imagen">
+                                    <i class="fas fa-camera" style="color: lightgray; font-size:40px"></i>
+                                    <span class="selected-image" style="background-image: url('data:image;base64,{{ session('cachedImage') }}');"></span>
+                                    <input type="hidden" name="cachedImage" value="{{ session('cachedImage') }}" />
+                                    <input type="file" class="@error('imagen') border-red-500 @enderror" id="imagen" name="imagen" value="{{old('imagen')}}" accept="image/*" onchange="handleImageUpload(event)" />
+                                    @error('imagen')
+                                        <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                                            {{$message}}
+                                        </p>    
+                                    @enderror
+                                </label>
+                            </div> 
+                        @else
+                            <div class="image-input-container">
+                                <label for="imagen">
+                                    <i class="fas fa-camera" style="color: lightgray; font-size:40px"></i>
+                                    <span class="selected-image"></span>
+                                    <input type="file" class="@error('imagen') border-red-500 @enderror" id="imagen" name="imagen" value="{{old('imagen')}}" accept="image/*" onchange="handleImageUpload(event)" />
+                                    @error('imagen')
+                                        <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                                            {{$message}}
+                                        </p>    
+                                    @enderror
+                                </label>
+                            </div> 
+                        @endif
                     </div> 
                 </div>
                 <div class=" mb-4">

@@ -206,7 +206,7 @@
     function eliminar(id) {
         Swal.fire({
             title: '¿Estás seguro?',
-            text: "¡No podrás revertir esto!",
+            text: "¿Estás seguro de que quieres eliminar este gimnasio? Al hacerlo, también eliminarás todos los entrenadores asociados.",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#4fe37d',

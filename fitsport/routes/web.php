@@ -61,12 +61,17 @@ Route::get('/GymAndBoxes/delete/{id}', [GimnasiosController::class, 'delete'])->
 Route::get('/GymAndBoxes/edit/{id}', [GimnasiosController::class, 'edit'])->name('addgymBoxes.editar');
 Route::post('/updateGymAndBoxes', [GimnasiosController::class, 'update'])->name('addgymBoxes.update');
 
-//Ruta para la vista de listado entrenador
+////////////////////////////////////////////////////////////////////////////////////////////
+//                                  RUTAS PARA EMTRENADOR ADMIN
+////////////////////////////////////////////////////////////////////////////////////////////
 Route::get('/entrenador', [EntrenadorAdController::class,'index'])->name('entrenador.index');
 //Ruta para la vista de agregar entrenador
 Route::get('/entrenador/create', [EntrenadorAdController::class,'create'])->name('entrenador.create');
 //Ruta para guardar los datos del entrenado
-Route::get('/entrenador/create', [EntrenadorAdController::class,'create'])->name('entrenador.create');
+Route::post('/entrenador/create', [EntrenadorAdController::class,'store'])->name('entrenador.store');
+Route::get('/entreador/edit/{id}', [EntrenadorAdController::class, 'edit'])->name('entrenador.editar');
+Route::post('/updateEntrenador', [EntrenadorAdController::class, 'update'])->name('entrenador.update');
+Route::get('/entrenador/delete/{id}', [EntrenadorAdController::class, 'delete'])->name('entrenador.eliminar');
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 //                                  RUTAS PARA EJERCICITATE ADMIN

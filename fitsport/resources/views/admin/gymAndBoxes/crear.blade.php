@@ -26,14 +26,9 @@
     .image-input-container {
         display: inline-block;
         position: relative;
-        margin-left: 38%;
+        margin-left: 10%;
     }
 
-    .image-input-container {
-    display: inline-block;
-    position: relative;
-    margin-left: 38%;
-    }
     .image-input-container label {
         display: flex;
         justify-content: center;
@@ -62,6 +57,7 @@
         display: none;
     }
     #map {
+        position: relative;
         height: 400px;
         border: 1px solid;
         border-radius: 20px;
@@ -69,23 +65,28 @@
     }
     #direccion-container {
         position: absolute;
-        top: 510px;  
-        left: 650px;
-        z-index: 1;
+        left: 550px;
+        transform: translateX(-50%);
+        z-index: 2000 !important;
     }
 
     #direccion {
-        position: sticky;
+        top: 10px;    
+        left: 10px;  
+        z-index: 1000; 
         color: black;
         padding: 8px;
         border-radius: 5px;
         background-color: #fff;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        width: calc(200px);
+        width: 400px;
     }
     #busqueda {
-        position: sticky;
-        top: 0;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important; /* Ajusta según tus necesidades */
+        right: 0 !important; /* Esto asegurará que el div de búsqueda tenga el ancho completo */
+        z-index: 999 !important;
     }
 
 </style>
@@ -120,80 +121,103 @@
 
             <!-- Información del Gym And Boxes -->
             <div class="flex">
-                <!-- Campo Nombre -->
-                <div class="w-1/2 mr-2 mb-0">
-                    <label for="nombre" class="text-lg font-bold">Nombre:</label>
-                    <input style="color:black" name="nombre" value="{{old('nombre')}}" type="text" id="nombre" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error ('nombre') border-red-500 @enderror" placeholder="Ingresa tu nombre">
-                    @error('nombre')
-                        <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
-                            {{$message}}
-                        </p>    
-                    @enderror
-                </div>
-
-                <!-- Campo Teléfono -->
-                <div class="w-1/2 mr-2 mb-0">
-                    <label for="telefono" class="text-lg font-bold">Teléfono:</label>
-                    <input type="number" style="color:black" id="telefono" name="telefono" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error ('telefono') border-red-500 @enderror" value="{{old('telefono')}}" placeholder="Ingresa tu teléfono">
-                    @error('telefono')
-                        <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
-                            {{$message}}
-                        </p>    
-                    @enderror
-                </div>
-
-                <!-- Campo Hora -->
-                <div class="w-1/2 ml-2 mb-0">
-                    <label for="hora" class="text-lg font-bold">Hora de apertura:</label>
-                    <input type="time" name="hora" style="color:black" id="hora" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error('hora') border-red-500 @enderror" value="{{old('hora')}}" placeholder="Ingresa la hora de apertura">
-                    @error('hora')
-                        <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
-                            {{$message}}
-                        </p>    
-                    @enderror
-                </div>
-                <div class="w-1/2 ml-2 mb-0">
-                    <label for="horaCierre" class="text-lg font-bold">Hora de cierre:</label>
-                    <input type="time" name="horaCierre" style="color:black" id="horaCierre" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error('horaCierre') border-red-500 @enderror" value="{{old('horaCierre')}}" placeholder="Ingresa la hora de cierre">
-                    @error('horaCierre')
-                        <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
-                            {{$message}}
-                        </p>    
-                    @enderror
-                </div>
-
-                <!-- Campo Imagen -->
-                <div class="w-1/2 ml-2">
-                    <div class="image-input-container">
-                        <label for="imagen">
-                            <i class="fas fa-camera" style="color: lightgray; font-size:40px"></i>
-                            <span class="selected-image"></span>
-                            <input type="file" class="@error('imagen') border-red-500 @enderror" id="imagen" name="imagen" value="{{old('imagen')}}" accept="image/*" onchange="handleImageUpload(event)" />
-                            @error('imagen')
+                <div class=" flex flex-col mb-2" style="width:80% !important">
+                    <div class="mb-0 flex">
+                        <!-- Campo Nombre -->
+                        <div class="w-1/2 mr-2 mb-2">
+                            <label for="nombre" class="text-lg font-bold">Nombre:</label>
+                            <input style="color:black" name="nombre" value="{{old('nombre')}}" type="text" id="nombre" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error ('nombre') border-red-500 @enderror" placeholder="Ingresa tu nombre">
+                            @error('nombre')
                                 <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                                     {{$message}}
                                 </p>    
                             @enderror
-                        </label>
-                    </div> 
+                        </div>
+
+                        <!-- Campo Apellido -->
+                        <div class="w-1/2 mr-2 mb-0">
+                            <label for="telefono" class="text-lg font-bold">Telefono:</label>
+                            <input style="color:black" name="telefono" value="{{old('telefono')}}" type="number" id="telefono" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error ('telefono') border-red-500 @enderror" placeholder="Ingresa tu telefono">
+                            @error('telefono')
+                                <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                                    {{$message}}
+                                </p>    
+                            @enderror
+                        </div>
+                        <div class="w-1/2 mr-2 mb-0">
+                            <label for="hora" class="text-lg font-bold">Hora de apertura:</label>
+                            <input style="color:black" name="hora" value="{{old('hora')}}" type="time" id="hora" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error ('hora') border-red-500 @enderror" placeholder="Ingresa la hora de apertura">
+                            @error('hora')
+                                <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                                    {{$message}}
+                                </p>    
+                            @enderror
+                        </div>
+                        <div class="w-1/2 mr-2 mb-0">
+                            <label for="horaCierre" class="text-lg font-bold">Hora de cierre:</label>
+                            <input style="color:black" name="horaCierre" value="{{old('horaCierre')}}" type="time" id="horaCierre" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error ('horaCierre') border-red-500 @enderror" placeholder="Ingresa la hora de cierre">
+                            @error('horaCierre')
+                                <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                                    {{$message}}
+                                </p>    
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="mb-0 flex">
+                        <!-- Descripción -->
+                        <div class="flex" >
+                            <div class="w-3/4 mr-2" style="width: 100%;">
+                                <label for="descripcion" class="text-lg font-bold mt-0">Descripción:</label>
+                                <textarea id="descripcion" name="descripcion" style="color:black;width: 265%;" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error('descripcion') border-red-500 @enderror" placeholder="Ingresa una descripción">{{old('descripcion')}}</textarea>
+                                @error('descripcion')
+                                    <p style="background-color: #f56565; color: #fff;width: 265%; margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                                        {{$message}}
+                                    </p>    
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Campo Imagen -->
+                <div class=" ml-2"  style="width:20% !important">
+                    @if(session()->has('cachedImage'))
+                        <div class="image-input-container">
+                            <label for="imagen">
+                                <i class="fas fa-camera" style="color: lightgray; font-size:40px"></i>
+                                <span class="selected-image" style="background-image: url('data:image;base64,{{ session('cachedImage') }}');"></span>
+                                <input type="hidden" name="cachedImage" value="{{ session('cachedImage') }}" />
+                                <input type="file" class="@error('imagen') border-red-500 @enderror" id="imagen" name="imagen" value="{{old('imagen')}}" accept="image/*" onchange="handleImageUpload(event)" />
+                                @error('imagen')
+                                    <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                                        {{$message}}
+                                    </p>    
+                                @enderror
+                            </label>
+                        </div> 
+                    @else
+                        <div class="image-input-container">
+                            <label for="imagen">
+                                <i class="fas fa-camera" style="color: lightgray; font-size:40px"></i>
+                                <span class="selected-image"></span>
+                                <input type="file" class="@error('imagen') border-red-500 @enderror" id="imagen" name="imagen" value="{{old('imagen')}}" accept="image/*" onchange="handleImageUpload(event)" />
+                                @error('imagen')
+                                    <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                                        {{$message}}
+                                    </p>    
+                                @enderror
+                            </label>
+                        </div> 
+                    @endif
+
                 </div>
             </div>
 
-            <!-- Descripción -->
-            <div class="flex" >
-                <div class="w-3/4 mr-2" style="width: 80%;">
-                    <label for="descripcion" class="text-lg font-bold mt-0">Descripción:</label>
-                    <textarea id="descripcion" name="descripcion" style="color:black;" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error('descripcion') border-red-500 @enderror" value="{{old('descripcion')}}" placeholder="Ingresa una descripción"></textarea>
-                    @error('descripcion')
-                        <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
-                            {{$message}}
-                        </p>    
-                    @enderror
+            <div style="position: relative;">
+                <div id="direccion-container">
+                    <input style="box-shadow: 0 4px 8px rgba(165, 164, 163 );" type="text" id="direccion" placeholder="Buscar dirección">
                 </div>
-            </div>
-
-            <!-- Código para el mapa -->
-            <div id="map" style="height: 400px;">
+                <div id="map" style="height: 400px;"></div>
             </div>
             <input type="hidden" id="latitud" name="latitud">
             <input type="hidden" id="longitud" name="longitud">
@@ -204,10 +228,7 @@
                 <a href="{{route('gymBoxes.index')}}" type="submit" class="px-4 py-2 bg-white text-black font-semibold rounded-2xl hover:bg-blue-600" style="width: 150px; text-align: center;">Cancelar</a>
             </div>
         </form>
-        <!-- Campo de búsqueda de dirección -->
-        <div id="direccion-container">
-            <input type="text" id="direccion" style="color:black"  class="w-full mt-1 p-2 rounded"  placeholder="Buscar dirección">
-        </div>
+        
 
     </div>
 </div>
@@ -217,27 +238,22 @@
 @section('js')
 <!-- Función para manejar la carga de imágenes -->
 <script>
-    function handleImageUpload(event) {
+function handleImageUpload(event) {
         const input = event.target;
         const imageContainer = input.parentElement;
         const selectedImage = imageContainer.querySelector('.selected-image');
 
-        // Obtener el archivo seleccionado
         const file = input.files[0];
-
-        // Crear un objeto FileReader para leer el contenido del archivo
         const reader = new FileReader();
 
-        // Cuando se termine de leer el archivo, se ejecutará esta función
         reader.onload = function (e) {
-            // Establecer el fondo del elemento con la imagen seleccionada
-            selectedImage.style.backgroundImage = `url(${e.target.result})`;
+        selectedImage.style.backgroundImage = `url(${e.target.result})`;
         };
 
-        // Leer el contenido del archivo como una URL de datos
         reader.readAsDataURL(file);
     }
 </script>
+
 
 <!-- Script para el mapa -->
 <script>

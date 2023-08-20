@@ -140,6 +140,7 @@ class EjerciciosController extends Controller
     
     public function viewE($id_ejercicio){
         //Se busca el ejercicio mediante el ID
+        //dd($id_ejercicio);
         $ejercicio= Ejercicio::find($id_ejercicio);
         //Se retorna a la vista
         return view('user.ejercitate.verEjercicio',["ejercicio"=>$ejercicio]);

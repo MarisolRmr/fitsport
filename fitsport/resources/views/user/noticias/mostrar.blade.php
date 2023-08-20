@@ -172,8 +172,8 @@ document.getElementById('searchInput').addEventListener('input', function(e) {
             <div class="card text-white mb-8">
                 <div class="flex flex-col items-center">
                     <p class="text-lg font-bold">${data.nombre}</p>
-                    <img src="${imgSrc}" alt="Imagen de la noticia" class="max-w-full h-auto" style="border-radius:10px">
-                    <a href="" class="mt-2">
+                    <img src="${imgSrc}" alt="Imagen de la noticia" class="max-w-full h-auto" style="width: 180px; height: 180px; object-fit: cover; border-radius: 10px;">
+                    <a href="${getDetallesUrl(data.id)}" class="mt-2">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="w-6 h-6">
                             <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z" clip-rule="evenodd" />
                         </svg>
@@ -181,6 +181,9 @@ document.getElementById('searchInput').addEventListener('input', function(e) {
                 </div>
             </div>`;
             cardsContainer.innerHTML += card;
+            function getDetallesUrl(id) {
+              return `/Noticias/${id}/detalle`;
+          }
         });
     })
     .catch(function(error) {

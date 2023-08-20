@@ -144,4 +144,26 @@ class GimnasiosController extends Controller
         //Redireccionamos al index con mensaje de éxito
         return redirect()->route('gymBoxes.index')->with('success', 'Ejercicio eliminado correctamente');
     }
+
+    //Método para mostrar todos los gimnasios
+    public function index_atleta() {
+        //Obtenemos todos los gimnasios
+        $gimnasios = Gimnasios::all();
+    
+        // Retornamos la vista 'verProductos' y pasamos los productos como una variable llamada 'productos'
+        return view('user.gymAndBoxes.mostrar')->with('gimnasios', $gimnasios);
+    }
+    public function buscar(Request $request) {
+        $query = $request->input('query');
+        $noticias = Gimnasios::where('nombre', 'LIKE', '%' . $query . '%')->get();
+        
+        return response()->json($noticias);
+    }
+
+    //vista de detalles de noticia
+    public function detalles_index($id){
+        // Busca la noticia por ID 
+        $gimnasio = Gimnasios::find($id);
+        return view('user.gymAndBoxes.detalles')->with(['gimnasio' => $gimnasio ]);
+    }
 }

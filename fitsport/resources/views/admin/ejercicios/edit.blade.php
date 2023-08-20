@@ -114,22 +114,42 @@
                         @enderror
                     </div>
                     <div class="w-1/2 ml-2">
-                        <div class="image-input-container">
-                            <label for="imagen">
-                                <i class="fas fa-camera" style="color: lightgray"></i>
-                                <span class="selected-image" style="background-image: url('{{ asset('ImgEjercicios/' . $ejercicio->imagen) }}');">
-                                    <span class="edit-icon">
-                                        <i class="fas fa-pencil-alt" ></i>
+                        @if(session()->has('cachedImage'))
+                            <div class="image-input-container">
+                                <label for="imagen">
+                                    <i class="fas fa-camera" style="color: lightgray; font-size:40px"></i>
+                                    <span class="selected-image" style="background-image: url('data:image;base64,{{ session('cachedImage') }}');">
+                                        <span class="edit-icon">
+                                            <i class="fas fa-pencil-alt" ></i>
+                                        </span>
                                     </span>
-                                </span>
-                                <input type="file" class="@error('imagen') border-red-500 @enderror" id="imagen" name="imagen" accept="image/*" onchange="handleImageUpload(event)" />
-                                @error('imagen')
-                                    <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2">
-                                        {{$message}}
-                                    </p>
-                                @enderror
-                            </label>
-                        </div>
+                                    <input type="hidden" name="cachedImage" value="{{ session('cachedImage') }}" />
+                                    <input type="file" class="@error('imagen') border-red-500 @enderror" id="imagen" name="imagen" value="{{old('imagen')}}" accept="image/*" onchange="handleImageUpload(event)" />
+                                    @error('imagen')
+                                        <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                                            {{$message}}
+                                        </p>    
+                                    @enderror
+                                </label>
+                            </div> 
+                        @else
+                            <div class="image-input-container">
+                                <label for="imagen">
+                                    <i class="fas fa-camera" style="color: lightgray; font-size:40px"></i>
+                                    <span class="selected-image" style="background-image: url('{{ asset('ImgEjercicios/' . $ejercicio->imagen) }}');">
+                                        <span class="edit-icon">
+                                            <i class="fas fa-pencil-alt" ></i>
+                                        </span>
+                                    </span>
+                                    <input type="file" class="@error('imagen') border-red-500 @enderror" id="imagen" name="imagen" value="{{ $ejercicio->imagen }}" accept="image/*" onchange="handleImageUpload(event)" />
+                                    @error('imagen')
+                                        <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                                            {{$message}}
+                                        </p>    
+                                    @enderror
+                                </label>
+                            </div> 
+                        @endif
                     </div>  
                 </div>
                 <div class=" mb-4">
@@ -162,7 +182,7 @@
 @endsection
 @section('js')
 <script>
-    function handleImageUpload(event) {
+function handleImageUpload(event) {
         const input = event.target;
         const imageContainer = input.parentElement;
         const selectedImage = imageContainer.querySelector('.selected-image');
@@ -171,12 +191,7 @@
         const reader = new FileReader();
 
         reader.onload = function (e) {
-            selectedImage.style.backgroundImage = `url('${e.target.result}')`; // Add the URL here
-            if (e.target.result) {
-                editIcon.style.display = 'flex'; // Mostrar el ícono de lápiz si hay imagen
-            } else {
-                editIcon.style.display = 'none'; // Ocultar el ícono de lápiz si no hay imagen
-            }
+        selectedImage.style.backgroundImage = `url(${e.target.result})`;
         };
 
         reader.readAsDataURL(file);

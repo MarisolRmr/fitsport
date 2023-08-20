@@ -141,6 +141,14 @@ class GimnasiosController extends Controller
             'hora' => 'required',
             'horaCierre' => 'required',
             'descripcion' => 'required',
+            'imagen' => [
+                function ($attribute, $value, $fail) use ($request) {
+                    // Verificar si no hay una imagen en la sesión flash ('cachedImage')
+                    if (!$request->session()->has('cachedImage') && !$request->hasFile('imagen')) {
+                        $fail('La imagen es obligatoria si no hay imagen en la sesión.');
+                    }
+                },
+            ],
         ]);
 
         //Busca el gimnasio y lo guarda en gym
@@ -193,6 +201,8 @@ class GimnasiosController extends Controller
             'descripcion' => $request->descripcion,
             'fotografia' =>$nombreImagenUnico,
         ]);
+        // Eliminar la imagen de la sesión flash después de haberla guardado
+        $request->session()->forget('cachedImage');
 
         //Redireccionamos al index
         return redirect()->route('gymBoxes.index')->with('success', 'Gym/Box actualizado correctamente');
@@ -226,8 +236,6 @@ class GimnasiosController extends Controller
                 unlink($imagenPath); 
             }
         }
-        // Eliminar la imagen de la sesión flash después de haberla guardado
-        $request->session()->forget('cachedImage');
 
         // Eliminamos el gimnasio
         $gymBoxes->delete();

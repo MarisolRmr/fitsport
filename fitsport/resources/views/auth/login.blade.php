@@ -35,35 +35,35 @@
                     <form action="{{route('login')}}" method="post" novalidate>
                         @csrf
                         <!-- Campo de nombre de usuario -->
-                         <div class="mb-5 row input-sign" style="padding-left: 2%; padding-right: 2%; margin-bottom: 10%;">
+                        <div class="mb-5 row input-sign" style="padding-left: 2%; padding-right: 2%; margin-bottom: 10%;">
                             <div class="col mb-3 " style="padding-left: 10%; padding-right: 10%">
-                            @if(session('mensaje'))
-                                <div class="bg-green-200 p-2 rounded-lg mb-6 text-white text-center ">
-                                    {{ session('mensaje') }}
-                                </div>
-                            @endif
-                              <label for="usuario" style="color: white; margin-left: 2%" class="form-label label">Nombre de usuario o correo electrónico</label>
-                              <input type="text" class="form-control @error ('usuario') border-red-500 @enderror"  value="{{old('usuario')}}" style="height: 43px; margin-bottom: 8%" id="usuario" name="usuario" required placeholder="Ingrese aquí su nombre de usuario o correo electrónico">
-                              @error ('usuario')
-                                <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2">
-                                    {{$message}}
-                                </p>
-                              @enderror
-                              <!-- Campo de contraseña -->
-                              <label for="password" style="color: white; margin-left: 2%" class="form-label label">Contraseña</label>
-                              <input type="password" class="form-control  @error ('password') border-red-500 @enderror"  style="height: 43px ; margin-bottom: 5%"  value="{{old('password')}}" id="password" required name="password" placeholder="Ingrese aquí su contraseña">
-                              @error ('password')
-                                <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2">
-                                    {{$message}}
-                                </p>
-                              @enderror
-                              <!-- Opción "Keep me logged in" -->
-                              <div class="form-check align-items-center d-flex">
-                                <input type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label label-check" for="flexCheckDefault">
-                                  Keep me logged in
-                                </label>
-                              </div>
+                                @if(session('mensaje'))
+                                    <div class="bg-green-200 p-2 rounded-lg mb-6 text-white text-center ">
+                                        {{ session('mensaje') }}
+                                    </div>
+                                @endif
+                                <label for="usuario" style="color: white; margin-left: 2%" class="form-label label">Nombre de usuario o correo electrónico</label>
+                                <input type="text" class="form-control @error ('usuario') border-red-500 @enderror"  value="{{old('usuario')}}" style="height: 43px; margin-bottom: 8%" id="usuario" name="usuario" required placeholder="Ingrese aquí su nombre de usuario o correo electrónico">
+                                @error ('usuario')
+                                    <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2">
+                                        {{$message}}
+                                    </p>
+                                @enderror
+                                <!-- Campo de contraseña -->
+                                <label for="password" style="color: white; margin-left: 2%" class="form-label label">Contraseña</label>
+                                <input type="password" class="form-control  @error ('password') border-red-500 @enderror"  style="height: 43px ; margin-bottom: 5%"  value="{{old('password')}}" id="password" required name="password" placeholder="Ingrese aquí su contraseña">
+                                @error ('password')
+                                    <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2">
+                                        {{$message}}
+                                    </p>
+                                @enderror
+                                <!-- Opción "Keep me logged in" -->
+                                {{-- <div class="form-check align-items-center d-flex">
+                                    <input type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label label-check" for="flexCheckDefault">
+                                    Keep me logged in
+                                    </label>
+                                </div> --}}
                             </div>
                         </div>
 

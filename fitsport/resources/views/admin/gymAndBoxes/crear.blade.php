@@ -181,6 +181,21 @@
 
                 <!-- Campo Imagen -->
                 <div class=" ml-2"  style="width:20% !important">
+                @if(session()->has('cachedImage'))
+                    <div class="image-input-container">
+                        <label for="imagen">
+                            <i class="fas fa-camera" style="color: lightgray; font-size:40px"></i>
+                            <span class="selected-image" style="background-image: url('data:image;base64,{{ session('cachedImage') }}');"></span>
+                            <input type="hidden" name="cachedImage" value="{{ session('cachedImage') }}" />
+                            <input type="file" class="@error('imagen') border-red-500 @enderror" id="imagen" name="imagen" value="{{old('imagen')}}" accept="image/*" onchange="handleImageUpload(event)" />
+                            @error('imagen')
+                                <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                                    {{$message}}
+                                </p>    
+                            @enderror
+                        </label>
+                    </div> 
+                @else
                     <div class="image-input-container">
                         <label for="imagen">
                             <i class="fas fa-camera" style="color: lightgray; font-size:40px"></i>
@@ -193,6 +208,8 @@
                             @enderror
                         </label>
                     </div> 
+                @endif
+
                 </div>
             </div>
 
@@ -221,24 +238,18 @@
 @section('js')
 <!-- Función para manejar la carga de imágenes -->
 <script>
-    function handleImageUpload(event) {
+function handleImageUpload(event) {
         const input = event.target;
         const imageContainer = input.parentElement;
         const selectedImage = imageContainer.querySelector('.selected-image');
 
-        // Obtener el archivo seleccionado
         const file = input.files[0];
-
-        // Crear un objeto FileReader para leer el contenido del archivo
         const reader = new FileReader();
 
-        // Cuando se termine de leer el archivo, se ejecutará esta función
         reader.onload = function (e) {
-            // Establecer el fondo del elemento con la imagen seleccionada
-            selectedImage.style.backgroundImage = `url(${e.target.result})`;
+        selectedImage.style.backgroundImage = `url(${e.target.result})`;
         };
 
-        // Leer el contenido del archivo como una URL de datos
         reader.readAsDataURL(file);
     }
 </script>

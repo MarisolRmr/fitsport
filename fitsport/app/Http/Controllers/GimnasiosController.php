@@ -33,6 +33,14 @@ class GimnasiosController extends Controller
     //Método para guardar un nuevo gimnasio
     public function store(Request $request)
     {
+        // Guardar la imagen temporalmente en el sistema de archivos si la validación falla
+        if ($request->hasFile('imagen') && $request->file('imagen')->isValid()) {
+            $imagenTemporal = file_get_contents($request->file('imagen')->getRealPath());
+            $request->session()->flash('cachedImage', base64_encode($imagenTemporal));
+        }elseif ($request->has('cachedImage')) {
+            // Si la solicitud incluye un campo "cachedImage", reutiliza el valor existente
+            $request->session()->flash('cachedImage', $request->cachedImage);
+        }
         //Validamos los datos del formulario
         $request->validate([
             'nombre' => 'required',
@@ -40,9 +48,16 @@ class GimnasiosController extends Controller
             'hora' => 'required',
             'horaCierre' => 'required',
             'descripcion' => 'required',
-            'imagen' => 'required',
             'longitud' => 'required',
             'latitud' => 'required',
+            'imagen' => [
+                function ($attribute, $value, $fail) use ($request) {
+                    // Verificar si no hay una imagen en la sesión flash ('cachedImage')
+                    if (!$request->session()->has('cachedImage') && !$request->hasFile('imagen')) {
+                        $fail('La imagen es obligatoria si no hay imagen en la sesión.');
+                    }
+                },
+            ],
         ]);
 
         $nombreImagenUnico='';
@@ -54,6 +69,30 @@ class GimnasiosController extends Controller
             $imagenServidor->fit(1000, 1000); // Redimensionamos la imagen
             $imagenPath = public_path('ImgGymBoxes') . '/' . $nombreImagenUnico;
             //Guardamos la imagen en el servidor
+            $imagenServidor->save($imagenPath);
+        }elseif (session()->has('cachedImage')) {
+            // Obtener la imagen codificada en base64 de la sesión flash
+            $imagenCodificada = session('cachedImage');
+        
+            // Decodificar la imagen base64 y crear un objeto de imagen desde los datos decodificados
+            $imagenDecodificada = base64_decode($imagenCodificada);
+        
+            // Asumir que la extensión es jpg si no podemos determinarla
+            $extensionOriginal = 'jpg';
+        
+            // Crear un nombre único para la imagen con la extensión original
+            $nombreImagenUnico = Str::uuid() . "." . $extensionOriginal;
+        
+            // Obtener la ubicación completa para guardar la imagen en el disco
+            $imagenPath = public_path('ImgGymBoxes') . '/' . $nombreImagenUnico;
+        
+            // Crear una instancia de Image a partir de los datos decodificados
+            $imagenServidor = Image::make($imagenDecodificada);
+        
+            // Redimensionar la imagen (ajustar esto según tus necesidades)
+            $imagenServidor->fit(1000, 1000);
+        
+            // Guardar la imagen redimensionada en el disco
             $imagenServidor->save($imagenPath);
         }
 
@@ -68,6 +107,8 @@ class GimnasiosController extends Controller
             'descripcion' => $request->descripcion,
             'fotografia' =>$nombreImagenUnico,
         ]);
+        // Eliminar la imagen de la sesión flash después de haberla guardado
+         $request->session()->forget('cachedImage');
 
         //Redireccionamos al index
         return redirect()->route('gymBoxes.index')->with('success', 'Gym/Box registrado correctamente');
@@ -84,6 +125,15 @@ class GimnasiosController extends Controller
     //Método para actualizar un gimnasio
     public function update(Request $request)
     {
+        // Guardar la imagen temporalmente en el sistema de archivos si la validación falla
+        if ($request->hasFile('imagen') && $request->file('imagen')->isValid()) {
+            $imagenTemporal = file_get_contents($request->file('imagen')->getRealPath());
+            $request->session()->flash('cachedImage', base64_encode($imagenTemporal));
+        }elseif ($request->has('cachedImage')) {
+            // Si la solicitud incluye un campo "cachedImage", reutiliza el valor existente
+            $request->session()->flash('cachedImage', $request->cachedImage);
+        }
+
         //Validamos los datos del formulario
         $this->validate($request, [
             'nombre' => 'required',
@@ -105,6 +155,30 @@ class GimnasiosController extends Controller
             $imagenServidor->fit(1000, 1000); // Redimensionamos la imagen
             $imagenPath = public_path('ImgGymBoxes') . '/' . $nombreImagenUnico;
             //Guardamos la imagen en el servidor
+            $imagenServidor->save($imagenPath);
+        }elseif (session()->has('cachedImage')) {
+            // Obtener la imagen codificada en base64 de la sesión flash
+            $imagenCodificada = session('cachedImage');
+        
+            // Decodificar la imagen base64 y crear un objeto de imagen desde los datos decodificados
+            $imagenDecodificada = base64_decode($imagenCodificada);
+        
+            // Asumir que la extensión es jpg si no podemos determinarla
+            $extensionOriginal = 'jpg';
+        
+            // Crear un nombre único para la imagen con la extensión original
+            $nombreImagenUnico = Str::uuid() . "." . $extensionOriginal;
+        
+            // Obtener la ubicación completa para guardar la imagen en el disco
+            $imagenPath = public_path('ImgGymBoxes') . '/' . $nombreImagenUnico;
+        
+            // Crear una instancia de Image a partir de los datos decodificados
+            $imagenServidor = Image::make($imagenDecodificada);
+        
+            // Redimensionar la imagen (ajustar esto según tus necesidades)
+            $imagenServidor->fit(1000, 1000);
+        
+            // Guardar la imagen redimensionada en el disco
             $imagenServidor->save($imagenPath);
         }
         
@@ -152,6 +226,8 @@ class GimnasiosController extends Controller
                 unlink($imagenPath); 
             }
         }
+        // Eliminar la imagen de la sesión flash después de haberla guardado
+        $request->session()->forget('cachedImage');
 
         // Eliminamos el gimnasio
         $gymBoxes->delete();

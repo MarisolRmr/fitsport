@@ -37,7 +37,7 @@ class EntrenadorAdController extends Controller
             'hora' => 'required',
             'horaCierre' => 'required',
             'gym' => 'required',
-            'email' => 'required|email|min:3|max:20|unique:users,correo',
+            'email' => 'required|email|min:3|unique:users,correo',
             'telefono' => 'required|max:10',
             'imagen' => 'required'
         ]);

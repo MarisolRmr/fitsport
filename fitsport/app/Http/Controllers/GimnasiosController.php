@@ -262,7 +262,7 @@ class GimnasiosController extends Controller
     //vista de detalles de noticia
     public function detalles_index($id){
         // Busca la noticia por ID 
-        $gimnasio = Gimnasios::find($id);
+        $gimnasio = Gimnasios::with('entrenadores')->find($id);
         return view('user.gymAndBoxes.detalles')->with(['gimnasio' => $gimnasio ]);
     }
 }

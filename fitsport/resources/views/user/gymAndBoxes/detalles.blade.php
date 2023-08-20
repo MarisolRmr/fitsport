@@ -140,12 +140,43 @@
     </div>
 </div>
 
-    <div style="font-family: 'Poppins';" class=" w-full h-screen flex flex-col items-center justify-center overflow-auto ">
-        <div class="rounded-xl w-4/5 flex text-white items-center mb-1" style="background-color:rgba(53, 58, 80, 0.67); padding: 15px">
-            <img src="{{asset('img/cuadro.png')}}" alt="Imagen pequeña" class="h-8 w-8">
-            <p id="titulo" class="ml-4 mb-0 font-bold">Entrenadores</p>
-        </div> 
+<div style="font-family: 'Poppins';" class=" w-full h-screen flex flex-col items-center justify-center overflow-auto ">
+    <div class="rounded-xl w-4/5 flex text-white items-center mb-1" style="background-color:rgba(53, 58, 80, 0.67); padding: 15px">
+        <img src="{{asset('img/cuadro.png')}}" alt="Imagen pequeña" class="h-8 w-8">
+        <p id="titulo" class="ml-4 mb-0 font-bold">Entrenadores</p>
+    </div> 
+</div>
+<div style="font-family: 'Poppins';" class=" w-full h-screen flex flex-col items-center justify-center overflow-auto ">
+
+<div class="rounded-xl text-white w-4/5 mb-8">
+  <div id="cardsContainer" class="flex flex-wrap"> 
+        @if (count($gimnasio->entrenadores) > 0)
+            @foreach ($gimnasio->entrenadores as $entrenador => $data )
+                <div class="card text-white mb-8">
+                    <div class="flex flex-col items-center">
+                    <div class="flex text-white items-center justify-center w-full mb-2" >
+                      <img src="{{ asset('img/cuadro.png') }}" alt="Imagen pequeña" class="h-8 w-8">
+                      <p id="titulo" class="ml-4 mb-0">{{$data->nombre}}</p>
+                    </div>
+                        @if($data->fotografia)
+                            <img src="{{ asset('ImgEntrenador/' . $data->fotografia)}}" alt="fotografia del entrenaodor" class="max-w-full h-auto"  style="width: 180px; height: 180px; object-fit: cover; border-radius: 50%;">
+                        @else
+                            <img src="{{asset('img/SinImagen.jpg')}}" alt="Imagen de la marca" class="max-w-full h-auto" style="border-radius:50%; height:180px; fit:content; ">
+                        @endif
+                        <a href="{{route('gymBoxes.detalles',$data->id)}}" class="mt-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="w-6 h-6">
+                                <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    </div>
+                    
+                </div>
+            @endforeach
+        @endif
     </div>
+
+  </div>
+</div>
 @endsection
 
 @section('js')

@@ -11,6 +11,7 @@ use App\Http\Controllers\EjerciciosController;
 use App\Http\Controllers\EntrenadorAdController;
 use App\Http\Controllers\NutriologoController;
 use App\Http\Controllers\PerfilController;
+use App\Http\Controllers\MetasController;
 
 /*
 /*
@@ -115,3 +116,16 @@ Route::post('/updatePerfil/{id}', [PerfilController::class, 'update'])->name('pe
 Route::get('/Noticias-atleta', [NoticiasController::class,'index_atleta'])->name('noticias.index_atleta');
 Route::get('/noticias/buscando', [NoticiasController::class, 'buscar'])->name('ejercitate.buscar'); 
 Route::get('/Noticias/{id}/detalle', [NoticiasController::class, 'detalles_index'])->name('noticias.detalles');
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+//                                  RUTAS PARA Metas
+////////////////////////////////////////////////////////////////////////////////////////////
+
+Route::get('/Metas',[MetasController::class,'index'])->name('metas.index');
+Route::get('/Metas/agregar',[MetasController::class,'create'])->name('metas.create');
+Route::post('/Metas/agregar',[MetasController::class,'store'])->name('metas.store');
+Route::post('/Metas/cambiarEstado', [MetasController::class, 'cambiarEstado'])->name('metas.cambiarEstado');
+Route::get('/Metas/cargaColumnaProceso', [MetasController::class, 'cargaColumnaProcesoPartial'])->name('metas.cargaColumnaProcesoPartial');
+Route::get('/Metas/edit/{id}', [MetasController::class, 'edit'])->name('metas.editar');
+Route::get('/Metas/delete/{id}', [MetasController::class, 'delete'])->name('metas.eliminar');

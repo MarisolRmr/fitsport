@@ -115,7 +115,7 @@
             </a>
           </li>
           <li class="mt-0.5 w-full">
-            <a href="{{route('rutina.index')}}" style="font-size:18px" class="text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors">
+            <a href="#" style="font-size:18px" class="text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors">
               <div class="mr-2 flex h-12 w-12 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                 <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#ffffff}</style><path d="M96 64c0-17.7 14.3-32 32-32h32c17.7 0 32 14.3 32 32V224v64V448c0 17.7-14.3 32-32 32H128c-17.7 0-32-14.3-32-32V384H64c-17.7 0-32-14.3-32-32V288c-17.7 0-32-14.3-32-32s14.3-32 32-32V160c0-17.7 14.3-32 32-32H96V64zm448 0v64h32c17.7 0 32 14.3 32 32v64c17.7 0 32 14.3 32 32s-14.3 32-32 32v64c0 17.7-14.3 32-32 32H544v64c0 17.7-14.3 32-32 32H480c-17.7 0-32-14.3-32-32V288 224 64c0-17.7 14.3-32 32-32h32c17.7 0 32 14.3 32 32zM416 224v64H224V224H416z"/></svg>
               </div>
@@ -124,7 +124,7 @@
           </li>
 
           <li class="mt-0.5 w-full">
-            <a style="font-size:18px" class="text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="{{route('metas.index')}}">
+            <a style="font-size:18px" class="text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="#">
               <div class="mr-2 flex h-12 w-12 items-center justify-center rounded-lg bg-center fill-current stroke-0 text-center xl:p-2.5">
                 <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#ffffff}</style><path d="M353.8 54.1L330.2 6.3c-3.9-8.3-16.1-8.6-20.4 0L286.2 54.1l-52.3 7.5c-9.3 1.4-13.3 12.9-6.4 19.8l38 37-9 52.1c-1.4 9.3 8.2 16.5 16.8 12.2l46.9-24.8 46.6 24.4c8.6 4.3 18.3-2.9 16.8-12.2l-9-52.1 38-36.6c6.8-6.8 2.9-18.3-6.4-19.8l-52.3-7.5zM256 256c-17.7 0-32 14.3-32 32V480c0 17.7 14.3 32 32 32H384c17.7 0 32-14.3 32-32V288c0-17.7-14.3-32-32-32H256zM32 320c-17.7 0-32 14.3-32 32V480c0 17.7 14.3 32 32 32H160c17.7 0 32-14.3 32-32V352c0-17.7-14.3-32-32-32H32zm416 96v64c0 17.7 14.3 32 32 32H608c17.7 0 32-14.3 32-32V416c0-17.7-14.3-32-32-32H480c-17.7 0-32 14.3-32 32z"/></svg>
               </div>
@@ -149,7 +149,12 @@
             </a>
           </li> --}}
           <li class="mt-0.5 w-full hover:bg-white">
+<<<<<<< HEAD
           <a href="{{route('nutriologos.mostrar')}}" style="font-size:18px" class="  text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors " >
+=======
+            <a href="#" style="font-size:18px" class="  text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors " >
+
+>>>>>>> c5f0b53 (nose)
               <div class="mr-2 flex h-12 w-12 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                 {{-- <i class="relative top-0  leading-normal text-red-600 ni ni-single-02"></i> --}}
                 <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 400 512">

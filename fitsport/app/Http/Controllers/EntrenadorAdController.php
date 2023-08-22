@@ -152,4 +152,9 @@ class EntrenadorAdController extends Controller
         //Redireccionamos al index con mensaje de éxito
         return redirect()->route('entrenador.index')->with('success', 'Entrenador eliminado correctamente');
     }
+    public function view($id_entranador){
+        $entrenador = Entrenador::with('gimnasio')->find($id_entranador);
+        //Se retorna a la vista
+        return view('admin.nutriologo.vernutriologo',["entrenador"=>$entrenador]);
+    }
 }

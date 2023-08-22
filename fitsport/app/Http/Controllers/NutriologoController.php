@@ -10,36 +10,26 @@ use Intervention\Image\Facades\Image;
 class NutriologoController extends Controller
 {
     //Constructor del controlador
-    public function __construct()
-    {
-        // Middleware para proteger las rutas con autenticación
+    public function __construct(){
+        //Middleware para proteger las rutas con autenticación
         $this->middleware('auth');
-        // Middleware para verificar si el usuario es administrador
-        $this->middleware(function ($request, $next) {
-            if (auth()->user()->tipo_id !== 1) {
-                abort(403, 'Acceso no autorizado.');
-            }
-            return $next($request);
-        })->only([
-            'index', 'create', 'store', 'edit', 'update', 'delete'
-        ]);
     }
 
-     // Método para mostrar todos los nutricionistas
-     public function index() {
-        // Obtenemos todos los nutricionistas con tipo de usuario 4 (nutricionista)
+    //Método para mostrar todos los gimnasios
+    public function index() {
+        //Obtenemos todos los gimnasios
         $nutriologo = User::where('tipo_id', 4)->get();
-        
-        // Retornamos la vista 'mostrar' y pasamos los nutricionistas como variable 'nutriologo'
+    
+        // Retornamos la vista 'verProductos' y pasamos los productos como una variable llamada 'productos'
         return view('admin.nutriologo.mostrar')->with('nutriologo', $nutriologo);
     }
-    // Método para mostrar el formulario de creación de un nuevo nutricionista
+
     public function create()
     {
         return view('admin.nutriologo.crear');
     }
 
-    //Método para guardar un nuevo nutriologo
+    //Método para guardar un nuevo gimnasio
     public function store(Request $request)
     {
         // Guardar la imagen temporalmente en el sistema de archivos si la validación falla
@@ -107,7 +97,7 @@ class NutriologoController extends Controller
         }
 
 
-        //Creamos el nutriologo
+        //Creamos el gimnasio
         Nutriologo::create([
             'nombre' => $request->nombre,
             'apellido' => $request->apellido,
@@ -126,15 +116,15 @@ class NutriologoController extends Controller
         //Redireccionamos al index
         return redirect()->route('admNutriologo.index')->with('success', 'Nutriologo registrado correctamente');
     }
-    //Método para editar un nutriologo
+    //Método para editar un gimnasio
     public function edit($id_nutriologo){
-        //Buscamos el nutriologo por el ID
+        //Buscamos el gimnasio por el ID
         $nutriologo = User::find($id_nutriologo);
-        //Devolvemos la vista con los datos del nutriologo
+        //Devolvemos la vista con los datos del gimnasio
         return view('admin.nutriologo.editar',["nutriologo"=>$nutriologo]);
     }
 
-    //Método para actualizar un nutriologo
+    //Método para actualizar un gimnasio
     public function update(Request $request)
     {
         // Guardar la imagen temporalmente en el sistema de archivos si la validación falla
@@ -164,7 +154,7 @@ class NutriologoController extends Controller
             ],
         ]);
 
-        //Busca el nutriologo y lo guarda en gym
+        //Busca el gimnasio y lo guarda en gym
         $nutriologo = User::findOrFail($request->id);
         $nombreImagenUnico = $nutriologo->fotografia;
 
@@ -206,7 +196,7 @@ class NutriologoController extends Controller
 
 
         
-        //Actualizamos el nutriologo
+        //Actualizamos el gimnasio
         Nutriologo::where('id', $request->id)->update([
             'nombre' => $request->nombre,
             'apellido' => $request->apellido,
@@ -228,10 +218,10 @@ class NutriologoController extends Controller
 
     public function delete($id_nutriologo)
     {
-        // Buscamos el nutriologo por su ID
+        // Buscamos el gimnasio por su ID
         $nutriologo = User::find($id_nutriologo);
 
-        // Comprobamos si el nutriologo tiene imagen asociada
+        // Comprobamos si el gimnasio tiene imagen asociada
         if ($nutriologo->imagen) {
             $imagenPath = public_path('ImgNutriologo') . '/' . $nutriologo->imagen;
             //Si existe la imagen en el servidor, la eliminamos
@@ -239,19 +229,14 @@ class NutriologoController extends Controller
                 unlink($imagenPath); 
             }
         }
-<<<<<<< HEAD
-        // Eliminamos el nutriologo
-=======
-
         // Eliminamos el gimnasio
->>>>>>> 542389b0c4cc065e86091fa61fe5d0d4742c4b59
         $nutriologo->delete();
-
         //Redireccionamos al index con mensaje de éxito
         return redirect()->route('admNutriologo.index')->with('success', 'Nutriologo eliminado correctamente');
     }
-<<<<<<< HEAD
     public function view($id_nutriologo){
+        //Se busca el ejercicio mediante el ID
+        //dd($id_ejercicio);
         $nutriologo= User::find($id_nutriologo);
         //Se retorna a la vista
         return view('admin.nutriologo.vernutriologo',["nutriologo"=>$nutriologo]);
@@ -259,36 +244,22 @@ class NutriologoController extends Controller
     ///////////////////////////////////////////////////////////////
     // LADO USUARIO 
     //////////////////////////////////////////////////////
-    // Método para mostrar la lista de nutricionistas en la vista de usuario
     public function nutriologos(){
-        // Obtenemos todos los nutricionistas con tipo de usuario 4 (nutricionista)
         $nutriologo = User::where('tipo_id', 4)->get();
-        
-        // Retornamos la vista 'vernutriologos' y pasamos los nutricionistas como variable 'nutriologo'
-        return view('user.nutriologos.vernutriologos', ["nutriologo" => $nutriologo]);
+        return view('user.nutriologos.vernutriologos',["nutriologo"=>$nutriologo]);
     }
-
-    // Método para realizar una búsqueda de nutricionistas en la vista de usuario
     public function buscar(Request $request) {
-        // Obtener el término de búsqueda de la solicitud
         $query = $request->input('query');
-        
-        // Realizar una consulta para obtener los nutricionistas que coinciden con el término de búsqueda
         $nutriologos = User::where('nombre', 'LIKE', '%' . $query . '%')->where('tipo_id', 4)->get();
         
-        // Devolver una respuesta JSON con los nutricionistas encontrados
         return response()->json($nutriologos);
     }
-
-    // Método para ver los detalles de un nutricionista en la vista de usuario
+    
     public function viewN($id_nutriologo){
-        // Buscamos el nutricionista por el ID
-        $nutriologo = User::find($id_nutriologo);
-        
-        // Retornamos la vista 'vernutriologo' y pasamos los detalles del nutricionista como variable 'nutriologo'
-        return view('user.nutriologos.vernutriologo', ["nutriologo" => $nutriologo]);
+        //Se busca el ejercicio mediante el ID
+        //dd($id_ejercicio);
+        $nutriologo= User::find($id_nutriologo);
+        //Se retorna a la vista
+        return view('user.nutriologos.vernutriologo',["nutriologo"=>$nutriologo]);
     }
-
-=======
->>>>>>> 542389b0c4cc065e86091fa61fe5d0d4742c4b59
 }

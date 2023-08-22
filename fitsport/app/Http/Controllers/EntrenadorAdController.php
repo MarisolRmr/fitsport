@@ -13,19 +13,9 @@ use Intervention\Image\Facades\Image;
 class EntrenadorAdController extends Controller
 {
     //Constructor del controlador
-    public function __construct()
-    {
-        // Middleware para proteger las rutas con autenticación
+    public function __construct(){
+        //Middleware para proteger las rutas con autenticación
         $this->middleware('auth');
-        // Middleware para verificar si el usuario es administrador
-        $this->middleware(function ($request, $next) {
-            if (auth()->user()->tipo_id !== 1) {
-                abort(403, 'Acceso no autorizado.');
-            }
-            return $next($request);
-        })->only([
-            'index', 'create', 'store', 'edit', 'update', 'delete'
-        ]);
     }
     public function index(){
         $entrenadores = Entrenador::where('tipo_id', 3)->with('gimnasio')->get();

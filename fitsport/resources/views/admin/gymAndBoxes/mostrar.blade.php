@@ -172,7 +172,7 @@
                 @foreach ($gimnasios as $gimnasio)
                     <tr>
                         <td>{{ $gimnasio->id }}</td>
-                        <td>{{ $gimnasio->nombre }}</td>
+                        <td class="actions-cell"><a href="{{route('gymBoxes.detalles',$gimnasio->id)}}" class="edit-button">{{$gimnasio->nombre}}</a></td>
                         <td>{{ $gimnasio->telefono }}</td>
                         <td>{{ date('g:i a', strtotime($gimnasio->horario)) }} - {{ date('g:i a', strtotime($gimnasio->horarioCierre)) }} </td>
                         <td>{{ Illuminate\Support\Str::words($gimnasio->descripcion, 10, '...') }}</td>

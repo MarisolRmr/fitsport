@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends(auth()->user()->tipo_id === 1 ? 'layouts.app' : 'layouts.appUser')
 
 @section('titulo')
     Entrenador {{$entrenador->nombre}} {{$entrenador->apellido}}
@@ -150,7 +150,12 @@
 
             </div>
             <div class="gimnasio-circle-container" style="text-align: center">
+            @if($entrenador->gimnasio->fotografia)
                 <img src="{{ asset('ImgGymBoxes/' . $entrenador->gimnasio->fotografia) }}" alt="Foto del gimnasio">
+            @else
+                <img src="{{asset('img/SinImagen.jpg')}}" alt="Foto del gimnasio">
+            @endif
+                
             </div>
             <p id="datos" class="text-white text-center mt-2">{{ $entrenador->gimnasio->nombre }}</p>
             

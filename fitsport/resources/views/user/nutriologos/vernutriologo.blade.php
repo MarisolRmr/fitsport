@@ -41,7 +41,7 @@
         margin-left: 60px;
         margin-right: 75px; 
         position: absolute; /* Posiciona el elemento de manera absoluta */
-        top: 72%;  /* Desplaza el elemento 10px hacia arriba respecto a su posición original */
+        top: 80%;  /* Desplaza el elemento 10px hacia arriba respecto a su posición original */
         left: 60px; Ajusta la posición horizontal si es necesario
         
     }

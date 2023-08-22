@@ -148,13 +148,8 @@
               <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Calendario</span>
             </a>
           </li> --}}
-          <li class="mt-0.5 w-full hover:bg-white">
-<<<<<<< HEAD
-          <a href="{{route('nutriologos.mostrar')}}" style="font-size:18px" class="  text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors " >
-=======
-            <a href="#" style="font-size:18px" class="  text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors " >
+          <li class="mt-0.5 w-full hover:bg-white"><a href="{{route('nutriologos.mostrar')}}" style="font-size:18px" class="  text-white dark:opacity-80 py-2.7  ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors " >
 
->>>>>>> c5f0b53 (nose)
               <div class="mr-2 flex h-12 w-12 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                 {{-- <i class="relative top-0  leading-normal text-red-600 ni ni-single-02"></i> --}}
                 <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 400 512">

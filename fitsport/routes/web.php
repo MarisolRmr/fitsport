@@ -70,11 +70,13 @@ Route::get('/entrenador', [EntrenadorAdController::class,'index'])->name('entren
 //Ruta para la vista de agregar entrenador
 Route::get('/entrenador/create', [EntrenadorAdController::class,'create'])->name('entrenador.create');
 //Ruta para guardar los datos del entrenado
+Route::get('/entrenador/create', [EntrenadorAdController::class,'create'])->name('entrenador.create');
+//Ruta para visualizar el entrenador
+Route::get('/entrenador/view/{id}', [EntrenadorAdController::class, 'view'])->name('entrenador.verEntrenador');
 Route::post('/entrenador/create', [EntrenadorAdController::class,'store'])->name('entrenador.store');
 Route::get('/entreador/edit/{id}', [EntrenadorAdController::class, 'edit'])->name('entrenador.editar');
 Route::post('/updateEntrenador', [EntrenadorAdController::class, 'update'])->name('entrenador.update');
 Route::get('/entrenador/delete/{id}', [EntrenadorAdController::class, 'delete'])->name('entrenador.eliminar');
-
 ////////////////////////////////////////////////////////////////////////////////////////////
 //                                  RUTAS PARA EJERCICITATE ADMIN
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -108,6 +110,14 @@ Route::post('/Nutriologo/agregar',[NutriologoController::class,'store'])->name('
 Route::get('/Nutriologo/delete/{id}', [NutriologoController::class, 'delete'])->name('admNutriologo.eliminar');
 Route::get('/Nutriologo/edit/{id}', [NutriologoController::class, 'edit'])->name('admNutriologo.editar');
 Route::post('/updateNutriologo', [NutriologoController::class, 'update'])->name('admNutriologo.update');
+//Ruta para visualizar el nutriologo en administrador
+Route::get('/Nutriologo/view/{id}', [NutriologoController::class, 'view'])->name('admNutriologo.view');
+//ver lo s nutriologos de parte del atleta
+Route::get('/Nutriologos', [NutriologoController::class,'nutriologos'])->name('nutriologos.mostrar');
+//Ruta para buscar el nutriologo
+Route::get('/Nutriologos/buscando', [NutriologoController::class, 'buscar'])->name('nutriologos.buscar'); 
+//Ruta para visualizar el nutriologo 
+Route::get('/Nutriologos/view/{id}', [NutriologoController::class, 'viewN'])->name('nutriologos.verDatosNutriologo');
 
 //perfil
 Route::get('/perfil', [PerfilController::class,'index'])->name('perfil.index');

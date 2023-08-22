@@ -1,4 +1,5 @@
-@extends('layouts.app')
+@extends(auth()->user()->tipo_id === 1 ? 'layouts.app' : 'layouts.appUser')
+
 
 @section('titulo')
     Mi Perfil

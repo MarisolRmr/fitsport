@@ -13,19 +13,9 @@ use Intervention\Image\Facades\Image;
 class EntrenadorAdController extends Controller
 {
     //Constructor del controlador
-    public function __construct()
-    {
-        // Middleware para proteger las rutas con autenticación
+    public function __construct(){
+        //Middleware para proteger las rutas con autenticación
         $this->middleware('auth');
-        // Middleware para verificar si el usuario es administrador
-        $this->middleware(function ($request, $next) {
-            if (auth()->user()->tipo_id !== 1) {
-                abort(403, 'Acceso no autorizado.');
-            }
-            return $next($request);
-        })->only([
-            'index', 'create', 'store', 'edit', 'update', 'delete'
-        ]);
     }
     public function index(){
         $entrenadores = Entrenador::where('tipo_id', 3)->with('gimnasio')->get();
@@ -152,9 +142,10 @@ class EntrenadorAdController extends Controller
         //Redireccionamos al index con mensaje de éxito
         return redirect()->route('entrenador.index')->with('success', 'Entrenador eliminado correctamente');
     }
-    public function view($id_entranador){
-        $entrenador = Entrenador::with('gimnasio')->find($id_entranador);
+    public function view($id_entrenador){
+        $entrenador = Entrenador::with('gimnasio')->find($id_entrenador);
         //Se retorna a la vista
-        return view('admin.nutriologo.vernutriologo',["entrenador"=>$entrenador]);
+        return view('admin.entrenador.verentrenador',["entrenador"=>$entrenador]);
     }
 }
+

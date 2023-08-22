@@ -162,17 +162,17 @@
                     <tr>
                         <td>{{ $entrenador->id }}</td>
                         <td style="text-align: center;">
-                                    <!-- Contenedor para centrar la imagen -->
-                                    <div style="display: flex; justify-content: center;">
-                                        <!-- Mostrar la imagen del gimnasio si existe, si no, mostrar "Sin Imagen" -->
-                                        @if($entrenador->fotografia)
-                                            <img src="{{ asset('ImgEntrenador/' . $entrenador->fotografia) }}" alt="Imagen de la marca" style="height: 80px; width: 80px; border-radius: 17px;">
-                                        @else
-                                            Sin Imagen
-                                        @endif
-                                    </div>
-                                </td>
-                        <td>{{ $entrenador->nombre }} {{ $entrenador->apellido }}</td>
+                            <!-- Contenedor para centrar la imagen -->
+                            <div style="display: flex; justify-content: center;">
+                                <!-- Mostrar la imagen del gimnasio si existe, si no, mostrar "Sin Imagen" -->
+                                @if($entrenador->fotografia)
+                                    <img src="{{ asset('ImgEntrenador/' . $entrenador->fotografia) }}" alt="Imagen de la marca" style="height: 80px; width: 80px; border-radius: 17px;">
+                                @else
+                                    Sin Imagen
+                                @endif
+                            </div>
+                        </td>
+                        <td class="actions-cell"><a href="{{ route('entrenador.verEntrenador', $entrenador->id) }}" class="edit-button">{{ $entrenador->nombre }} {{ $entrenador->apellido }}</a></td>
                         <td>{{ date('g:i a', strtotime($entrenador->horaEntrada)) }} - {{ date('g:i a', strtotime($entrenador->horaSalida)) }}</td>
                         <td>{{ $entrenador->gimnasio->nombre}}</td>
                         <td>{{ $entrenador->telefono }}</td>
@@ -216,7 +216,7 @@
         order: [[3, 'desc']],
         "lengthMenu":[[5,10,50,-1],[5,10,50,"All"]],
         language: {
-            emptyTable: "Aún no hay Noticias que mostrar."
+            emptyTable: "Aún no hay Entrenadores que mostrar."
         }
     });
 

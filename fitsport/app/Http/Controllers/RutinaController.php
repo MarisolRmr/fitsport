@@ -85,8 +85,8 @@ class RutinaController extends Controller
 
     public function buscar(Request $request) {
         $query = $request->input('query');
-        $ejercicios = Ejercicio::where('nombre', 'LIKE', '%' . $query . '%')->get();
+        $rutina = Rutina::where('nombre', 'LIKE', '%' . $query . '%')->get();
         
-        return response()->json($ejercicios);
+        return response()->json($rutina);
     }
 }

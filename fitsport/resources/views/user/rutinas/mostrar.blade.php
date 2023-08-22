@@ -317,10 +317,37 @@ document.getElementById('searchInput').addEventListener('input', function(e) {
             let imgSrc = data.imagen ? `/ImgEjercicios/${data.imagen}` : '/img/SinImagen.jpg';
 
             // Crear tarjeta y agregarla al contenedor
-            let card = ;
+            let card = `
+            <div class="card text-white mb-8">
+                <div class="flex flex-col items-center">
+                    <div class="flex items-center mb-4"> 
+                        <img src="{{ asset('img/cuadro.png') }}" alt="Imagen pequeña" class="h-4 w-4">
+                        <p id="titulo" class="ml-4 mb-0">${data.nombre }</p>
+                    </div>
+                    <div class="cardMetas text-black mb-4 w-1/3 px-2 h-128 flex flex-col">
+                        <div class="text-center w-full bg-gray-200" style="background-color: #D9D9D9; padding: 0; margin: 0!important;">
+                            <p class="truncated-text-d text-lg font-bold">${data.descripcion }</p>
+                            <button class="view-more-button-d" style="display:none; color: #72def1 !important">Ver más</button>
+                            <button class="view-less-button-d" style="display:none; color: #72def1 !important">Ver menos</button>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center mt-4">
+                            <a href="${getEditarUrl(data.id)}" class="focus:outline-none text-white p-2 mr-2 ">
+                                <i class="fas fa-pencil-alt text-xl"></i>
+                            </a>
+                            <button type="submit" class="focus:outline-none text-white p-2 mr-2 " onclick="eliminar(${data.id })">
+                                <i class="fas fa-trash-alt text-xl"></i> <!-- Ícono de bote de basura de Font Awesome -->
+                            </button>
+                        </div>
+                </div>
+            </div>
+            `;
             cardsContainer.innerHTML += card;
-            function getDetallesUrl(id) {
-                return `/ejercitate/view/${id}`;
+            // function getDetallesUrl(id) {
+            //     return `/Rutina/edit/${id}`;
+            // }
+            function getEditarUrl(id) {
+                return `/Rutina/edit/${id}`;
             }
         });
     })

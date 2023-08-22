@@ -119,3 +119,4 @@ Route::get('/Noticias/{id}/detalle', [NoticiasController::class, 'detalles_index
 Route::get('/GymAndBoxes-atleta',[GimnasiosController::class,'index_atleta'])->name('gymBoxes.index_atleta');
 Route::get('/gimnasios/buscando', [GimnasiosController::class, 'buscar'])->name('gymBoxes.buscar'); 
 Route::get('/GymAndBoxes/{id}/detalle', [GimnasiosController::class, 'detalles_index'])->name('gymBoxes.detalles');
+Route::post('/GymAndBoxes/opinion/agregar',[GimnasiosController::class,'store_opinion'])->name('opinion.store');

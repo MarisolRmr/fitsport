@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Gimnasios;
 use App\Models\Entrenador;
+use App\Models\Opinion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
@@ -112,6 +113,29 @@ class GimnasiosController extends Controller
 
         //Redireccionamos al index
         return redirect()->route('gymBoxes.index')->with('success', 'Gym/Box registrado correctamente');
+    }
+
+    //Método para guardar una opinion
+    public function store_opinion(Request $request)
+    {
+        
+        //Validamos los datos del formulario
+        $request->validate([
+            'calificacion' => 'required',
+            'user_id' => 'required',
+            'gimnasio_id' => 'required',
+        ]);
+
+        //Creamos el gimnasio
+        Opinion::create([
+            'calificacion' => $request->calificacion,
+            'descripcion' => $request->descripcion,
+            'user_id' => $request->user_id,
+            'gimnasio_id'=> $request->gimnasio_id,
+        ]);
+
+        //Redireccionamos al index
+        return back()->with('success', 'Su opinión se ha registrado correctamente');
     }
 
     //Método para editar un gimnasio
@@ -248,21 +272,38 @@ class GimnasiosController extends Controller
     public function index_atleta() {
         //Obtenemos todos los gimnasios
         $gimnasios = Gimnasios::all();
-    
+                
+        foreach ($gimnasios as $gimnasio) {
+            $opiniones = Opinion::where('gimnasio_id', $gimnasio->id)->get();
+            
+            $gimnasio->opiniones = $opiniones;
+        }
+
         // Retornamos la vista 'verProductos' y pasamos los productos como una variable llamada 'productos'
         return view('user.gymAndBoxes.mostrar')->with('gimnasios', $gimnasios);
     }
     public function buscar(Request $request) {
         $query = $request->input('query');
-        $noticias = Gimnasios::where('nombre', 'LIKE', '%' . $query . '%')->get();
-        
-        return response()->json($noticias);
+    
+        $gimnasiosConOpiniones = Gimnasios::where('nombre', 'LIKE', '%' . $query . '%')->get();
+    
+        $resultados = [];
+    
+        foreach ($gimnasiosConOpiniones as $gimnasio) {
+            $opiniones = Opinion::where('gimnasio_id', $gimnasio->id)->get();
+            $gimnasio->opiniones = $opiniones;
+            $resultados[] = $gimnasio;
+        }
+    
+        return response()->json($resultados);
     }
+    
 
-    //vista de detalles de noticia
+    //vista de detalles de gimnasio
     public function detalles_index($id){
-        // Busca la noticia por ID 
+        $opiniones = Opinion::with('user')->where('gimnasio_id', $id)->get();
+
         $gimnasio = Gimnasios::with('entrenadores')->find($id);
-        return view('user.gymAndBoxes.detalles')->with(['gimnasio' => $gimnasio ]);
+        return view('user.gymAndBoxes.detalles')->with(['gimnasio' => $gimnasio,'opiniones' => $opiniones ]);
     }
 }

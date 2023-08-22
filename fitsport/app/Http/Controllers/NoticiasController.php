@@ -10,11 +10,21 @@ use Carbon\Carbon;
 
 class NoticiasController extends Controller
 {
-    public function __construct(){
-        //protegemos la url
-        //al metodo index con el constructor le pasamos el parametro de autenticacion
+    public function __construct()
+    {
+        // Middleware para proteger las rutas con autenticación
         $this->middleware('auth');
+        // Middleware para verificar si el usuario es administrador
+        $this->middleware(function ($request, $next) {
+            if (auth()->user()->tipo_id !== 1) {
+                abort(403, 'Acceso no autorizado.');
+            }
+            return $next($request);
+        })->only([
+            'index', 'create', 'store', 'edit', 'update', 'delete'
+        ]);
     }
+    
     public function index(){
         $noticias = Noticia::all();
         return view('admin.noticias.mostrar')->with(['noticias' => $noticias]);

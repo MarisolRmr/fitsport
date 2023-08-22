@@ -117,7 +117,7 @@
             <div id="cardsContainer" class="flex flex-wrap"> 
                 <!-- Primera columna -->
                 <div class="card text-white mb-8 w-1/3 px-2 h-96 columna">
-                    <div class="flex items-center mb-4"> <!-- Añadí mt-2 para moverlo un poco hacia arriba -->
+                    <div class="flex items-center mb-4"> 
                         <img src="{{asset('img/cuadro.png')}}" alt="Imagen pequeña" class="h-4 w-4"> <!-- Ajusté la imagen a un tamaño un poco más grande, puedes cambiarlo como prefieras -->
                         <p id="titulo" class="ml-4 mb-0">Inicio</p>
                     </div>
@@ -128,7 +128,7 @@
                         @endphp
                             @if ($metasInicio->count())
                                 @foreach ($metasInicio  as $meta)
-                                <div class="cardMetas text-black mb-4 w-1/3 px-2 h-128 flex flex-col" id="meta-{{ $meta->id }}"> <!-- Cambio de flex a flex-col para estructura vertical -->
+                                <div class="cardMetas text-black mb-4 w-1/3 px-2 h-128 flex flex-col" id="meta-{{ $meta->id }}" data-nombre="{{ $meta->nombre }}"> <!-- Cambio de flex a flex-col para estructura vertical -->
                                     <!-- Título del meta (nombre) centrado y que abarque las dos columnas -->
                                     <div class="text-left w-full bg-gray-200" style="background-color: #D9D9D9; padding: 0; margin: 0;">
                                         <p class="titulo">Vencimiento: {{ $meta->fecha }}</p>
@@ -148,25 +148,26 @@
 
                                         <!-- Columna de la derecha (Botones) -->
                                         <div class="flex flex-col mb-0 justify-center items-center p-4 space-y-2" style="width:20% !important"> <!-- space-y-2 da un espacio vertical entre los botones -->
-                                            <button class="focus:outline-none text-black p-2 mr-2 ">
+                                            <a class="focus:outline-none text-black p-2 mr-2 " data-id="{{ $meta->id }}" onclick="editar(event)">
                                                 <i class="fas fa-pencil-alt text-xl"></i> <!-- Ícono de lápiz de Font Awesome -->
-                                            </button>
-                                            <button class="focus:outline-none text-black p-2">
+                                            </a>
+                                            <button class="focus:outline-none text-black p-2" onclick="eliminar({{ $meta->id }}, event)">
                                                 <i class="fas fa-trash-alt text-xl"></i> <!-- Ícono de bote de basura de Font Awesome -->
                                             </button>
                                         </div>
                                     </div>
                                     <!-- Botones "Proceso" y "Finalizar" -->
                                     <div class="flex justify-between px-4 mt-4"> <!-- Contenedor de botones con espacio entre ellos -->
-                                        <button data-meta-id="{{ $meta->id }}" style="background-color: #FFDE59; width: 150px; text-align: center;" class="move-to-proceso-btn px-4 py-2 mr-4 text-black font-semibold rounded-2xl hover:bg-blue-600">Proceso</button>
-                                        <button style="background-color: #FFDE59; width: 150px; text-align: center;" class="px-4 py-2 mr-4 text-black font-semibold rounded-2xl hover:bg-blue-600">Finalizar</button>
+                                        <button style="background-color: #FFDE59; width: 150px; text-align: center;" class="move-to-proceso-btn px-4 py-2 mr-4 text-black font-semibold rounded-2xl hover:bg-blue-600" data-meta-id="{{ $meta->id }}">Proceso</button>
+                                        <button style="background-color: #FFDE59; width: 150px; text-align: center;" class="move-to-final-btn px-4 py-2 mr-4 text-black font-semibold rounded-2xl hover:bg-blue-600"  data-meta-id="{{ $meta->id }}">Finalizar</button>
                                     </div>
                                     <br>
+
                                 </div>
                                 @endforeach
                             @else
                                 <div class="cardMetas text-black mb-4 w-1/3 px-2 h-128 flex flex-col">
-                                    <div class="text-center w-full bg-gray-200 no-metas-inicio-message" style="background-color: #D9D9D9; padding: 0; margin: 0!important;">
+                                    <div class="no-metas-inicio-message  text-center w-full bg-gray-200 " style="background-color: #D9D9D9; padding: 0; margin: 0!important;">
                                         <p class="titulo">No tienes metas por iniciar.</p>
                                     </div>
                                 </div>
@@ -184,12 +185,12 @@
                     </div>
                     
                     <div class="flex flex-col items-center h-full bg-gray-500" id="columna-proceso">
-                    @php
+                        @php
                             $metasInicio = $metas->where('estado', 'proceso');
                         @endphp
                             @if ($metasInicio->count())
                                 @foreach ($metasInicio  as $meta)
-                                <div class="cardMetas text-black mb-4 w-1/3 px-2 h-128 flex flex-col" id="meta-{{ $meta->id }}"> <!-- Cambio de flex a flex-col para estructura vertical -->
+                                <div class="cardMetas text-black mb-4 w-1/3 px-2 h-128 flex flex-col" id="meta-{{ $meta->id }}" data-nombre="{{ $meta->nombre }}"> <!-- Cambio de flex a flex-col para estructura vertical -->
                                     <!-- Título del meta (nombre) centrado y que abarque las dos columnas -->
                                     <div class="text-left w-full bg-gray-200" style="background-color: #D9D9D9; padding: 0; margin: 0;">
                                         <p class="titulo">Vencimiento: {{ $meta->fecha }}</p>
@@ -209,23 +210,23 @@
 
                                         <!-- Columna de la derecha (Botones) -->
                                         <div class="flex flex-col mb-0 justify-center items-center p-4 space-y-2" style="width:20% !important"> <!-- space-y-2 da un espacio vertical entre los botones -->
-                                            <a class="focus:outline-none text-black p-2 mr-2 " href="{{route('metas.editar',$meta->id)}}">
+                                            <a class="focus:outline-none text-black p-2 mr-2 " data-id="{{ $meta->id }}" onclick="editar(event)">
                                                 <i class="fas fa-pencil-alt text-xl"></i> <!-- Ícono de lápiz de Font Awesome -->
                                             </a>
-                                            <button class="focus:outline-none text-black p-2" onclick="eliminar({{ $meta->id }})">
+                                            <button class="focus:outline-none text-black p-2" onclick="eliminar({{ $meta->id }}, event)">
                                                 <i class="fas fa-trash-alt text-xl"></i> <!-- Ícono de bote de basura de Font Awesome -->
                                             </button>
                                         </div>
                                     </div>
                                     <!-- Botones "Proceso" y "Finalizar" -->
                                     <div class="flex justify-between px-4 mt-4"> <!-- Contenedor de botones con espacio entre ellos -->
-                                        <button style="background-color: #FFDE59; width: 150px; text-align: center;" class="px-4 py-2 mr-4 text-black font-semibold rounded-2xl hover:bg-blue-600">Finalizar</button>
+                                        <button style="background-color: #FFDE59; width: 150px; text-align: center;" class="move-to-final-btn px-4 py-2 mr-4 text-black font-semibold rounded-2xl hover:bg-blue-600"  data-meta-id="{{ $meta->id }}">Finalizar</button>
                                     </div>
                                     <br>
                                 </div>
                                 @endforeach
                             @else
-                                <div class="cardMetas text-black mb-4 w-1/3 px-2 h-128 flex flex-col">
+                                <div id="no-metas-proceso-message" class="cardMetas text-black mb-4 w-1/3 px-2 h-128 flex flex-col">
                                     <div class="text-center w-full bg-gray-200" style="background-color: #D9D9D9; padding: 0; margin: 0!important;">
                                         <p class="titulo">No tienes metas en proceso.</p>
                                     </div>
@@ -240,9 +241,51 @@
                         <img src="{{asset('img/cuadro.png')}}" alt="Imagen pequeña" class="h-4 w-4"> <!-- Ajusté la imagen a un tamaño un poco más grande, puedes cambiarlo como prefieras -->
                         <p id="titulo" class="ml-4 mb-0">Finalizadas</p>
                     </div>
+                        @php
+                            $metasInicio = $metas->where('estado', 'final');
+                        @endphp
                     
-                    <div class="flex flex-col items-center h-full bg-gray-500">
-                        <!-- Contenido de la primera columna -->
+                    <div class="flex flex-col items-center h-full bg-gray-500" id="columna-final">
+                        @if ($metasInicio->count())
+                                @foreach ($metasInicio  as $meta)
+                                <div class="cardMetas text-black mb-4 w-1/3 px-2 h-128 flex flex-col" id="meta-{{ $meta->id }}" data-nombre="{{ $meta->nombre }}"> <!-- Cambio de flex a flex-col para estructura vertical -->
+                                    <!-- Título del meta (nombre) centrado y que abarque las dos columnas -->
+                                    <div class="text-left w-full bg-gray-200" style="background-color: #D9D9D9; padding: 0; margin: 0;">
+                                        <p class="titulo">Vencimiento: {{ $meta->fecha }}</p>
+                                    </div>
+                                    <div class="text-center w-full bg-gray-200" style="background-color: #D9D9D9; padding: 0; margin: 0!important;">
+                                        <h4 class="titulo">{{ $meta->nombre }}</h4>
+                                    </div>
+                                    <!-- Contenido principal en estructura horizontal -->
+                                    <div class="flex flex-1 mb-0">
+                                        <!-- Columna de la izquierda (Información) -->
+                                        <div class="flex-1 p-4 mb-0" style="width:80% !important; white-space: normal; overflow-wrap: break-word;">
+                                            <p class="truncated-text-d">{{ $meta->descripcion }}</p>
+                                            <button class="view-more-button-d" style="display:none; color: #72def1 !important">Ver más</button>
+                                            <button class="view-less-button-d" style="display:none; color: #72def1 !important">Ver menos</button>
+                                            <!-- Aquí puedes agregar más detalles si lo necesitas -->
+                                        </div>
+
+                                        <!-- Columna de la derecha (Botones) -->
+                                        <div class="flex flex-col mb-0 justify-center items-center p-4 space-y-2" style="width:20% !important"> <!-- space-y-2 da un espacio vertical entre los botones -->
+                                            <a class="focus:outline-none text-black p-2 mr-2 " data-id="{{ $meta->id }}" onclick="editar(event)">
+                                                <i class="fas fa-pencil-alt text-xl"></i> <!-- Ícono de lápiz de Font Awesome -->
+                                            </a>
+                                            <button class="focus:outline-none text-black p-2" onclick="eliminar({{ $meta->id }}, event)">
+                                                <i class="fas fa-trash-alt text-xl"></i> <!-- Ícono de bote de basura de Font Awesome -->
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <br>
+                                </div>
+                                @endforeach
+                            @else
+                                <div id="no-metas-final-message" class="cardMetas text-black mb-4 w-1/3 px-2 h-128 flex flex-col">
+                                    <div class="text-center w-full bg-gray-200" style="background-color: #D9D9D9; padding: 0; margin: 0!important;">
+                                        <p class="titulo">No tienes metas en proceso.</p>
+                                    </div>
+                                </div>
+                            @endif
                     </div>
                 </div>
             </div>
@@ -253,44 +296,6 @@
 @section('js')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<script>
-    function handleImageUpload(event) {
-        const input = event.target;
-        const imageContainer = input.parentElement;
-        const selectedImage = imageContainer.querySelector('.selected-image');
-
-        const file = input.files[0];
-        const reader = new FileReader();
-
-        reader.onload = function (e) {
-            selectedImage.style.backgroundImage = `url('${e.target.result}')`; // Add the URL here
-            if (e.target.result) {
-                editIcon.style.display = 'flex'; // Mostrar el ícono de lápiz si hay imagen
-            } else {
-                editIcon.style.display = 'none'; // Ocultar el ícono de lápiz si no hay imagen
-            }
-        };
-
-        reader.readAsDataURL(file);
-    }
-    document.getElementById('searchInput').addEventListener('input', function(e) {
-    const inputValue = e.target.value;
-    const clearInputBtn = document.getElementById('clearInput');
-    
-    if (inputValue) {
-        clearInputBtn.style.display = 'block';
-    } else {
-        clearInputBtn.style.display = 'none';
-    }
-    });
-
-    document.getElementById('clearInput').addEventListener('click', function() {
-        const searchInput = document.getElementById('searchInput');
-        searchInput.value = '';
-        this.style.display = 'none';
-    });
-
-</script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
     // Función para truncar el texto y mostrar el botón "ver más"
@@ -382,7 +387,11 @@
 
     
     // Función para mostrar el SweetAlert de confirmación antes de eliminar
-    function eliminar(id) {
+    function eliminar(id, event) {
+        if (event) {
+            event.stopPropagation();
+        }
+
         Swal.fire({
             title: '¿Estás seguro?',
             text: "¡No podrás revertir esto!",
@@ -398,23 +407,36 @@
             }
         });
     }
+    function editar(event) {
+        // Detener la propagación del evento
+        event.stopPropagation();
+        // Tomar el ID de la meta desde el elemento que desencadenó el evento
+        let id = event.target.closest('a').getAttribute('data-id');
+        // Redirige a la ruta de edición con el ID correcto
+        window.location.href = "{{ route('metas.editar', ':id') }}".replace(':id', id);
+    }
+
 
 </script>
 <script>
-    // Configuración del token CSRF para todas las solicitudes AJAX
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
+ // Configuración del token CSRF para todas las solicitudes AJAX
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
 
+// Manejar clic en el botón "Mover a Proceso"
 $('.move-to-proceso-btn').click(function() {
     var btn = $(this);
     var metaId = btn.data('meta-id');
     var tarjeta = $('#meta-' + metaId);
     var columnaProceso = $('#columna-proceso'); // Selecciona la columna "Proceso"
 
+    // Contar la cantidad de metas en estado "Inicio"
     var metasInicioCount = $('.cardMetas[data-estado="inicio"]').length;
+
+    // Realizar solicitud AJAX para cambiar el estado
     $.ajax({
         url: '{{ route('metas.cambiarEstado') }}',
         method: 'POST',
@@ -424,32 +446,107 @@ $('.move-to-proceso-btn').click(function() {
         },
         success: function(response) {
             if (response.success) {
-            console.log('Estado cambiado exitosamente');
+                console.log('Estado cambiado exitosamente');
 
-            // Desactiva el evento click del botón "Proceso" para esta tarjeta
-            btn.off('click');
+                // Desactivar el evento click del botón "Mover a Proceso" para esta tarjeta
+                btn.off('click');
 
-            // Mueve la tarjeta a la columna "Proceso"
-            tarjeta.appendTo(columnaProceso);
+                // Mover la tarjeta a la columna "Proceso"
+                tarjeta.appendTo(columnaProceso);
 
-            // Cambia el botón "Proceso" al botón "Finalizar" en la tarjeta
-            // Adjunta un nuevo evento click para el botón "Finalizar"
-            finalizarBtn.click(function() {
-                // Aquí puedes implementar la lógica para finalizar la meta
-            });
-            // Verificar si quedan metas por iniciar
-            if (metasInicioCount === 1) {
-                    // Mostrar el mensaje de "No tienes metas por iniciar"
-                    $('.no-metas-inicio-message').show();
-                }
+                btn.hide();
 
-        } else {
-            console.log('Error al cambiar el estado: ' + response.message);
-        }
+                // Verificar si hay metas en proceso
+                setTimeout(function() {
+                    var metasProcesoCount = $('#columna-proceso .cardMetas').length;
+                    if (metasProcesoCount > 0) {
+                        // Ocultar el mensaje de "No tienes metas en proceso"
+                        $('#no-metas-proceso-message').hide();
+                    } else {
+                        // Mostrar el mensaje de "No tienes metas en proceso"
+                        $('#no-metas-proceso-message').show();
+                    }
+                }, 100);
+            } else {
+                console.log('Error al cambiar el estado: ' + response.message);
+            }
         },
     });
 });
 
+// Manejar clic en el botón "Mover a Final"
+$('.move-to-final-btn').click(function() {
+    var btn = $(this);
+    var metaId = btn.data('meta-id');
+    var tarjeta = $('#meta-' + metaId);
+    var columnaFinal = $('#columna-final'); // Selecciona la columna "Final"
+
+    // Contar la cantidad de metas en estado "Inicio"
+    var metasInicioCount = $('.cardMetas[data-estado="inicio"]').length;
+
+    // Realizar solicitud AJAX para cambiar el estado
+    $.ajax({
+        url: '{{ route('metas.cambiarEstado') }}',
+        method: 'POST',
+        data: {
+            meta_id: metaId,
+            estado: 'final' // Cambia este valor según tu necesidad
+        },
+        success: function(response) {
+            if (response.success) {
+                console.log('Estado cambiado exitosamente');
+
+                // Desactivar el evento click del botón "Mover a Final" para esta tarjeta
+                btn.off('click');
+
+                // Mover la tarjeta a la columna "Final"
+                tarjeta.appendTo(columnaFinal);
+
+                btn.hide();
+
+                // Verificar si hay metas en proceso
+                setTimeout(function() {
+                    var metasFinalCount = $('#columna-final .cardMetas').length;
+                    if (metasFinalCount > 0) {
+                        // Ocultar el mensaje de "No tienes metas en final"
+                        $('#no-metas-final-message').hide();
+                    } else {
+                        // Mostrar el mensaje de "No tienes metas en final"
+                        $('#no-metas-final-message').show();
+                    }
+                }, 100);
+            } else {
+                console.log('Error al cambiar el estado: ' + response.message);
+            }
+        },
+    });
+});
+
+// Función para filtrar las tarjetas según la búsqueda
+$(document).ready(function() {
+    $('#searchInput').on('keyup', function() {
+        var value = $(this).val().toLowerCase();
+
+        // Ocultar todas las tarjetas primero
+        $('.cardMetas').hide();
+
+        // Mostrar solo las tarjetas que coincidan con la búsqueda
+        $(".cardMetas").filter(function() {
+            var nombre = $(this).data('nombre');
+            if (nombre) {
+                return nombre.toLowerCase().indexOf(value) > -1;
+            }
+            return false; // Si no hay data-nombre, no mostramos la tarjeta.
+        }).show();
+
+        // Verificar si no hay tarjetas visibles y mostrar el mensaje adecuado
+        if($("#columna-final .cardMetas:visible").length == 0) {
+            $("#no-metas-final-message").show();
+        } else {
+            $("#no-metas-final-message").hide();
+        }
+    });
+});
 
 
 

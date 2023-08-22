@@ -1,7 +1,7 @@
 @extends('layouts.appUser')
 
 @section('titulo')
-    Ejercitate
+    Metas
 @endsection
 
 @section('css')
@@ -70,8 +70,8 @@
 
     <!-- Formulario -->
     <div class="rounded-xl text-white w-4/5 mb-8" style="background-color:rgba(53, 58, 80, 0.67); padding: 40px">
-        <!-- Formulario para agregar Gym And Boxes -->
-        <form action="{{route('metas.store')}}" class="text-white rounded-lg p-4" enctype="multipart/form-data" method="POST" novalidate>
+        <!-- Formulario para editar una meta -->
+        <form action="{{route('meta.update')}}" class="text-white rounded-lg p-4" enctype="multipart/form-data" method="POST" novalidate>
             @csrf
 
             <!-- Mensaje de sesión -->
@@ -81,7 +81,9 @@
                 </p>
             @endif
 
-            <!-- Información del Gym And Boxes -->
+            <input name="id" type="hidden" value="{{$meta->id }}">
+
+            <!-- Información de la meta -->
             <div class="flex">
                 <div class="flex flex-col" style="width:60% !important">
                     
@@ -128,7 +130,7 @@
             <!-- Botones de acción -->
             <div class="flex justify-end mt-4">
                 <button style="background-color: #FFDE59; width: 150px; text-align: center;" type="submit" class="px-4 py-2 mr-4 text-black font-semibold rounded-2xl hover:bg-blue-600">Agregar</button>
-                <a href="{{route('gymBoxes.index')}}" type="submit" class="px-4 py-2 bg-white text-black font-semibold rounded-2xl hover:bg-blue-600" style="width: 150px; text-align: center;">Cancelar</a>
+                <a href="{{route('metas.index')}}" type="submit" class="px-4 py-2 bg-white text-black font-semibold rounded-2xl hover:bg-blue-600" style="width: 150px; text-align: center;">Cancelar</a>
             </div>
         </form>
         

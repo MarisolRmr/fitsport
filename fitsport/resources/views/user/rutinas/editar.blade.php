@@ -1,7 +1,7 @@
 @extends('layouts.appUser')
 
 @section('titulo')
-    Metas
+    Rutina
 @endsection
 
 @section('css')
@@ -65,13 +65,13 @@
     <!-- Encabezado -->
     <div class="rounded-xl flex text-white items-center w-4/5 mb-4" style="background-color:rgba(53, 58, 80, 0.67); padding: 15px">
         <img src="{{asset('img/cuadro.png')}}" alt="Imagen pequeña" class="h-8 w-8">
-        <p id="titulo" class="ml-4 mb-0">Agregar meta</p>
+        <p id="titulo" class="ml-4 mb-0">Editar rutina</p>
     </div>
 
     <!-- Formulario -->
     <div class="rounded-xl text-white w-4/5 mb-8" style="background-color:rgba(53, 58, 80, 0.67); padding: 40px">
-        <!-- Formulario para agregar metas -->
-        <form action="{{route('metas.store')}}" class="text-white rounded-lg p-4" enctype="multipart/form-data" method="POST" novalidate>
+        <!-- Formulario para agregar rutina -->
+        <form action="{{route('rutina.update')}}" class="text-white rounded-lg p-4" enctype="multipart/form-data" method="POST" novalidate>
             @csrf
 
             <!-- Mensaje de sesión -->
@@ -80,27 +80,17 @@
                     {{session('mensaje')}}
                 </p>
             @endif
+            <input name="id" type="hidden" value="{{$rutina->id }}">
 
-            <!-- Información de metas -->
+            <!-- Información de rutina -->
             <div class="flex">
                 <div class="flex flex-col" style="width:60% !important">
                     
                     <!-- Campo Nombre -->
                     <div class="mb-8">
                         <label for="nombre" class="text-lg font-bold">Nombre:</label>
-                        <input style="color:black;" name="nombre" value="{{old('nombre')}}" type="text" id="nombre" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error ('nombre') border-red-500 @enderror" placeholder="Ingresa tu nombre">
+                        <input style="color:black;" name="nombre" value="{{$rutina->nombre }}" type="text" id="nombre" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error ('nombre') border-red-500 @enderror" placeholder="Ingresa tu nombre">
                         @error('nombre')
-                            <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
-                                {{$message}}
-                            </p>    
-                        @enderror
-                    </div>
-
-                    <!-- Campo Fecha -->
-                    <div class="mb-8">
-                        <label for="fecha" class="text-lg font-bold">Fecha:</label>
-                        <input style="color:black;" name="fecha" value="{{old('fecha')}}" type="date" id="fecha" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error ('fecha') border-red-500 @enderror">
-                        @error('fecha')
                             <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                                 {{$message}}
                             </p>    
@@ -110,7 +100,7 @@
                     <!-- Descripción -->
                     <div>
                         <label for="descripcion" class="text-lg font-bold mt-0">Descripción:</label>
-                        <textarea id="descripcion" name="descripcion" style="color:black;" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error('descripcion') border-red-500 @enderror" placeholder="Ingresa una descripción">{{old('descripcion')}}</textarea>
+                        <textarea id="descripcion" name="descripcion" style="color:black;" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error('descripcion') border-red-500 @enderror" placeholder="Ingresa una descripción">{{$rutina->descripcion }}</textarea>
                         @error('descripcion')
                             <p style="background-color: #f56565; color: #fff; margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                                 {{$message}}
@@ -122,13 +112,13 @@
 
                 <!-- Campo Imagen -->
                 <div class="ml-2" style="width:40% !important">
-                    <img src="{{asset('img/user/metas.png')}}" alt="Descripción de la imagen" style="max-width:100%; height:auto;">
+                    <img src="{{asset('img/user/metas2.png')}}" alt="Descripción de la imagen" style="max-width:100%; height:auto;">
                 </div>
             </div>
             <!-- Botones de acción -->
             <div class="flex justify-end mt-4">
                 <button style="background-color: #FFDE59; width: 150px; text-align: center;" type="submit" class="px-4 py-2 mr-4 text-black font-semibold rounded-2xl hover:bg-blue-600">Agregar</button>
-                <a href="{{route('metas.index')}}" type="submit" class="px-4 py-2 bg-white text-black font-semibold rounded-2xl hover:bg-blue-600" style="width: 150px; text-align: center;">Cancelar</a>
+                <a href="{{route('rutina.index')}}" type="submit" class="px-4 py-2 bg-white text-black font-semibold rounded-2xl hover:bg-blue-600" style="width: 150px; text-align: center;">Cancelar</a>
             </div>
         </form>
         

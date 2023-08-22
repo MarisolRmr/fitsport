@@ -1,7 +1,7 @@
 @extends('layouts.appUser')
 
 @section('titulo')
-    Metas
+    Rutina
 @endsection
 
 @section('css')
@@ -65,13 +65,13 @@
     <!-- Encabezado -->
     <div class="rounded-xl flex text-white items-center w-4/5 mb-4" style="background-color:rgba(53, 58, 80, 0.67); padding: 15px">
         <img src="{{asset('img/cuadro.png')}}" alt="Imagen pequeña" class="h-8 w-8">
-        <p id="titulo" class="ml-4 mb-0">Agregar meta</p>
+        <p id="titulo" class="ml-4 mb-0">Agregar rutina</p>
     </div>
 
     <!-- Formulario -->
     <div class="rounded-xl text-white w-4/5 mb-8" style="background-color:rgba(53, 58, 80, 0.67); padding: 40px">
         <!-- Formulario para agregar metas -->
-        <form action="{{route('metas.store')}}" class="text-white rounded-lg p-4" enctype="multipart/form-data" method="POST" novalidate>
+        <form action="{{route('rutina.store')}}" class="text-white rounded-lg p-4" enctype="multipart/form-data" method="POST" novalidate>
             @csrf
 
             <!-- Mensaje de sesión -->
@@ -90,17 +90,6 @@
                         <label for="nombre" class="text-lg font-bold">Nombre:</label>
                         <input style="color:black;" name="nombre" value="{{old('nombre')}}" type="text" id="nombre" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error ('nombre') border-red-500 @enderror" placeholder="Ingresa tu nombre">
                         @error('nombre')
-                            <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
-                                {{$message}}
-                            </p>    
-                        @enderror
-                    </div>
-
-                    <!-- Campo Fecha -->
-                    <div class="mb-8">
-                        <label for="fecha" class="text-lg font-bold">Fecha:</label>
-                        <input style="color:black;" name="fecha" value="{{old('fecha')}}" type="date" id="fecha" class="w-full mt-1 p-2 border border-white rounded-lg focus:outline-none focus:border-blue-300 @error ('fecha') border-red-500 @enderror">
-                        @error('fecha')
                             <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                                 {{$message}}
                             </p>    

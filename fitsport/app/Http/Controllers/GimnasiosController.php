@@ -10,9 +10,19 @@ use Intervention\Image\Facades\Image;
 class GimnasiosController extends Controller
 {
     //Constructor del controlador
-    public function __construct(){
-        //Middleware para proteger las rutas con autenticación
+    public function __construct()
+    {
+        // Middleware para proteger las rutas con autenticación
         $this->middleware('auth');
+        // Middleware para verificar si el usuario es administrador
+        $this->middleware(function ($request, $next) {
+            if (auth()->user()->tipo_id !== 1) {
+                abort(403, 'Acceso no autorizado.');
+            }
+            return $next($request);
+        })->only([
+            'index', 'create', 'store', 'edit', 'update', 'delete'
+        ]);
     }
 
     //Método para mostrar todos los gimnasios
@@ -242,5 +252,27 @@ class GimnasiosController extends Controller
 
         //Redireccionamos al index con mensaje de éxito
         return redirect()->route('gymBoxes.index')->with('success', 'Gym/Box eliminado correctamente');
+    }
+
+    //Método para mostrar todos los gimnasios
+    public function index_atleta() {
+        //Obtenemos todos los gimnasios
+        $gimnasios = Gimnasios::all();
+    
+        // Retornamos la vista 'verProductos' y pasamos los productos como una variable llamada 'productos'
+        return view('user.gymAndBoxes.mostrar')->with('gimnasios', $gimnasios);
+    }
+    public function buscar(Request $request) {
+        $query = $request->input('query');
+        $noticias = Gimnasios::where('nombre', 'LIKE', '%' . $query . '%')->get();
+        
+        return response()->json($noticias);
+    }
+
+    //vista de detalles de noticia
+    public function detalles_index($id){
+        // Busca la noticia por ID 
+        $gimnasio = Gimnasios::with('entrenadores')->find($id);
+        return view('user.gymAndBoxes.detalles')->with(['gimnasio' => $gimnasio ]);
     }
 }

@@ -27,22 +27,14 @@ class MetasController extends Controller
 
     public function store(Request $request)
     {
-        // Guardar la imagen temporalmente en el sistema de archivos si la validación falla
-        if ($request->hasFile('imagen') && $request->file('imagen')->isValid()) {
-            $imagenTemporal = file_get_contents($request->file('imagen')->getRealPath());
-            $request->session()->flash('cachedImage', base64_encode($imagenTemporal));
-        }elseif ($request->has('cachedImage')) {
-            // Si la solicitud incluye un campo "cachedImage", reutiliza el valor existente
-            $request->session()->flash('cachedImage', $request->cachedImage);
-        }
         //Validamos los datos del formulario
         $request->validate([
             'nombre' => 'required',
-            'fecha' => 'required',
+            'fecha' => 'required|date|after_or_equal:today',
             'descripcion' => 'required',
         ]);
 
-        //Creamos el gimnasio
+        //Creamos la meta
         Evento::create([
             'nombre' => $request->nombre,
             'fecha' => $request->fecha,
@@ -55,9 +47,8 @@ class MetasController extends Controller
         //Redireccionamos al index
         return redirect()->route('metas.index')->with('success', 'Meta registrada correctamente');
     }
-
+     // Cambia el estado de una meta (Proceso o Finalizada)
     public function cambiarEstado(Request $request) {
-        \Log::info('Método cambiarEstado llamado con datos:', $request->all());
         $metaId = $request->input('meta_id');
         $estado = $request->input('estado');
         
@@ -77,7 +68,7 @@ class MetasController extends Controller
             return response()->json(['success' => false, 'message' => 'Meta no encontrada']);
         }
     }
-
+    // Muestra el formulario de edición de una meta
     public function edit($id_metas){
         //Buscamos el gimnasio por el ID
         $meta= Evento::find($id_metas);
@@ -85,18 +76,42 @@ class MetasController extends Controller
         return view('user.metas.editar',["meta"=>$meta]);
     }
 
-    
+    //Método para actualizar una meta
+    public function update(Request $request)
+    {
+
+        //Validamos los datos del formulario
+        $this->validate($request, [
+            'nombre' => 'required',
+            'fecha' => 'required',
+            'descripcion' => 'required',
+        ]);
+
+        //Actualizamos la meta
+        Evento::where('id', $request->id)->update([
+            'nombre' => $request->nombre,
+            'fecha' => $request->fecha,
+            'descripcion' => $request->descripcion,
+            
+        ]);
+
+        //Redireccionamos al index
+        return redirect()->route('metas.index')->with('success', 'Meta actualizada correctamente');
+    }
+
+
+
 
 
     public function delete($id_meta)
     {
-        // Buscamos el gimnasio por su ID
+        // Buscamos la meta por su ID
         $meta = Evento::find($id_meta);
 
-        // Eliminamos el gimnasio
+        // Eliminamos la meta
         $meta->delete();
 
         //Redireccionamos al index con mensaje de éxito
-        return redirect()->route('metas.index')->with('success', 'Nutriologo eliminado correctamente');
+        return redirect()->route('metas.index')->with('success', 'Meta eliminada correctamente');
     }
 }

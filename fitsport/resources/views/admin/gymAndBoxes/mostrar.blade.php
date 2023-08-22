@@ -135,10 +135,18 @@
     <div class="rounded-xl text-white w-4/5 mb-8" style="background-color: rgba(53, 58, 80, 0.67); padding: 40px">
         <div class="rounded-xl p-4 text-white overflow-x-auto" style="background: #64677893;">
             <!-- Mensaje de éxito si se agrega un nuevo gimnasio -->
+            <!-- Mensaje de éxito con alerta SweetAlert -->
             @if(session('agregada'))
-                <div class="bg-green-200 p-2 rounded-lg mb-6 text-black text-center ">
-                    {{ session('agregada') }}
-                </div>
+                <script>
+                    Swal.fire({
+                        title: 'Éxito',
+                        text: '{{ session('agregada') }}',
+                        icon: 'success',
+                        timer: 4000, 
+                        timerProgressBar: true,
+                        showConfirmButton: false,
+                    });
+                </script>
             @endif
             <!-- Mensaje de éxito con alerta SweetAlert -->
             @if(session('success'))

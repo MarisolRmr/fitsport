@@ -173,7 +173,7 @@
                 @foreach ($nutriologo as $nutriologo)
                     <tr>
                         <td>{{ $nutriologo->id }}</td>
-                        <td class="actions-cell"><a href="{{ route('admNutriologo.view', $nutriologo->id) }}" class="edit-button">{{$nutriologo->nombre}}</a></td>
+                        <td>{{ $nutriologo->nombre }}</td>
                         <td>{{ $nutriologo->apellido }}</td>
                         <td>{{ $nutriologo->telefono }}</td>
                         <td>{{ date('g:i a', strtotime($nutriologo->horaEntrada)) }} - {{ date('g:i a', strtotime($nutriologo->horaSalida)) }} </td>

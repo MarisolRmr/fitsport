@@ -239,11 +239,18 @@ class NutriologoController extends Controller
                 unlink($imagenPath); 
             }
         }
+<<<<<<< HEAD
         // Eliminamos el nutriologo
+=======
+
+        // Eliminamos el gimnasio
+>>>>>>> 542389b0c4cc065e86091fa61fe5d0d4742c4b59
         $nutriologo->delete();
+
         //Redireccionamos al index con mensaje de éxito
         return redirect()->route('admNutriologo.index')->with('success', 'Nutriologo eliminado correctamente');
     }
+<<<<<<< HEAD
     public function view($id_nutriologo){
         $nutriologo= User::find($id_nutriologo);
         //Se retorna a la vista
@@ -282,4 +289,6 @@ class NutriologoController extends Controller
         return view('user.nutriologos.vernutriologo', ["nutriologo" => $nutriologo]);
     }
 
+=======
+>>>>>>> 542389b0c4cc065e86091fa61fe5d0d4742c4b59
 }

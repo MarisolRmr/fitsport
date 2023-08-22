@@ -168,13 +168,28 @@
                         @else
                             <img src="{{asset('img/SinImagen.jpg')}}" alt="Imagen de la marca" class="max-w-full h-auto" style="border-radius:50%; height:180px; fit:content; ">
                         @endif
-                        <div class="rating flex justify-center" style="font-size:35px">
-                          <span class="star">★</span>
-                          <span class="star">★</span>
-                          <span class="star">★</span>
-                          <span class="star">★</span>
-                          <span class="star">★</span>
-                      </div>
+                        @php
+                            $totalCalificaciones = count($data->opiniones);
+                            $sumaCalificaciones = 0;
+                            
+                            foreach ($data->opiniones as $opinion) {
+                                $sumaCalificaciones += $opinion->calificacion;
+                            }
+                            
+                            $promedioCalificaciones = ($totalCalificaciones > 0) ? $sumaCalificaciones / $totalCalificaciones : 0;
+                            $promedioCalificaciones = number_format($promedioCalificaciones, 1);
+                            $promedioTruncado = floor($promedioCalificaciones);
+                        @endphp
+                        
+                        <div class="flex justify-center w-full ml-4" style="font-size: 25px">
+                            <span class="mr-2">{{ $promedioCalificaciones }}</span>
+                            @for ($i = 0; $i < $promedioTruncado; $i++)
+                                <span class="star starred">★</span>
+                            @endfor
+                            @for ($i = $promedioTruncado; $i < 5; $i++)
+                                <span class="star">★</span>
+                            @endfor
+                        </div>
                         <a href="{{route('gymBoxes.detalles',$data->id)}}" class="mt-2">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="w-6 h-6">
                                 <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z" clip-rule="evenodd" />
@@ -195,24 +210,7 @@
 @endsection
 
 @section('js')
-<script>
-    const ratings = document.querySelectorAll(".rating");
 
-    ratings.forEach(rating => {
-        const stars = rating.querySelectorAll(".star");
-        stars.forEach(star => {
-            star.addEventListener("click", () => {
-                stars.forEach((s, index) => {
-                    if (index <= Array.from(stars).indexOf(star)) {
-                        s.classList.add("starred");
-                    } else {
-                        s.classList.remove("starred");
-                    }
-                });
-            });
-        });
-    });
-</script>
 
 
 <script>
@@ -376,20 +374,38 @@ document.getElementById('searchInput').addEventListener('input', function(e) {
 
         response.data.forEach(data => {
             let imgSrc = data.fotografia ? `/ImgGymBoxes/${data.fotografia}` : '/img/SinImagen.jpg';
+            // Calcular promedio de calificaciones
+            let totalCalificaciones = data.opiniones.length;
+            let sumaCalificaciones = 0;
+            data.opiniones.forEach(opinion => {
+                sumaCalificaciones += opinion.calificacion;
+            });
+            let promedioCalificaciones = totalCalificaciones > 0 ? sumaCalificaciones / totalCalificaciones : 0;
+            promedioCalificaciones = promedioCalificaciones.toFixed(1); // Limitar a 1 decimal
+
+            let promedioTruncado = Math.floor(promedioCalificaciones);
 
             // Crear tarjeta y agregarla al contenedor
             let card = `
             <div class="card text-white mb-8">
                 <div class="flex flex-col items-center">
-                    <p class="text-lg font-bold">${data.nombre}</p>
+                    <div class="flex text-white items-center justify-center w-full mb-2" >
+                      <img src="{{ asset('img/cuadro.png') }}" alt="Imagen pequeña" class="h-8 w-8">
+                      <p id="titulo" class="ml-4 mb-0">${data.nombre}</p>
+                    </div>
                     <img src="${imgSrc}" alt="Imagen del gimnasio" class="max-w-full h-auto" style="border-radius:50%; height:180px; fit:content">
-                    <div class="rating flex justify-center" style="font-size:35px">
-                          <span class="star">★</span>
-                          <span class="star">★</span>
-                          <span class="star">★</span>
-                          <span class="star">★</span>
-                          <span class="star">★</span>
-                      </div>
+                    <div class="rating flex justify-center" style="font-size:25px">
+                    <span class="mr-2">${promedioCalificaciones }</span>
+                        `;
+            for (let i = 0; i < 5; i++) {
+                if (i < promedioTruncado) {
+                    card += '<span class="star starred">★</span>';
+                } else {
+                    card += '<span class="star">★</span>';
+                }
+            }
+            card += `
+                    </div>
                     <a href="${getDetallesUrl(data.id)}" class="mt-2">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="w-6 h-6">
                             <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z" clip-rule="evenodd" />
@@ -397,16 +413,19 @@ document.getElementById('searchInput').addEventListener('input', function(e) {
                     </a>
                 </div>
             </div>`;
+
             cardsContainer.innerHTML += card;
-            function getDetallesUrl(id) {
-              return `/GymAndBoxes/${id}/detalle`;
-          }
         });
     })
     .catch(function(error) {
         console.log(error);
     });
 });
+
+function getDetallesUrl(id) {
+    return `/GymAndBoxes/${id}/detalle`;
+}
+
 
 </script>
 @endsection

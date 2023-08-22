@@ -18,6 +18,7 @@
     #hora:focus{
         color:black !important;
     }
+   
     #titulo{
         font-family: 'Poppins'!important;
         font-size: 120%;
@@ -122,7 +123,7 @@
 @endsection
 @section('contenido_top')
 <div class="absolute bg-y-50 w-full top-0 bg-[url('{{asset ('img/admin.png')}}')] min-h-75">
-    <span class="absolute top-0 left-0 w-full h-full bg-black opacity-60"></span>
+  <span class="absolute top-0 left-0 w-full h-full bg-black opacity-60"></span>
 </div>
 @endsection
 
@@ -149,6 +150,7 @@
             @endif
             <!-- Campo oculto para el ID del gimnasio a editar -->
             <input name="id" type="hidden" value="{{$nutriologo->id }}">
+
             <!-- Información del Gym And Boxes -->
             <div class="flex">
                 <div class=" flex flex-col mb-2" style="width:80% !important">

@@ -70,9 +70,6 @@ Route::get('/entrenador', [EntrenadorAdController::class,'index'])->name('entren
 //Ruta para la vista de agregar entrenador
 Route::get('/entrenador/create', [EntrenadorAdController::class,'create'])->name('entrenador.create');
 //Ruta para guardar los datos del entrenado
-Route::get('/entrenador/create', [EntrenadorAdController::class,'create'])->name('entrenador.create');
-//Ruta para visualizar el entrenador
-Route::get('/entrenador/view/{id}', [EntrenadorAdController::class, 'view'])->name('entrenador.verEntrenador');
 Route::post('/entrenador/create', [EntrenadorAdController::class,'store'])->name('entrenador.store');
 Route::get('/entreador/edit/{id}', [EntrenadorAdController::class, 'edit'])->name('entrenador.editar');
 Route::post('/updateEntrenador', [EntrenadorAdController::class, 'update'])->name('entrenador.update');
@@ -111,14 +108,6 @@ Route::post('/Nutriologo/agregar',[NutriologoController::class,'store'])->name('
 Route::get('/Nutriologo/delete/{id}', [NutriologoController::class, 'delete'])->name('admNutriologo.eliminar');
 Route::get('/Nutriologo/edit/{id}', [NutriologoController::class, 'edit'])->name('admNutriologo.editar');
 Route::post('/updateNutriologo', [NutriologoController::class, 'update'])->name('admNutriologo.update');
-//Ruta para visualizar el nutriologo en administrador
-Route::get('/Nutriologo/view/{id}', [NutriologoController::class, 'view'])->name('admNutriologo.view');
-//ver lo s nutriologos de parte del atleta
-Route::get('/Nutriologos', [NutriologoController::class,'nutriologos'])->name('nutriologos.mostrar');
-//Ruta para buscar el nutriologo
-Route::get('/Nutriologos/buscando', [NutriologoController::class, 'buscar'])->name('nutriologos.buscar'); 
-//Ruta para visualizar el nutriologo 
-Route::get('/Nutriologos/view/{id}', [NutriologoController::class, 'viewN'])->name('nutriologos.verDatosNutriologo');
 
 //perfil
 Route::get('/perfil', [PerfilController::class,'index'])->name('perfil.index');
@@ -143,12 +132,10 @@ Route::get('/Metas/edit/{id}', [MetasController::class, 'edit'])->name('metas.ed
 Route::post('/updateMeta', [MetasController::class, 'update'])->name('meta.update');
 Route::get('/Metas/delete/{id}', [MetasController::class, 'delete'])->name('metas.eliminar');
 
-
-
+Route::post('/GymAndBoxes/opinion/agregar',[GimnasiosController::class,'store_opinion'])->name('opinion.store');
 Route::get('/GymAndBoxes-atleta',[GimnasiosController::class,'index_atleta'])->name('gymBoxes.index_atleta');
 Route::get('/gimnasios/buscando', [GimnasiosController::class, 'buscar'])->name('gymBoxes.buscar'); 
 Route::get('/GymAndBoxes/{id}/detalle', [GimnasiosController::class, 'detalles_index'])->name('gymBoxes.detalles');
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 //                                  RUTAS PARA RUTINAS
@@ -161,3 +148,4 @@ Route::get('/Rutina/edit/{id}', [RutinaController::class, 'edit'])->name('rutina
 Route::post('/updateMeta', [RutinaController::class, 'update'])->name('rutina.update');
 Route::get('/Rutina/buscando', [RutinaController::class, 'buscar'])->name('rutina.buscar'); 
 Route::get('/Rutina/delete/{id}', [RutinaController::class, 'delete'])->name('rutina.eliminar');
+

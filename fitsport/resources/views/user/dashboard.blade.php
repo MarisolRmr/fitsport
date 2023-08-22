@@ -27,22 +27,25 @@
     <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
       <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border" style="background-color: rgba(53, 58, 80, 0.67);">
         <div class="flex-auto p-4">
-          <div class="flex flex-row -mx-3">
-            <div class="flex-none w-2/3 max-w-full px-3">
-              <div>
-                <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase text-white dark:opacity-60">Registrar</p>
-                <h5 class="mb-2 font-bold text-white">Gyms</h5>
-                <p class="mb-0 dark:text-white dark:opacity-60">
-                  <span class="text-sm font-bold leading-normal text-emerald-500">Gyms and Boxes</span>
-                </p>
+          <a href="{{route('metas.index')}}">
+            <div class="flex flex-row -mx-3">
+              <div class="flex-none w-2/3 max-w-full px-3">
+                <div>
+                  <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase text-white dark:opacity-60"> </p>
+                  <h5 class="mb-2 font-bold text-white">Metas</h5>
+                  <p class="mb-0 dark:text-white dark:opacity-60">
+                    <span class="text-sm font-bold leading-normal text-emerald-500">Mis metas</span>
+                  </p>
+                </div>
+              </div>
+              <div class="px-3 text-right basis-1/3">
+                <div class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-blue-500 to-violet-500">
+                  <i class="ni leading-none ni-money-coins text-lg relative top-3.5 text-white"></i>
+                </div>
               </div>
             </div>
-            <div class="px-3 text-right basis-1/3">
-              <div class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-blue-500 to-violet-500">
-                <i class="ni leading-none ni-money-coins text-lg relative top-3.5 text-white"></i>
-              </div>
-            </div>
-          </div>
+          </a>
+          
         </div>
       </div>
     </div>
@@ -51,22 +54,26 @@
     <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
       <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border" style="background-color: rgba(53, 58, 80, 0.67);">
         <div class="flex-auto p-4">
-          <div class="flex flex-row -mx-3">
-            <div class="flex-none w-2/3 max-w-full px-3">
-              <div>
-                <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase text-white dark:opacity-60">Registrar</p>
-                <h5 class="mb-2 font-bold text-white">Nutriólogos</h5>
-                <p class="mb-0 dark:text-white dark:opacity-60">
-                  <span class="text-sm font-bold leading-normal text-emerald-500">Nutriólogos</span>
-                </p>
+          <a href="{{route('rutina.index')}}">
+          
+            <div class="flex flex-row -mx-3">
+              <div class="flex-none w-2/3 max-w-full px-3">
+                <div>
+                  <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase text-white dark:opacity-60"> </p>
+                  <h5 class="mb-2 font-bold text-white">Rutinas</h5>
+                  <p class="mb-0 dark:text-white dark:opacity-60">
+                    <span class="text-sm font-bold leading-normal text-emerald-500">Mis rutinas</span>
+                  </p>
+                </div>
+              </div>
+              <div class="px-3 text-right basis-1/3">
+                <div class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-red-600 to-orange-600">
+                  <i class="ni leading-none ni-world text-lg relative top-3.5 text-white"></i>
+                </div>
               </div>
             </div>
-            <div class="px-3 text-right basis-1/3">
-              <div class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-red-600 to-orange-600">
-                <i class="ni leading-none ni-world text-lg relative top-3.5 text-white"></i>
-              </div>
-            </div>
-          </div>
+          
+          </a>
         </div>
       </div>
     </div>
@@ -75,22 +82,26 @@
     <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
       <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border" style="background-color: rgba(53, 58, 80, 0.67);">
         <div class="flex-auto p-4">
-          <div class="flex flex-row -mx-3">
-            <div class="flex-none w-2/3 max-w-full px-3">
-              <div>
-                <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase text-white dark:opacity-60">Registrar</p>
-                <h5 class="mb-2 font-bold text-white">Entrenadores</h5>
-                <p class="mb-0 dark:text-white dark:opacity-60">
-                  <span class="text-sm font-bold leading-normal text-emerald-500">Entrenadores</span>
-                </p>
+          <a href="{{route('gymBoxes.index_atleta')}}">
+            <div class="flex flex-row -mx-3">
+              <div class="flex-none w-2/3 max-w-full px-3">
+                <div>
+                  <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase text-white dark:opacity-60"> </p>
+                  <h5 class="mb-2 font-bold text-white">Gym</h5>
+                  <p class="mb-0 dark:text-white dark:opacity-60">
+                    <span class="text-sm font-bold leading-normal text-emerald-500">Gym & Boxes</span>
+                  </p>
+                </div>
+              </div>
+              <div class="px-3 text-right basis-1/3">
+                <div class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-emerald-500 to-teal-400">
+                  <i class="ni leading-none ni-paper-diploma text-lg relative top-3.5 text-white"></i>
+                </div>
               </div>
             </div>
-            <div class="px-3 text-right basis-1/3">
-              <div class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-emerald-500 to-teal-400">
-                <i class="ni leading-none ni-paper-diploma text-lg relative top-3.5 text-white"></i>
-              </div>
-            </div>
-          </div>
+          
+          </a>
+          
         </div>
       </div>
     </div>
@@ -99,22 +110,26 @@
     <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
       <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border" style="background-color: rgba(53, 58, 80, 0.67);">
         <div class="flex-auto p-4">
-          <div class="flex flex-row -mx-3">
-            <div class="flex-none w-2/3 max-w-full px-3">
-              <div>
-                <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase text-white dark:opacity-60">Registrar</p>
-                <h5 class="mb-2 font-bold text-white">Atletas</h5>
-                <p class="mb-0 dark:text-white dark:opacity-60">
-                  <span class="text-sm font-bold leading-normal text-emerald-500">Atletas</span>
-                </p>
+          <a href=" {{route('ejercitate.mostrar')}}">
+            <div class="flex flex-row -mx-3">
+              <div class="flex-none w-2/3 max-w-full px-3">
+                <div>
+                  <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase text-white dark:opacity-60"> </p>
+                  <h5 class="mb-2 font-bold text-white">Ejercitate</h5>
+                  <p class="mb-0 dark:text-white dark:opacity-60">
+                    <span class="text-sm font-bold leading-normal text-emerald-500">Ejercicios</span>
+                  </p>
+                </div>
+              </div>
+              <div class="px-3 text-right basis-1/3">
+                <div class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-emerald-500 to-teal-400">
+                  <i class="ni leading-none ni-paper-diploma text-lg relative top-3.5 text-white"></i>
+                </div>
               </div>
             </div>
-            <div class="px-3 text-right basis-1/3">
-              <div class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-emerald-500 to-teal-400">
-                <i class="ni leading-none ni-paper-diploma text-lg relative top-3.5 text-white"></i>
-              </div>
-            </div>
-          </div>
+
+          </a>
+          
         </div>
       </div>
     </div>

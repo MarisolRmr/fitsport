@@ -139,7 +139,7 @@ Route::post('/Metas/agregar',[MetasController::class,'store'])->name('metas.stor
 Route::post('/Metas/cambiarEstado', [MetasController::class, 'cambiarEstado'])->name('metas.cambiarEstado');
 Route::get('/Metas/cargaColumnaProceso', [MetasController::class, 'cargaColumnaProcesoPartial'])->name('metas.cargaColumnaProcesoPartial');
 Route::get('/Metas/edit/{id}', [MetasController::class, 'edit'])->name('metas.editar');
-Route::post('/updateMeta', [MetasController::class, 'update'])->name('meta.update');
+Route::post('/updateMeta', [MetasController::class, 'update'])->name('metas.update');
 Route::get('/Metas/delete/{id}', [MetasController::class, 'delete'])->name('metas.eliminar');
 
 Route::post('/GymAndBoxes/opinion/agregar',[GimnasiosController::class,'store_opinion'])->name('opinion.store');
@@ -155,7 +155,7 @@ Route::get('/Rutina',[RutinaController::class,'index'])->name('rutina.index');
 Route::get('/Rutina/agregar',[RutinaController::class,'create'])->name('rutina.create');
 Route::post('/Rutina/agregar',[RutinaController::class,'store'])->name('rutina.store');
 Route::get('/Rutina/edit/{id}', [RutinaController::class, 'edit'])->name('rutina.editar');
-Route::post('/updateMeta', [RutinaController::class, 'update'])->name('rutina.update');
+Route::post('/updateRutina', [RutinaController::class, 'update'])->name('rutina.update');
 Route::get('/Rutina/buscando', [RutinaController::class, 'buscar'])->name('rutina.buscar'); 
 Route::get('/Rutina/delete/{id}', [RutinaController::class, 'delete'])->name('rutina.eliminar');
 

@@ -4,6 +4,15 @@
     Atleta Dashboard
 @endsection
 
+@section('css')
+<style>
+
+
+</style>
+@endsection
+
+
+
 @section('contenido_top')
 <div class="absolute bg-y-50 w-full top-0 bg-[url('{{asset ('img/admin.png')}}')] min-h-75">
   <span class="absolute top-0 left-0 w-full h-full bg-black opacity-60"></span>
@@ -22,118 +31,58 @@
   </div>
 
   <!-- row 1 -->
-  <div class="flex flex-wrap py-6 -mx-3">
-    <!-- card1 -->
-    <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
-      <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border" style="background-color: rgba(53, 58, 80, 0.67);">
-        <div class="flex-auto p-4">
-          <a href="{{route('metas.index')}}">
-            <div class="flex flex-row -mx-3">
-              <div class="flex-none w-2/3 max-w-full px-3">
-                <div>
-                  <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase text-white dark:opacity-60"> </p>
-                  <h5 class="mb-2 font-bold text-white">Metas</h5>
-                  <p class="mb-0 dark:text-white dark:opacity-60">
-                    <span class="text-sm font-bold leading-normal text-emerald-500">Mis metas</span>
-                  </p>
+<div class="flex flex-wrap py-6 -mx-3">
+  <!-- card1 -->
+  <div class="w-full max-w-screen-sm px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
+    <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border" style="background-color: rgba(53, 58, 80, 0.67);">
+      <div class="flex-auto p-4">
+        <div class="flex flex-row -mx-3">
+          <div class="flex-none w-2/3 max-w-full px-3" style="justify-content: center">
+            <div style="justify-content: center">
+              <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase text-white dark:opacity-60">Metas en progreso</p>
+              @foreach($metas as $data)
+                <div class="cardMetas text-black mb-4 w-1/3 px-2 h-128 flex flex-col" style="justify-content: center">
+                  <div class="text-center w-full bg-gray-200" style="background-color: #D9D9D9; padding: 0; margin: 0!important; justify-content:center; border-radius:20px;">
+                      <p class="truncated-text-d text-lg font-bold">{{ $data->nombre }}</p>
+                  </div>
                 </div>
-              </div>
-              <div class="px-3 text-right basis-1/3">
-                <div class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-blue-500 to-violet-500">
-                  <i class="ni leading-none ni-money-coins text-lg relative top-3.5 text-white"></i>
-                </div>
-              </div>
+              @endforeach
+              
             </div>
-          </a>
-          
-        </div>
-      </div>
-    </div>
-
-    <!-- card2 -->
-    <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
-      <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border" style="background-color: rgba(53, 58, 80, 0.67);">
-        <div class="flex-auto p-4">
-          <a href="{{route('rutina.index')}}">
-          
-            <div class="flex flex-row -mx-3">
-              <div class="flex-none w-2/3 max-w-full px-3">
-                <div>
-                  <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase text-white dark:opacity-60"> </p>
-                  <h5 class="mb-2 font-bold text-white">Rutinas</h5>
-                  <p class="mb-0 dark:text-white dark:opacity-60">
-                    <span class="text-sm font-bold leading-normal text-emerald-500">Mis rutinas</span>
-                  </p>
-                </div>
-              </div>
-              <div class="px-3 text-right basis-1/3">
-                <div class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-red-600 to-orange-600">
-                  <i class="ni leading-none ni-world text-lg relative top-3.5 text-white"></i>
-                </div>
-              </div>
-            </div>
-          
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- card3 -->
-    <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
-      <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border" style="background-color: rgba(53, 58, 80, 0.67);">
-        <div class="flex-auto p-4">
-          <a href="{{route('gymBoxes.index_atleta')}}">
-            <div class="flex flex-row -mx-3">
-              <div class="flex-none w-2/3 max-w-full px-3">
-                <div>
-                  <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase text-white dark:opacity-60"> </p>
-                  <h5 class="mb-2 font-bold text-white">Gym</h5>
-                  <p class="mb-0 dark:text-white dark:opacity-60">
-                    <span class="text-sm font-bold leading-normal text-emerald-500">Gym & Boxes</span>
-                  </p>
-                </div>
-              </div>
-              <div class="px-3 text-right basis-1/3">
-                <div class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-emerald-500 to-teal-400">
-                  <i class="ni leading-none ni-paper-diploma text-lg relative top-3.5 text-white"></i>
-                </div>
-              </div>
-            </div>
-          
-          </a>
-          
-        </div>
-      </div>
-    </div>
-
-    <!-- card4 -->
-    <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
-      <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border" style="background-color: rgba(53, 58, 80, 0.67);">
-        <div class="flex-auto p-4">
-          <a href=" {{route('ejercitate.mostrar')}}">
-            <div class="flex flex-row -mx-3">
-              <div class="flex-none w-2/3 max-w-full px-3">
-                <div>
-                  <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase text-white dark:opacity-60"> </p>
-                  <h5 class="mb-2 font-bold text-white">Ejercitate</h5>
-                  <p class="mb-0 dark:text-white dark:opacity-60">
-                    <span class="text-sm font-bold leading-normal text-emerald-500">Ejercicios</span>
-                  </p>
-                </div>
-              </div>
-              <div class="px-3 text-right basis-1/3">
-                <div class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-emerald-500 to-teal-400">
-                  <i class="ni leading-none ni-paper-diploma text-lg relative top-3.5 text-white"></i>
-                </div>
-              </div>
-            </div>
-
-          </a>
-          
+          </div>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- card2 -->
+  <div class="w-full max-w-screen-sm px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4" style="width: 50%">
+    <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border" style="background-color: rgba(53, 58, 80, 0.67);">
+      <div class="flex-auto p-4">
+        <div class="flex flex-row -mx-3">
+          <div class="flex-none w-2/3 max-w-full px-3">
+            <div>
+              <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase text-white dark:opacity-60">Rutinas</p>
+              @foreach($rutina as $data)
+              <div class="cardMetas text-black mb-4 w-1/3 px-2 h-128 flex flex-col">
+                <div class="text-center w-full bg-gray-200 items-center justify-center" style="background-color: #D9D9D9; padding: 0; margin: 0!important; justify-content:center; border-radius:20px;">
+                    <p class="truncated-text-d text-lg font-bold">{{ $data->nombre }}</p>
+                </div>
+              </div>
+              @endforeach
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- card3 -->
+    <div class="w-full max-w-screen-sm px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
+      <img src="{{asset ('img/user/user_shape.png')}}" class="h-full w-full" alt="admin_dashboard" />
+    </div>
+
+</div>
 
 
   <footer class="pt-4">
